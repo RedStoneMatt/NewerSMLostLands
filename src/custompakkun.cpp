@@ -298,6 +298,8 @@ void daCustomPakkun::executeState_Attack() {
 			spawner->speed.x = sqrtf(totalSpeed * totalSpeed / (1 + ratio * ratio));
 			spawner->speed.x = spawner->speed.x * -1;
 			spawner->speed.y = ratio * spawner->speed.x;
+			
+			spawner->pos.x -= 5;
 		}
 		if (this->direction == 0) {
 			S16Vec nullRot = {0,0,0};
@@ -313,6 +315,8 @@ void daCustomPakkun::executeState_Attack() {
 			float ratio = (this->pos.y - mario->pos.y) / (this->pos.x - mario->pos.x);
 			spawner->speed.x = sqrtf(totalSpeed * totalSpeed / (1 + ratio * ratio));
 			spawner->speed.y = ratio * spawner->speed.x;
+			
+			spawner->pos.x += 5;
 		}
 		
 		PlaySoundAsync(this, soundID);
