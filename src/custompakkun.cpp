@@ -247,7 +247,9 @@ void daCustomPakkun::executeState_Attack() {
 	}
 	if(this->delayforshooting == 0 || this->delayforshooting == 1) {
 		if(this->animationChr.isAnimationDone()) {
-			bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+			if(this->delayforshooting == 1) {
+				bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+			}
 			this->animationChr.setCurrentFrame(0.0);
 			this->delayforshooting++;
 		}
