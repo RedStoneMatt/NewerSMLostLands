@@ -43,9 +43,14 @@ rm_files JP_1
 rm_files JP_2
 rm -r NewerASM
 
-echo Commit to git...
+echo Commiting to git...
 
 git add .
 git commit
+
+echo Unzipping Built Files...
+
+unzip Build/Build.zip
+rm Build/Build.zip
 
 echo Built all!
