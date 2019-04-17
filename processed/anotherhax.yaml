@@ -1,0 +1,47 @@
+hooks:
+- {addr_jpn: 2147536996, addr_jpn2: 2147536996, addr_ntsc: 2147536996, addr_ntsc2: 2147536996,
+  addr_pal: 2147536996, addr_pal2: 2147536996, data: 280000FF, name: Fix1, type: patch}
+- {addr_jpn: 2147982288, addr_jpn2: 2147982288, addr_ntsc: 2147982288, addr_ntsc2: 2147982288,
+  addr_pal: 2147982288, addr_pal2: 2147982288, data: 280000FF, name: Fix2, type: patch}
+- {addr_jpn: 2147983200, addr_jpn2: 2147983200, addr_ntsc: 2147983200, addr_ntsc2: 2147983200,
+  addr_pal: 2147983200, addr_pal2: 2147983200, data: 280000FF, name: Fix3, type: patch}
+- {addr_jpn: 2147985560, addr_jpn2: 2147985560, addr_ntsc: 2147985560, addr_ntsc2: 2147985560,
+  addr_pal: 2147985560, addr_pal2: 2147985560, data: 280000FF, name: Fix4, type: patch}
+- {addr_jpn: 2148022912, addr_jpn2: 2148022912, addr_ntsc: 2148022912, addr_ntsc2: 2148022912,
+  addr_pal: 2148022912, addr_pal2: 2148022912, data: '38600000', name: Fix5, type: patch}
+- {addr_jpn: 2148449364, addr_jpn2: 2148449364, addr_ntsc: 2148449492, addr_ntsc2: 2148449492,
+  addr_pal: 2148449764, addr_pal2: 2148449764, data: 280000FF, name: Fix6, type: patch}
+- {addr_jpn: 2148539088, addr_jpn2: 2148539088, addr_ntsc: 2148539216, addr_ntsc2: 2148539216,
+  addr_pal: 2148539488, addr_pal2: 2148539488, data: 280000FF, name: Fix7, type: patch}
+- {addr_jpn: 2148880348, addr_jpn2: 2148880348, addr_ntsc: 2148880844, addr_ntsc2: 2148880844,
+  addr_pal: 2148881164, addr_pal2: 2148881164, data: 280000FF, name: Fix8, type: patch}
+- {addr_jpn: 2155564088, addr_jpn2: 2155564104, addr_ntsc: 2155564712, addr_ntsc2: 2155564728,
+  addr_pal: 2155564712, addr_pal2: 2155564728, data: 280000FF, name: Fix9, type: patch}
+- {addr_jpn: 2155565240, addr_jpn2: 2155565256, addr_ntsc: 2155565864, addr_ntsc2: 2155565880,
+  addr_pal: 2155565864, addr_pal2: 2155565880, data: 280000FF, name: Fix10, type: patch}
+- {addr_jpn: 2156431080, addr_jpn2: 2156431096, addr_ntsc: 2156431704, addr_ntsc2: 2156431720,
+  addr_pal: 2156431704, addr_pal2: 2156431720, data: 280000FF, name: Fix11, type: patch}
+- {addr_jpn: 2156431624, addr_jpn2: 2156431640, addr_ntsc: 2156432248, addr_ntsc2: 2156432264,
+  addr_pal: 2156432248, addr_pal2: 2156432264, data: 280000FF, name: Fix12, type: patch}
+- {branch_type: b, name: Fix38WithJumpCoin, src_addr_jpn: 2155788780, src_addr_jpn2: 2155788796,
+  src_addr_ntsc: 2155789404, src_addr_ntsc2: 2155789420, src_addr_pal: 2155789404,
+  src_addr_pal2: 2155789420, target_func: fix38WithJumpCoin, type: branch_insn}
+- {addr_jpn: 2155355788, addr_jpn2: 2155355852, addr_ntsc: 2155356092, addr_ntsc2: 2155356156,
+  addr_pal: 2155356092, addr_pal2: 2155356156, data: 60000000 60000000 60000000, name: RemoveTitleReplay,
+  type: patch}
+- {addr_jpn: 2148541544, addr_jpn2: 2148541544, addr_ntsc: 2148541672, addr_ntsc2: 2148541672,
+  addr_pal: 2148541944, addr_pal2: 2148541944, data: '60000000', name: RemoveSGSwitch,
+  type: patch}
+- {addr_jpn: 2156902068, addr_jpn2: 2156902084, addr_ntsc: 2156902772, addr_ntsc2: 2156902788,
+  addr_pal: 2156902772, addr_pal2: 2156902788, data: '60000000', name: RemoveToadHouseMsg1,
+  type: patch}
+- {addr_jpn: 2156902056, addr_jpn2: 2156902072, addr_ntsc: 2156902760, addr_ntsc2: 2156902776,
+  addr_pal: 2156902760, addr_pal2: 2156902776, data: '60000000', name: RemoveToadHouseMsg2,
+  type: patch}
+- {addr_jpn: 2157069780, addr_jpn2: 2157069796, addr_ntsc: 2157070484, addr_ntsc2: 2157070500,
+  addr_pal: 2157070484, addr_pal2: 2157070500, data: '38600000', name: RemovePeachCastleMsg,
+  type: patch}
+- {addr_jpn: 2150567852, addr_jpn2: 2150567852, addr_ntsc: 2150568332, addr_ntsc2: 2150568332,
+  addr_pal: 2150569100, addr_pal2: 2150569100, data: 616E6F746865722E, name: NewSaveFilename,
+  type: patch}
+source_files: [../src/fix38.S]

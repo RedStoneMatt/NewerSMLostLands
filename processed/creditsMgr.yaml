@@ -1,0 +1,55 @@
+hooks:
+- {name: BuildCreditsMgr, src_addr_jpn: 2157485128, src_addr_jpn2: 2157485144, src_addr_ntsc: 2157486944,
+  src_addr_ntsc2: 2157486960, src_addr_pal: 2157486944, src_addr_pal2: 2157486960,
+  target_func: 'dCreditsMgr_c::build()', type: add_func_pointer}
+- {branch_type: b, name: StaffCreditsAddAllCoins, src_addr_jpn: 2147877456, src_addr_jpn2: 2147877456,
+  src_addr_ntsc: 2147877456, src_addr_ntsc2: 2147877456, src_addr_pal: 2147877456,
+  src_addr_pal2: 2147877456, target_func: StaffCreditsAddAllCoins, type: branch_insn}
+- {branch_type: b, name: StaffCreditsNoScore, src_addr_jpn: 2148218176, src_addr_jpn2: 2148218176,
+  src_addr_ntsc: 2148218176, src_addr_ntsc2: 2148218176, src_addr_pal: 2148218176,
+  src_addr_pal2: 2148218176, target_func: StaffCreditsNoScore, type: branch_insn}
+- {addr_jpn: 2148327616, addr_jpn2: 2148327616, addr_ntsc: 2148327744, addr_ntsc2: 2148327744,
+  addr_pal: 2148327984, addr_pal2: 2148327984, data: '38600000', name: CreditsUseHighScore0,
+  type: patch}
+- {area_jpn: 2155537944, area_jpn2: 2155537960, area_ntsc: 2155538568, area_ntsc2: 2155538584,
+  area_pal: 2155538568, area_pal2: 2155538584, name: CreditsDontSaveHighScore, type: nop_insn}
+- {addr_jpn: 2147784200, addr_jpn2: 2147784200, addr_ntsc: 2147784200, addr_ntsc2: 2147784200,
+  addr_pal: 2147784200, addr_pal2: 2147784200, data: '38000000', name: DisableCreditsCrap1,
+  type: patch}
+- {addr_jpn: 2147872768, addr_jpn2: 2147872768, addr_ntsc: 2147872768, addr_ntsc2: 2147872768,
+  addr_pal: 2147872768, addr_pal2: 2147872768, data: '38000000', name: DisableCreditsCrap3,
+  type: patch}
+- {addr_jpn: 2148699772, addr_jpn2: 2148699772, addr_ntsc: 2148700268, addr_ntsc2: 2148700268,
+  addr_pal: 2148700588, addr_pal2: 2148700588, data: '38000000', name: DisableCreditsCrap4,
+  type: patch}
+- {addr_jpn: 2148712548, addr_jpn2: 2148712548, addr_ntsc: 2148713044, addr_ntsc2: 2148713044,
+  addr_pal: 2148713364, addr_pal2: 2148713364, data: '38000000', name: DisableCreditsCrap5,
+  type: patch}
+- {addr_jpn: 2158142808, addr_jpn2: 2158142840, addr_ntsc: 2158144632, addr_ntsc2: 2158144664,
+  addr_pal: 2158144600, addr_pal2: 2158144632, data: '38000000', name: DisableCreditsCrap6,
+  type: patch}
+- {addr_jpn: 2148888288, addr_jpn2: 2148888288, addr_ntsc: 2148888784, addr_ntsc2: 2148888784,
+  addr_pal: 2148889104, addr_pal2: 2148889104, data: 4E800020, name: NoFukidashi,
+  type: patch}
+- {branch_type: b, name: LoadDanceValues, src_addr_jpn: 2147918260, src_addr_jpn2: 2147918260,
+  src_addr_ntsc: 2147918260, src_addr_ntsc2: 2147918260, src_addr_pal: 2147918260,
+  src_addr_pal2: 2147918260, target_func: LoadDanceValues(), type: branch_insn}
+- {branch_type: b, name: EFBMagic, src_addr_jpn: 2150351312, src_addr_jpn2: 2150351312,
+  src_addr_ntsc: 2150351808, src_addr_ntsc2: 2150351808, src_addr_pal: 2150352560,
+  src_addr_pal2: 2150352560, target_func: EFB_Crap, type: branch_insn}
+- {name: CreditsSpriteFileInfo, src_addr_jpn: 2150739364, src_addr_jpn2: 2150739364,
+  src_addr_ntsc: 2150739844, src_addr_ntsc2: 2150739844, src_addr_pal: 2150740636,
+  src_addr_pal2: 2150740636, target_func: CreditsFileList, type: add_func_pointer}
+- {branch_type: b, name: AutoScrollInjector, src_addr_jpn: 2147985044, src_addr_jpn2: 2147985044,
+  src_addr_ntsc: 2147985044, src_addr_ntsc2: 2147985044, src_addr_pal: 2147985044,
+  src_addr_pal2: 2147985044, target_func: AutoScrollInjector, type: branch_insn}
+- {branch_type: bl, name: PlayerRotInjector, src_addr_jpn: 2148815868, src_addr_jpn2: 2148815868,
+  src_addr_ntsc: 2148816364, src_addr_ntsc2: 2148816364, src_addr_pal: 2148816684,
+  src_addr_pal2: 2148816684, target_func: PlayerRotInjector, type: branch_insn}
+- {branch_type: bl, name: PlayerRotInjector2, src_addr_jpn: 2148862472, src_addr_jpn2: 2148862472,
+  src_addr_ntsc: 2148862968, src_addr_ntsc2: 2148862968, src_addr_pal: 2148863288,
+  src_addr_pal2: 2148863288, target_func: PlayerRotInjector2, type: branch_insn}
+- {branch_type: bl, name: PlayerRotInjector3, src_addr_jpn: 2148816736, src_addr_jpn2: 2148816736,
+  src_addr_ntsc: 2148817232, src_addr_ntsc2: 2148817232, src_addr_pal: 2148817552,
+  src_addr_pal2: 2148817552, target_func: PlayerRotInjector3, type: branch_insn}
+source_files: [../src/creditsMgr.cpp, ../src/creditsMgr.S]

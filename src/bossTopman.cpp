@@ -5,12 +5,35 @@
 #include <stage.h>
 #include "boss.h"
 
+const char* BoomSFX[2] = {
+	"sfx/boomboomone",
+	"sfx/boomboomlast"
+};
+
+extern "C" void PlaySoundWithFunctionB4(void *spc, nw4r::snd::SoundHandle *handle, int id, int unk);
+static nw4r::snd::StrmSoundHandle handle;
+
+u8 hijackMusicWithSongName(const char *songName, int themeID, bool hasFast, int channelCount, int trackCount, int *wantRealStreamID);
+
+void BoomMusicPlayer(int id) {
+	if (handle.Exists())
+		handle.Stop(0);
+
+	int sID;
+	hijackMusicWithSongName(BoomSFX[id], -1, false, 2, 1, &sID);
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, sID, 1);
+	}
+
 class daDreidel : public daBoss {
 public:
 	int onCreate();
 	int onDelete();
 	int onExecute();
 	int onDraw();
+	int Songs[16][4][16][3];
+	int song;
+ 	int chorus;
+	int currentBoom;
 
 	mHeapAllocator_c allocator;
 	nw4r::g3d::ResFile resFile;
@@ -129,19 +152,19 @@ daDreidel *daDreidel::build() {
 	void daDreidel::addScoreWhenHit(void *other) { };
 
 	void daDreidel::spriteCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
-		if (apOther->owner->name == 390) { //time to get hurt
+		/*if (apOther->owner->name == 390) { //time to get hurt
 			OSReport("YO SUP I'M A TOPMAN AND I'M COLLIDING WITH A FUCKING WALL [%d]\n", damage);
 			if (this->isInvulnerable) {
-				OSReport("I'm invulnerable so I'm ignoring it\n");
+				OSReport("I'm invulnerable so I'm ignoring it\n");*/
 				return;
-			}
+			/*}
 			this->damage += 1;
 			OSReport("I'm increasing my damage to %d\n", damage);
 			doStateChange(&StateID_Damage);
 
 			if (this->damage == 3) { doStateChange(&StateID_Outro); }
 		}
-		else { dEn_c::spriteCollision(apThis, apOther); }
+		else { dEn_c::spriteCollision(apThis, apOther); }*/
 	}
 
 	void daDreidel::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
@@ -151,7 +174,22 @@ daDreidel *daDreidel::build() {
 		hitType = usedForDeterminingStatePress_or_playerCollision(this, apThis, apOther, 0);
 
 		if(hitType > 0) {
-			this->_vf220(apOther->owner);
+			//this->_vf220(apOther->owner);
+			if (this->isInvulnerable) {
+				//EN_LandbarrelPlayerCollision(this, apThis, apOther);
+				return;
+			}
+			else {
+				OSReport("BOOM BOOM DON'T LIKE MARIO BECAUSE HE JUMPED ON HIS HEAD [%d]\n", damage);
+				/*if (this->isInvulnerable) {
+					OSReport("I'm invulnerable so I'm ignoring it\n");
+					return;
+				}	*/
+				this->damage += 1;
+				OSReport("BOOM BOOM DAMADE SET TO %d\n", damage);
+				doStateChange(&StateID_Damage);
+				if (this->damage == 3) { doStateChange(&StateID_Outro); }
+			}
 			this->counter_504[apOther->owner->which_player] = 0;
 		} else {
 
@@ -168,7 +206,7 @@ daDreidel *daDreidel::build() {
 					if (MarioPos == 1)  { this->direction = 1; }
 					else 				{ this->direction = 0; }
 
-					doStateChange(&StateID_KnockBack);
+					//doStateChange(&StateID_KnockBack);
 				}
 
 				else { // Mario is standing in front of the boss
@@ -188,7 +226,7 @@ daDreidel *daDreidel::build() {
 
 				this->counter_504[apOther->owner->which_player] = 0;
 				EN_LandbarrelPlayerCollision(this, apThis, apOther);
-				doStateChange(&StateID_KnockBack);
+				//doStateChange(&StateID_KnockBack);
 			}
 			else {
 				this->counter_504[apOther->owner->which_player] = 0;
@@ -205,27 +243,63 @@ daDreidel *daDreidel::build() {
 	}
 
 	bool daDreidel::collisionCatD_Drill(ActivePhysics *apThis, ActivePhysics *apOther) {
-		DamagePlayer(this, apThis, apOther);
-		return true;
+		if (this->isInvulnerable) {
+			EN_LandbarrelPlayerCollision(this, apThis, apOther);
+		}
+		else {
+			OSReport("BOOM BOOM DON'T LIKE MARIO BECAUSE HE JUMPED ON HIS HEAD [%d]\n", damage);
+			/*if (this->isInvulnerable) {
+				OSReport("I'm invulnerable so I'm ignoring it\n");
+				return;
+			}	*/
+			this->damage += 1;
+			OSReport("BOOM BOOM DAMADE SET TO %d\n", damage);
+			doStateChange(&StateID_Damage);
+			if (this->damage == 3) { doStateChange(&StateID_Outro); }
+		}
 	}
 	bool daDreidel::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-		DamagePlayer(this, apThis, apOther);
-		return true;
+		if (this->isInvulnerable) {
+			EN_LandbarrelPlayerCollision(this, apThis, apOther);
+		}
+		else {
+			OSReport("BOOM BOOM DON'T LIKE MARIO BECAUSE HE JUMPED ON HIS HEAD [%d]\n", damage);
+			/*if (this->isInvulnerable) {
+				OSReport("I'm invulnerable so I'm ignoring it\n");
+				return;
+			}	*/
+			this->damage += 1;
+			OSReport("BOOM BOOM DAMADE SET TO %d\n", damage);
+			doStateChange(&StateID_Damage);
+			if (this->damage == 3) { doStateChange(&StateID_Outro); }
+		}
 	}
 	bool daDreidel::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
-		DamagePlayer(this, apThis, apOther);
-		return true;
+		if (this->isInvulnerable) {
+			EN_LandbarrelPlayerCollision(this, apThis, apOther);
+		}
+		else {
+			OSReport("BOOM BOOM DON'T LIKE MARIO BECAUSE HE JUMPED ON HIS HEAD [%d]\n", damage);
+			/*if (this->isInvulnerable) {
+				OSReport("I'm invulnerable so I'm ignoring it\n");
+				return;
+			}	*/
+			this->damage += 1;
+			OSReport("BOOM BOOM DAMADE SET TO %d\n", damage);
+			doStateChange(&StateID_Damage);
+			if (this->damage == 3) { doStateChange(&StateID_Outro); }
+		}
 	}
 
 	bool daDreidel::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
 		if (this->isInvulnerable == 0) {
-			doStateChange(&StateID_KnockBack);
+			//doStateChange(&StateID_KnockBack);
 		}
 		return true;
 	}
 	bool daDreidel::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther){
 		if (this->isInvulnerable == 0) {
-			doStateChange(&StateID_KnockBack);
+			//doStateChange(&StateID_KnockBack);
 		}
 		return true;
 	}
@@ -322,20 +396,20 @@ int daDreidel::onCreate() {
 	// Model creation
 	allocator.link(-1, GameHeaps[0], 0, 0x20);
 
-	this->resFile.data = getResource("topman", "g3d/begoman_spike.brres");
-	nw4r::g3d::ResMdl mdl = this->resFile.GetResMdl("begoman");
+	this->resFile.data = getResource("topman", "g3d/boomboom.brres");
+	nw4r::g3d::ResMdl mdl = this->resFile.GetResMdl("bumbum");
 	bodyModel.setup(mdl, &allocator, 0x224, 1, 0);
 	SetupTextures_Map(&bodyModel, 0);
 
 
 	// Animations start here
-	nw4r::g3d::ResAnmChr anmChr = this->resFile.GetResAnmChr("begoman_wait");
+	nw4r::g3d::ResAnmChr anmChr = this->resFile.GetResAnmChr("wait");
 	this->chrAnimation.setup(mdl, anmChr, &this->allocator, 0);
 
 	allocator.unlink();
 
 	// Stuff I do understand
-	this->scale = (Vec){0.2, 0.2, 0.2};
+	this->scale = (Vec){1, 1, 1};
 
 	// this->pos.y = this->pos.y + 30.0; // X is vertical axis
 	this->rot.x = 0; // X is vertical axis
@@ -398,7 +472,7 @@ int daDreidel::onCreate() {
 
 
 	// State Changers
-	bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 1.0);
+	bindAnimChr_and_setUpdateRate("wait", 1, 0.0, 1.0);
 	doStateChange(&StateID_Grow);
 
 	this->onExecute();
@@ -419,7 +493,7 @@ int daDreidel::onExecute() {
 int daDreidel::onDraw() {
 
 	if (this->isInvulnerable == 1) {
-		this->flashing++;
+		//this->flashing++;
 	}
 
 	if (this->flashing < 5) {
@@ -448,8 +522,8 @@ void daDreidel::updateModelMatrices() {
 // Grow State
 ///////////////
 	void daDreidel::beginState_Grow() {
-		bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 0.75);
-
+		bindAnimChr_and_setUpdateRate("wait", 1, 0.0, 0.75);
+		BoomMusicPlayer(Songs[song][chorus][1][1]-1);
 		this->timer = 0;
 
 		SetupKameck(this, Kameck);
@@ -464,11 +538,11 @@ void daDreidel::updateModelMatrices() {
 		this->timer += 1;
 
 		bool ret;
-		ret = GrowBoss(this, Kameck, 0.2, 0.4, 0, this->timer);
+		ret = GrowBoss(this, Kameck, 1, 2, 0, this->timer);
 
 		if (ret) {
 			PlaySound(this, SE_EMY_MECHAKOOPA_BOUND);
-			doStateChange(&StateID_Walk);
+			doStateChange(&StateID_ChargePrep);
 		}
 	}
 	void daDreidel::endState_Grow() {
@@ -539,7 +613,7 @@ void daDreidel::updateModelMatrices() {
 
 		if(done) {
 			if (this->damage > 0) 	{ doStateChange(&StateID_ChargePrep); }
-			else 					{ doStateChange(&StateID_Walk); }
+			else 					{ doStateChange(&StateID_ChargePrep); }
 		}
 	}
 	void daDreidel::endState_Turn() { this->rot.y = (this->direction) ? 0xD800 : 0x2800; }
@@ -566,7 +640,7 @@ void daDreidel::updateModelMatrices() {
 		bodyModel._vf1C();
 		if(this->chrAnimation.isAnimationDone()) {
 			if (this->damage > 0) 	{ doStateChange(&StateID_ChargePrep); }
-			else 					{ doStateChange(&StateID_Walk); }
+			else 					{ doStateChange(&StateID_ChargePrep); }
 		}
 
 	}
@@ -580,7 +654,7 @@ void daDreidel::updateModelMatrices() {
 			this->direction = 1;
 		}
 		// this->direction ^= 1;
-		bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 1.0);
+		bindAnimChr_and_setUpdateRate("wait", 1, 0.0, 1.0);
 	}
 
 
@@ -588,12 +662,12 @@ void daDreidel::updateModelMatrices() {
 // ChargePrep State
 ///////////////
 	void daDreidel::beginState_ChargePrep() {
-		bindAnimChr_and_setUpdateRate("begoman_attack", 1, 0.0, 0.9);
+		//bindAnimChr_and_setUpdateRate("begoman_attack", 1, 0.0, 0.9);
 	}
 	void daDreidel::executeState_ChargePrep() {
-		if(this->chrAnimation.isAnimationDone()) {
-			doStateChange(&StateID_Charge);
-		}
+		//if(this->chrAnimation.isAnimationDone()) {
+		doStateChange(&StateID_Charge);
+		//}
 	}
 	void daDreidel::endState_ChargePrep() { }
 
@@ -602,7 +676,7 @@ void daDreidel::updateModelMatrices() {
 // Charge State
 ///////////////
 	void daDreidel::beginState_Charge() {
-		bindAnimChr_and_setUpdateRate("begoman_attack3", 1, 0.0, 1.0);
+		bindAnimChr_and_setUpdateRate("run", 1, 0.0, 1.0);
 		this->timer = 0;
 		this->isTurningCountdown = 0;
 
@@ -616,14 +690,8 @@ void daDreidel::updateModelMatrices() {
 		this->charging = 1;
 	}
 	void daDreidel::executeState_Charge() {
-
-		if (this->isInvulnerableCountdown > 0) {
-			this->isInvulnerableCountdown--;
-		}
-		else {
 			this->isInvulnerable = 0;
 			this->flashing = 0;
-		}
 
 		if(this->chrAnimation.isAnimationDone()) {
 			this->chrAnimation.setCurrentFrame(0.0);
@@ -656,12 +724,12 @@ void daDreidel::updateModelMatrices() {
 // ChargeRecover State
 ///////////////
 	void daDreidel::beginState_ChargeRecover() {
-		bindAnimChr_and_setUpdateRate("begoman_stand", 1, 0.0, 0.5);
+		//bindAnimChr_and_setUpdateRate("begoman_stand", 1, 0.0, 0.5);
 	}
 	void daDreidel::executeState_ChargeRecover() {
-		if(this->chrAnimation.isAnimationDone()) {
-			doStateChange(&StateID_Turn);
-		}
+		//if(this->chrAnimation.isAnimationDone()) {
+		doStateChange(&StateID_Turn);
+		//}
 	}
 	void daDreidel::endState_ChargeRecover() { }
 
@@ -671,47 +739,42 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 	void daDreidel::beginState_Damage() {
 		this->isInvulnerable = 1;
-		bindAnimChr_and_setUpdateRate("begoman_wait", 1, 0.0, 0.75);
+		bindAnimChr_and_setUpdateRate("damage", 1, 0.0, 0.75);
 		this->timer = 0;
 
-		PlaySound(this, SE_PLY_TOUCH_BIRI);
+		/*PlaySound(this, SE_PLY_TOUCH_BIRI);
 		PlaySound(this, SE_BOSS_JR_ELEC_SPARK);
-		PlaySound(this, SE_EMY_BIRIKYU_SPARK);
+		PlaySound(this, SE_EMY_BIRIKYU_SPARK);*/
 
 		Vec front = {this->pos.x-4.0f, this->pos.y+8.0f, 5500.0f};
 		Vec back = {this->pos.x-4.0f, this->pos.y+8.0f, -5500.0f};
 
-		Vec sparkScale = {2.5f, 2.5f, 1.5f};
+		/*Vec sparkScale = {2.5f, 2.5f, 1.5f};
 		SpawnEffect("Wm_ob_cmnspark", 0, &front, 0, &sparkScale);
 		Vec lineScale = {1.5f, 1.5f, 1.5f};
 		SpawnEffect("Wm_mr_wirehit_line", 0, &front, 0, &lineScale);
 		Vec kickScale = {1.5f, 1.5f, 1.5f};
 		SpawnEffect("Wm_mr_kick_grain", 0, &front, 0, &kickScale);
 		Vec glowScale = {2.5f, 2.5f, 2.5f};
-		SpawnEffect("Wm_mr_wirehit_glow", 0, &back, 0, &glowScale);
+		SpawnEffect("Wm_mr_wirehit_glow", 0, &back, 0, &glowScale);*/
 	}
 	void daDreidel::executeState_Damage() {
 
 		if(this->chrAnimation.isAnimationDone()) {
-			this->timer += 1;
-			if (this->timer == 1) {
-
-				u8 dir = dSprite_c__getXDirectionOfFurthestPlayerRelativeToVEC3(this, this->pos);
-				if (dir != this->direction) {
-					doStateChange(&StateID_Turn);
-				}
-				else {
-					if (this->damage > 1) 	{ doStateChange(&StateID_ChargePrep); }
-					else 					{ doStateChange(&StateID_Walk); }
-				}
+			this->isInvulnerable = 0;
+			u8 dir = dSprite_c__getXDirectionOfFurthestPlayerRelativeToVEC3(this, this->pos);
+			if (dir != this->direction) {
+				doStateChange(&StateID_Turn);
 			}
 			else {
+				if (this->damage > 1) 	{ doStateChange(&StateID_ChargePrep); }
+				else 					{ doStateChange(&StateID_ChargePrep); }
 			}
-			this->chrAnimation.setCurrentFrame(0.0);
+			//this->chrAnimation.setCurrentFrame(0.0);
 		}
 	}
 	void daDreidel::endState_Damage() {
-		bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 1.0);
+		bindAnimChr_and_setUpdateRate("run", 1, 0.0, 1.0);
 		this->isInvulnerableCountdown = 90;
 	}
 
@@ -720,9 +783,14 @@ void daDreidel::updateModelMatrices() {
 // Outro State
 ///////////////
 	void daDreidel::beginState_Outro() {
+		bindAnimChr_and_setUpdateRate("dead", 1, 0.0, 1.0);
 		OutroSetup(this);
 	}
 	void daDreidel::executeState_Outro() {
+		
+		if(this->chrAnimation.isAnimationDone()) {
+			this->chrAnimation.setCurrentFrame(0.0);
+		}
 
 		if (this->dying == 1) {
 			if (this->timer > 180) { ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE); }
@@ -733,14 +801,17 @@ void daDreidel::updateModelMatrices() {
 		}
 
 		bool ret;
-		ret = ShrinkBoss(this, &this->pos, 0.5, this->timer);
+		ret = ShrinkBoss(this, &this->pos, 2, this->timer);
 
 		if (ret == true) 	{
 			BossExplode(this, &this->pos);
 			this->dying = 1;
 			this->timer = 0;
 		}
-		else 		{ PlaySound(this, SE_EMY_BUBBLE_EXTINCT); }
+		else { 
+			//PlaySound(this, SE_EMY_BUBBLE_EXTINCT); 
+			BoomMusicPlayer(Songs[song][chorus][2][1]-1);
+		}
 
 		this->timer += 1;
 	}

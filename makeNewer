@@ -8,9 +8,9 @@ else
 fi
 
 copy_files() {
-	cp NewerASM/n_$1_loader.bin ~/Games/Newer/DolphinPatch/NewerRes/System$2.bin
-	cp NewerASM/n_$1_dlcode.bin ~/Games/Newer/DolphinPatch/NewerRes/DLCode$2.bin
-	cp NewerASM/n_$1_dlrelocs.bin ~/Games/Newer/DolphinPatch/NewerRes/DLRelocs$2.bin
+	cp NewerASM/n_$1_loader.bin ~/Games/Newer/DolphinPatch/LostlASM/System$2.bin
+	cp NewerASM/n_$1_dlcode.bin ~/Games/Newer/DolphinPatch/LostlASM/DLCode$2.bin
+	cp NewerASM/n_$1_dlrelocs.bin ~/Games/Newer/DolphinPatch/LostlASM/DLRelocs$2.bin
 }
 
 copy_files pal EU_1

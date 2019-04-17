@@ -1,0 +1,5 @@
+hooks:
+- {name: FakeStarCoinAdd, src_addr_jpn: 2157350176, src_addr_jpn2: 2157350192, src_addr_ntsc: 2157351992,
+  src_addr_ntsc2: 2157352008, src_addr_pal: 2157351992, src_addr_pal2: 2157352008,
+  target_func: 'daFakeStarCoin::build()', type: add_func_pointer}
+source_files: [../src/fakeStarCoin.cpp]

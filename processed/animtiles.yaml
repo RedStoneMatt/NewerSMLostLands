@@ -1,0 +1,11 @@
+hooks:
+- {branch_type: bl, name: AnimatedTiles, src_addr_jpn: 2148038296, src_addr_jpn2: 2148038296,
+  src_addr_ntsc: 2148038296, src_addr_ntsc2: 2148038296, src_addr_pal: 2148038296,
+  src_addr_pal2: 2148038296, target_func: DoTiles(void*), type: branch_insn}
+- {branch_type: b, name: AnimatedTilesDestroy, src_addr_jpn: 2148037896, src_addr_jpn2: 2148037896,
+  src_addr_ntsc: 2148037896, src_addr_ntsc2: 2148037896, src_addr_pal: 2148037896,
+  src_addr_pal2: 2148037896, target_func: DestroyTiles(void*), type: branch_insn}
+- {addr_jpn: 2148037956, addr_jpn2: 2148037956, addr_ntsc: 2148037956, addr_ntsc2: 2148037956,
+  addr_pal: 2148037956, addr_pal2: 2148037956, data: 3880 1000, name: AnimTileFrameHeapPatch,
+  type: patch}
+source_files: [../src/animtiles.cpp]

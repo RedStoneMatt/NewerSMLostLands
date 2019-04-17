@@ -1,0 +1,17 @@
+hooks:
+- {branch_type: b, name: AddClassicController, src_addr_jpn: 2149495752, src_addr_jpn2: 2149495752,
+  src_addr_ntsc: 2149496248, src_addr_ntsc2: 2149496248, src_addr_pal: 2149496568,
+  src_addr_pal2: 2149496568, target_func: _switch_buttons, type: branch_insn}
+- {branch_type: b, name: WiimoteWaggleAdjust, src_addr_jpn: 2149493828, src_addr_jpn2: 2149493828,
+  src_addr_ntsc: 2149494324, src_addr_ntsc2: 2149494324, src_addr_pal: 2149494644,
+  src_addr_pal2: 2149494644, target_func: waggleAdjust, type: branch_insn}
+- {addr_jpn: 2147589856, addr_jpn2: 2147589856, addr_ntsc: 2147589856, addr_ntsc2: 2147589856,
+  addr_pal: 2147589856, addr_pal2: 2147589856, data: '38000000', name: PatchExtensionScall,
+  type: patch}
+- {addr_jpn: 2148219696, addr_jpn2: 2148219696, addr_ntsc: 2148219696, addr_ntsc2: 2148219696,
+  addr_pal: 2148219696, addr_pal2: 2148219696, data: '38000000', name: DisableWarningMgrOne,
+  type: patch}
+- {addr_jpn: 2155273128, addr_jpn2: 2155273192, addr_ntsc: 2155273128, addr_ntsc2: 2155273192,
+  addr_pal: 2155273128, addr_pal2: 2155273192, data: '38000000', name: DisableWarningMgrTwo,
+  type: patch}
+source_files: [../src/classic_controller.S]

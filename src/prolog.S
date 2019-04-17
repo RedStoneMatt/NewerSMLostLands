@@ -61,7 +61,7 @@ startLoop:
 
 .data
 PMsg:
-	.string "Newer Super Mario Lost Lands - Hacks by Treeki and Tempus 2009-2013\nNewer v1.0.2\n.ctors: %p - %p\n"
+	.string "Newer Super Mario Lost Lands - Original game by the Newer Team 2009-2013\nLostLands v1.0\n.ctors: %p - %p\n"
 
 PMsg2:
 	.string "%d inits called\n"

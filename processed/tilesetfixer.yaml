@@ -1,0 +1,10 @@
+hooks:
+- {branch_type: bl, name: TilesetFixHack, src_addr_jpn: 2148013848, src_addr_jpn2: 2148013848,
+  src_addr_ntsc: 2148013848, src_addr_ntsc2: 2148013848, src_addr_pal: 2148013848,
+  src_addr_pal2: 2148013848, target_func: 'TilesetFixerHack(void*, void*, int, int)',
+  type: branch_insn}
+- {branch_type: bl, name: TilesetFixHack2, src_addr_jpn: 2148014020, src_addr_jpn2: 2148014020,
+  src_addr_ntsc: 2148014020, src_addr_ntsc2: 2148014020, src_addr_pal: 2148014020,
+  src_addr_pal2: 2148014020, target_func: 'TilesetFixerHack(void*, void*, int, int)',
+  type: branch_insn}
+source_files: [../src/tilesetfixer.cpp]

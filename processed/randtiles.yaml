@@ -1,0 +1,17 @@
+hooks:
+- {addr_jpn: 2148021656, addr_jpn2: 2148021656, addr_ntsc: 2148021656, addr_ntsc2: 2148021656,
+  addr_pal: 2148021656, addr_pal2: 2148021656, data: 3860 0C3C, name: ModifyTilemapClassSize,
+  type: patch}
+- {branch_type: b, name: LoadRandTiles, src_addr_jpn: 2148907424, src_addr_jpn2: 2148907424,
+  src_addr_ntsc: 2148907920, src_addr_ntsc2: 2148907920, src_addr_pal: 2148908240,
+  src_addr_pal2: 2148908240, target_func: RandTileLoadHook, type: branch_insn}
+- {branch_type: bl, name: HookIdentifyTilesets, src_addr_jpn: 2148022444, src_addr_jpn2: 2148022444,
+  src_addr_ntsc: 2148022444, src_addr_ntsc2: 2148022444, src_addr_pal: 2148022444,
+  src_addr_pal2: 2148022444, target_func: IdentifyTilesets, type: branch_insn}
+- {branch_type: bl, name: HookTilePlacer, src_addr_jpn: 2148035400, src_addr_jpn2: 2148035400,
+  src_addr_ntsc: 2148035400, src_addr_ntsc2: 2148035400, src_addr_pal: 2148035400,
+  src_addr_pal2: 2148035400, target_func: TryAndRandomise, type: branch_insn}
+- {addr_jpn: 2148035404, addr_jpn2: 2148035404, addr_ntsc: 2148035404, addr_ntsc2: 2148035404,
+  addr_pal: 2148035404, addr_pal2: 2148035404, data: 4800 0120, name: AHackOfGiganticProportions,
+  type: patch}
+source_files: [../src/randtiles.cpp]
