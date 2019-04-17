@@ -1,6 +1,5 @@
 #!/bin/sh
 #cd /home/me/Games/Newer/Kamek
-rm -r NewerASM
 rm -r Build
 mkdir NewerASM
 mkdir Build
@@ -18,11 +17,35 @@ copy_files() {
 	cp NewerASM/n_$1_dlrelocs.bin Build/DLRelocs$2.bin
 }
 
+rm_files() {
+	rm Build/System$1.bin
+	rm Build/DLCode$1.bin
+	rm Build/DLRelocs$1.bin
+}
+
 copy_files pal EU_1
 copy_files pal2 EU_2
 copy_files ntsc US_1
 copy_files ntsc2 US_2
 copy_files jpn JP_1
 copy_files jpn2 JP_2
+
+echo Zipping Built Files...
+
+zip -r Build.zip Build
+cp Build.zip Build/Build.zip
+rm Build.zip
+rm_files EU_1
+rm_files EU_2
+rm_files US_1
+rm_files US_2
+rm_files JP_1
+rm_files JP_2
+rm -r NewerASM
+
+echo Commit to git...
+
+git add .
+git commit
 
 echo Built all!

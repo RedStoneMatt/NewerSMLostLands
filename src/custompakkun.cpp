@@ -27,6 +27,7 @@ class daCustomPakkun : public dEn_c {
 	u32 timer;
 	u32 filename;
 	bool isDieing;
+	int delayforshooting;
 	
 	int spawnersettings;
 	int type;
@@ -127,7 +128,7 @@ void daCustomPakkun::setupBodyModel() {
 	SetupTextures_Enemy(&bodyModel, 0);
 
 	bool ret;
-	nw4r::g3d::ResAnmChr anmChr = this->resFile.GetResAnmChr("fire_attack_down");
+	nw4r::g3d::ResAnmChr anmChr = this->resFile.GetResAnmChr("fire_wait_up");
 	ret = this->animationChr.setup(mdl, anmChr, &this->allocator, 0);
 
 	allocator.unlink();
@@ -181,7 +182,7 @@ int daCustomPakkun::onCreate() {
 	this->aPhysics.addToList();
 
 
-	bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+	bindAnimChr_and_setUpdateRate("fire_wait_up", 1, 0.0, 1.0);
 
 	doStateChange(&StateID_Attack);
 
@@ -239,8 +240,17 @@ void daCustomPakkun::executeState_Attack() {
 			this->rot.y = 0x2800;
 		}
 	}
-	
-	if(this->animationChr.getCurrentFrame() == 26.00) {
+	if(this->animationChr.isAnimationDone() && this->delayforshooting == 1) {
+		bindAnimChr_and_setUpdateRate("fire_wait_up", 1, 0.0, 1.0);
+		this->animationChr.setCurrentFrame(0.0);
+		this->delayforshooting--;
+	}
+	if(this->animationChr.isAnimationDone() && this->delayforshooting == 0) {
+		bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+		this->animationChr.setCurrentFrame(0.0);
+		this->delayforshooting++;
+	}
+	if(this->animationChr.getCurrentFrame() == 26.00 && this->delayforshooting == 1) {
 		Actors shootItem;
 		int soundID;
 		if (type == 0) {
@@ -300,7 +310,6 @@ void daCustomPakkun::executeState_Attack() {
 			spawner->speed.x = sqrtf(totalSpeed * totalSpeed / (1 + ratio * ratio));
 			spawner->speed.y = ratio * spawner->speed.x;
 		}
-		
 		
 		PlaySoundAsync(this, soundID);
 	}
