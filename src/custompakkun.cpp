@@ -245,10 +245,12 @@ void daCustomPakkun::executeState_Attack() {
 		this->animationChr.setCurrentFrame(0.0);
 		this->delayforshooting -= 2;
 	}
-	if(this->animationChr.isAnimationDone() && this->delayforshooting == 0) {
-		bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
-		this->animationChr.setCurrentFrame(0.0);
-		this->delayforshooting++;
+	if(this->delayforshooting == 0 || this->delayforshooting == 1) {
+		if(this->animationChr.isAnimationDone()) {
+			bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+			this->animationChr.setCurrentFrame(0.0);
+			this->delayforshooting++;
+		}
 	}
 	if(this->animationChr.getCurrentFrame() == 26.00 && this->delayforshooting == 2) {
 		Actors shootItem;
