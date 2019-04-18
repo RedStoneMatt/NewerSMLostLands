@@ -274,7 +274,7 @@ int daBunbun::onCreate() {
 	allocator.unlink();
 
 	// Stuff I do understand
-	this->scale = (Vec){1, 1, 1};
+	this->scale = (Vec){0.5, 0.5, 0.5};
 
 	this->rot.x = 0; // X is vertical axis
 	this->rot.y = 0xD800; // Y is horizontal axis
@@ -306,6 +306,7 @@ int daBunbun::onCreate() {
 	HitMeBaby.bitfield2 = 0xffbafffe;
 	HitMeBaby.unkShort1C = 0;
 	HitMeBaby.callback = &dEn_c::collisionCallback;
+	this->directiontomove = -1;
 
 	this->aPhysics.initWithStruct(this, &HitMeBaby);
 	this->aPhysics.addToList();
@@ -402,11 +403,11 @@ void daBunbun::updateModelMatrices() {
 
 		this->timer += 1;
 
-		if(this->timer == 1) {
-			bindAnimClr_and_setUpdateRate("star_color", 1, 0.0, 0.75);
+		bool ret;
+		ret = GrowBoss(this, Kameck, 1, 2, 0, this->timer);
+
+		if (ret) {
 			PlaySound(this, SE_EMY_MECHAKOOPA_BOUND);
-		}
-		if(this->timer == 150) {
 			doStateChange(&StateID_Charge);
 		}
 	}
@@ -462,10 +463,10 @@ void daBunbun::updateModelMatrices() {
 		if (ret) {
 			doStateChange(&StateID_Turn);
 		}
-		if(this->rot.y == 0xD800) {
+		if(this->direction == 1) {
 			this->directiontomove = -1;
 		}
-		if(this->rot.y == 0x2800) {
+		if(this->direction == 0) {
 			this->directiontomove = 1;
 		}
 		this->pos.x += 4 * this->directiontomove;
