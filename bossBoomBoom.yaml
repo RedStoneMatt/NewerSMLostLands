@@ -1,15 +1,15 @@
 ---
 # Replaces Slow_Quick_Tag
 
-source_files: [../src/bossTopman.cpp]
+source_files: [../src/bossBoomBoom.cpp]
 hooks:
-  - name: BossTopmanBuild
+  - name: BossBoomBoomBuild
     type: add_func_pointer
     src_addr_pal: 0x8097BCC0
-    target_func: 'daDreidel::build()'
+    target_func: 'daBunbun::build()'
 
-  - name: BossTopmanSpriteFileInfo
+  - name: BossBoomBoomSpriteFileInfo
     type: add_func_pointer
     src_addr_pal: 0x8031AF38
-    target_func: 'TMarcNameList'
+    target_func: 'BBarcNameList'
     # 0x8031AB4C + sprite num * 0x4 == offset

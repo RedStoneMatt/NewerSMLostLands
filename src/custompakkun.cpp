@@ -299,7 +299,7 @@ void daCustomPakkun::executeState_Attack() {
 			spawner->speed.x = spawner->speed.x * -1;
 			spawner->speed.y = ratio * spawner->speed.x;
 			
-			spawner->pos.x -= 6.5;
+			spawner->pos.x -= 7.5;
 		}
 		if (this->direction == 0) {
 			S16Vec nullRot = {0,0,0};
@@ -316,7 +316,7 @@ void daCustomPakkun::executeState_Attack() {
 			spawner->speed.x = sqrtf(totalSpeed * totalSpeed / (1 + ratio * ratio));
 			spawner->speed.y = ratio * spawner->speed.x;
 			
-			spawner->pos.x += 6.5;
+			spawner->pos.x += 7.5;
 		}
 		
 		PlaySoundAsync(this, soundID);

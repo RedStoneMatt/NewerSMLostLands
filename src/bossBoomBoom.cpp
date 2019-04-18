@@ -5,7 +5,12 @@
 #include <stage.h>
 #include "boss.h"
 
-class daDreidel : public daBoss {
+const char* BBarcNameList [] = {
+	"bunbun",
+	NULL	
+};
+
+class daBunbun : public daBoss {
 public:
 	int onCreate();
 	int onDelete();
@@ -33,7 +38,7 @@ public:
 
 	float dying;
 
-	static daDreidel *build();
+	static daBunbun *build();
 
 	void bindAnimChr_and_setUpdateRate(const char* name, int unk, float unk2, float rate);
 	void updateModelMatrices();
@@ -58,7 +63,7 @@ public:
 
 	void addScoreWhenHit(void *other);
 
-	USING_STATES(daDreidel);
+	USING_STATES(daBunbun);
 	DECLARE_STATE(Walk);
 	DECLARE_STATE(Turn);
 	DECLARE_STATE(KnockBack);
@@ -73,9 +78,9 @@ public:
 
 };
 
-daDreidel *daDreidel::build() {
-	void *buffer = AllocFromGameHeap1(sizeof(daDreidel));
-	return new(buffer) daDreidel;
+daBunbun *daBunbun::build() {
+	void *buffer = AllocFromGameHeap1(sizeof(daBunbun));
+	return new(buffer) daBunbun;
 }
 
 ///////////////////////
@@ -86,17 +91,17 @@ daDreidel *daDreidel::build() {
 	extern "C" int SmoothRotation(short* rot, u16 amt, int unk2);
 
 
-	CREATE_STATE(daDreidel, Walk);
-	CREATE_STATE(daDreidel, Turn);
-	CREATE_STATE(daDreidel, KnockBack);
+	CREATE_STATE(daBunbun, Walk);
+	CREATE_STATE(daBunbun, Turn);
+	CREATE_STATE(daBunbun, KnockBack);
 
-	CREATE_STATE(daDreidel, ChargePrep);
-	CREATE_STATE(daDreidel, Charge);
-	CREATE_STATE(daDreidel, ChargeRecover);
-	CREATE_STATE(daDreidel, Damage);
+	CREATE_STATE(daBunbun, ChargePrep);
+	CREATE_STATE(daBunbun, Charge);
+	CREATE_STATE(daBunbun, ChargeRecover);
+	CREATE_STATE(daBunbun, Damage);
 
-	CREATE_STATE(daDreidel, Grow);
-	CREATE_STATE(daDreidel, Outro);
+	CREATE_STATE(daBunbun, Grow);
+	CREATE_STATE(daBunbun, Outro);
 
 	// 	begoman_attack2"	// wobble back and forth tilted forwards
 	// 	begoman_attack3"	// Leaned forward, antennae extended
@@ -119,16 +124,16 @@ daDreidel *daDreidel::build() {
 	// 		dEn_c::collisionCallback(apThis, apOther);
 	// 	}
 	// 	else {
-	// 		daDreidel *actor = (daDreidel*)apThis->owner;
+	// 		daBunbun *actor = (daBunbun*)apThis->owner;
 	// 		actor->damage += 1;
-	// 		actor->doStateChange(&daDreidel::StateID_Damage);
+	// 		actor->doStateChange(&daBunbun::StateID_Damage);
 
-	// 		if (actor->damage > 2) { actor->doStateChange(&daDreidel::StateID_Outro); }
+	// 		if (actor->damage > 2) { actor->doStateChange(&daBunbun::StateID_Outro); }
 	// 	}
 	// }
-	void daDreidel::addScoreWhenHit(void *other) { };
+	void daBunbun::addScoreWhenHit(void *other) { };
 
-	void daDreidel::spriteCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
+	void daBunbun::spriteCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
 		if (apOther->owner->name == 390) { //time to get hurt
 			OSReport("YO SUP I'M A TOPMAN AND I'M COLLIDING WITH A FUCKING WALL [%d]\n", damage);
 			if (this->isInvulnerable) {
@@ -144,7 +149,7 @@ daDreidel *daDreidel::build() {
 		else { dEn_c::spriteCollision(apThis, apOther); }
 	}
 
-	void daDreidel::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
+	void daBunbun::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
 
 
 		char hitType;
@@ -200,30 +205,30 @@ daDreidel *daDreidel::build() {
 		this->flags_4FC |= (1<<(31-7));
 	}
 
-	void daDreidel::yoshiCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
+	void daBunbun::yoshiCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
 		this->playerCollision(apThis, apOther);
 	}
 
-	bool daDreidel::collisionCatD_Drill(ActivePhysics *apThis, ActivePhysics *apOther) {
+	bool daBunbun::collisionCatD_Drill(ActivePhysics *apThis, ActivePhysics *apOther) {
 		DamagePlayer(this, apThis, apOther);
 		return true;
 	}
-	bool daDreidel::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
+	bool daBunbun::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
 		DamagePlayer(this, apThis, apOther);
 		return true;
 	}
-	bool daDreidel::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
+	bool daBunbun::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
 		DamagePlayer(this, apThis, apOther);
 		return true;
 	}
 
-	bool daDreidel::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
+	bool daBunbun::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
 		if (this->isInvulnerable == 0) {
 			doStateChange(&StateID_KnockBack);
 		}
 		return true;
 	}
-	bool daDreidel::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther){
+	bool daBunbun::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther){
 		if (this->isInvulnerable == 0) {
 			doStateChange(&StateID_KnockBack);
 		}
@@ -231,16 +236,16 @@ daDreidel *daDreidel::build() {
 	}
 
 
-	bool daDreidel::collisionCat3_StarPower(ActivePhysics *apThis, ActivePhysics *apOther){ return true; }
-	bool daDreidel::collisionCat13_Hammer(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
-	bool daDreidel::collisionCat14_YoshiFire(ActivePhysics *apThis, ActivePhysics *apOther){ return true; }
-	bool daDreidel::collisionCat1_Fireball_E_Explosion(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
-	bool daDreidel::collisionCat2_IceBall_15_YoshiIce(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
+	bool daBunbun::collisionCat3_StarPower(ActivePhysics *apThis, ActivePhysics *apOther){ return true; }
+	bool daBunbun::collisionCat13_Hammer(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
+	bool daBunbun::collisionCat14_YoshiFire(ActivePhysics *apThis, ActivePhysics *apOther){ return true; }
+	bool daBunbun::collisionCat1_Fireball_E_Explosion(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
+	bool daBunbun::collisionCat2_IceBall_15_YoshiIce(ActivePhysics *apThis, ActivePhysics *apOther) { return true; }
 
-void daDreidel::powBlockActivated(bool isNotMPGP) { }
+void daBunbun::powBlockActivated(bool isNotMPGP) { }
 
 
-bool daDreidel::calculateTileCollisions() {
+bool daBunbun::calculateTileCollisions() {
 	// Returns true if sprite should turn, false if not.
 
 	HandleXSpeed();
@@ -310,14 +315,14 @@ bool daDreidel::calculateTileCollisions() {
 	return false;
 }
 
-void daDreidel::bindAnimChr_and_setUpdateRate(const char* name, int unk, float unk2, float rate) {
+void daBunbun::bindAnimChr_and_setUpdateRate(const char* name, int unk, float unk2, float rate) {
 	nw4r::g3d::ResAnmChr anmChr = this->resFile.GetResAnmChr(name);
 	this->chrAnimation.bind(&this->bodyModel, anmChr, unk);
 	this->bodyModel.bindAnim(&this->chrAnimation, unk2);
 	this->chrAnimation.setUpdateRate(rate);
 }
 
-int daDreidel::onCreate() {
+int daBunbun::onCreate() {
 
 	// Model creation
 	allocator.link(-1, GameHeaps[0], 0, 0x20);
@@ -405,18 +410,18 @@ int daDreidel::onCreate() {
 	return true;
 }
 
-int daDreidel::onDelete() {
+int daBunbun::onDelete() {
 	return true;
 }
 
-int daDreidel::onExecute() {
+int daBunbun::onExecute() {
 	acState.execute();
 	updateModelMatrices();
 
 	return true;
 }
 
-int daDreidel::onDraw() {
+int daBunbun::onDraw() {
 
 	if (this->isInvulnerable == 1) {
 		this->flashing++;
@@ -433,7 +438,7 @@ int daDreidel::onDraw() {
 	return true;
 }
 
-void daDreidel::updateModelMatrices() {
+void daBunbun::updateModelMatrices() {
 	matrix.translation(pos.x, pos.y - 2.0, pos.z);
 	matrix.applyRotationYXZ(&rot.x, &rot.y, &rot.z);
 
@@ -447,7 +452,7 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 // Grow State
 ///////////////
-	void daDreidel::beginState_Grow() {
+	void daBunbun::beginState_Grow() {
 		bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 0.75);
 
 		this->timer = 0;
@@ -455,7 +460,7 @@ void daDreidel::updateModelMatrices() {
 		SetupKameck(this, Kameck);
 	}
 
-	void daDreidel::executeState_Grow() {
+	void daBunbun::executeState_Grow() {
 
 		if(this->chrAnimation.isAnimationDone()) {
 			this->chrAnimation.setCurrentFrame(0.0);
@@ -471,7 +476,7 @@ void daDreidel::updateModelMatrices() {
 			doStateChange(&StateID_Walk);
 		}
 	}
-	void daDreidel::endState_Grow() {
+	void daBunbun::endState_Grow() {
 		this->chrAnimation.setUpdateRate(1.0);
 		CleanupKameck(this, Kameck);
 	}
@@ -480,7 +485,7 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 // Walk State
 ///////////////
-	void daDreidel::beginState_Walk() {
+	void daBunbun::beginState_Walk() {
 		this->max_speed.x = (this->direction) ? -this->XSpeed : this->XSpeed;
 		this->speed.x = (direction) ? -1.2f : 1.2f;
 
@@ -490,7 +495,7 @@ void daDreidel::updateModelMatrices() {
 
 		this->isTurningCountdown = 0;
 	}
-	void daDreidel::executeState_Walk() {
+	void daBunbun::executeState_Walk() {
 
 		if (this->isInvulnerableCountdown > 0) {
 			this->isInvulnerableCountdown--;
@@ -518,17 +523,17 @@ void daDreidel::updateModelMatrices() {
 			this->chrAnimation.setCurrentFrame(0.0);
 		}
 	}
-	void daDreidel::endState_Walk() { this->timer += 1; }
+	void daBunbun::endState_Walk() { this->timer += 1; }
 
 
 ///////////////
 // Turn State
 ///////////////
-	void daDreidel::beginState_Turn() {
+	void daBunbun::beginState_Turn() {
 		this->direction ^= 1;
 		this->speed.x = 0.0;
 	}
-	void daDreidel::executeState_Turn() {
+	void daBunbun::executeState_Turn() {
 
 		if(this->chrAnimation.isAnimationDone()) {
 			this->chrAnimation.setCurrentFrame(0.0);
@@ -542,19 +547,19 @@ void daDreidel::updateModelMatrices() {
 			else 					{ doStateChange(&StateID_Walk); }
 		}
 	}
-	void daDreidel::endState_Turn() { this->rot.y = (this->direction) ? 0xD800 : 0x2800; }
+	void daBunbun::endState_Turn() { this->rot.y = (this->direction) ? 0xD800 : 0x2800; }
 
 
 ///////////////
 // Knockback State
 ///////////////
-	void daDreidel::beginState_KnockBack() {
+	void daBunbun::beginState_KnockBack() {
 		bindAnimChr_and_setUpdateRate("begoman_damage", 1, 0.0, 0.65);
 
 		this->max_speed.x = (this->direction) ? 6.5f : -6.5f;
 		this->speed.x = (this->direction) ? 6.5f : -6.5f;
 	}
-	void daDreidel::executeState_KnockBack() {
+	void daBunbun::executeState_KnockBack() {
 
 		bool ret = calculateTileCollisions();
 		if (ret) {
@@ -570,7 +575,7 @@ void daDreidel::updateModelMatrices() {
 		}
 
 	}
-	void daDreidel::endState_KnockBack() {
+	void daBunbun::endState_KnockBack() {
 		if (this->rot.y == 0x2800) {
 			// CreateEffect(&this->pos, &(S16Vec){0,0,0}, &(Vec){1.0, 1.0, 1.0}, 175);
 			this->direction = 0;
@@ -587,21 +592,21 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 // ChargePrep State
 ///////////////
-	void daDreidel::beginState_ChargePrep() {
+	void daBunbun::beginState_ChargePrep() {
 		bindAnimChr_and_setUpdateRate("begoman_attack", 1, 0.0, 0.9);
 	}
-	void daDreidel::executeState_ChargePrep() {
+	void daBunbun::executeState_ChargePrep() {
 		if(this->chrAnimation.isAnimationDone()) {
 			doStateChange(&StateID_Charge);
 		}
 	}
-	void daDreidel::endState_ChargePrep() { }
+	void daBunbun::endState_ChargePrep() { }
 
 
 ///////////////
 // Charge State
 ///////////////
-	void daDreidel::beginState_Charge() {
+	void daBunbun::beginState_Charge() {
 		bindAnimChr_and_setUpdateRate("begoman_attack3", 1, 0.0, 1.0);
 		this->timer = 0;
 		this->isTurningCountdown = 0;
@@ -615,7 +620,7 @@ void daDreidel::updateModelMatrices() {
 
 		this->charging = 1;
 	}
-	void daDreidel::executeState_Charge() {
+	void daBunbun::executeState_Charge() {
 
 		if (this->isInvulnerableCountdown > 0) {
 			this->isInvulnerableCountdown--;
@@ -642,7 +647,7 @@ void daDreidel::updateModelMatrices() {
 
 		if (this->isTurningCountdown > 90) { doStateChange(&StateID_Turn); }
 	}
-	void daDreidel::endState_Charge() {
+	void daBunbun::endState_Charge() {
 		this->charging = 0;
 
 		this->counter_504[0] = 0;
@@ -655,21 +660,21 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 // ChargeRecover State
 ///////////////
-	void daDreidel::beginState_ChargeRecover() {
+	void daBunbun::beginState_ChargeRecover() {
 		bindAnimChr_and_setUpdateRate("begoman_stand", 1, 0.0, 0.5);
 	}
-	void daDreidel::executeState_ChargeRecover() {
+	void daBunbun::executeState_ChargeRecover() {
 		if(this->chrAnimation.isAnimationDone()) {
 			doStateChange(&StateID_Turn);
 		}
 	}
-	void daDreidel::endState_ChargeRecover() { }
+	void daBunbun::endState_ChargeRecover() { }
 
 
 ///////////////
 // Damage State
 ///////////////
-	void daDreidel::beginState_Damage() {
+	void daBunbun::beginState_Damage() {
 		this->isInvulnerable = 1;
 		bindAnimChr_and_setUpdateRate("begoman_wait", 1, 0.0, 0.75);
 		this->timer = 0;
@@ -690,7 +695,7 @@ void daDreidel::updateModelMatrices() {
 		Vec glowScale = {2.5f, 2.5f, 2.5f};
 		SpawnEffect("Wm_mr_wirehit_glow", 0, &back, 0, &glowScale);
 	}
-	void daDreidel::executeState_Damage() {
+	void daBunbun::executeState_Damage() {
 
 		if(this->chrAnimation.isAnimationDone()) {
 			this->timer += 1;
@@ -710,7 +715,7 @@ void daDreidel::updateModelMatrices() {
 			this->chrAnimation.setCurrentFrame(0.0);
 		}
 	}
-	void daDreidel::endState_Damage() {
+	void daBunbun::endState_Damage() {
 		bindAnimChr_and_setUpdateRate("begoman_wait2", 1, 0.0, 1.0);
 		this->isInvulnerableCountdown = 90;
 	}
@@ -719,10 +724,10 @@ void daDreidel::updateModelMatrices() {
 ///////////////
 // Outro State
 ///////////////
-	void daDreidel::beginState_Outro() {
+	void daBunbun::beginState_Outro() {
 		OutroSetup(this);
 	}
-	void daDreidel::executeState_Outro() {
+	void daBunbun::executeState_Outro() {
 
 		if (this->dying == 1) {
 			if (this->timer > 180) { ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE); }
@@ -744,4 +749,4 @@ void daDreidel::updateModelMatrices() {
 
 		this->timer += 1;
 	}
-	void daDreidel::endState_Outro() { }
+	void daBunbun::endState_Outro() { }
