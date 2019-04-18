@@ -461,13 +461,15 @@ void daBunbun::updateModelMatrices() {
 				this->direction = 0;
 			}
 		}
-		if(this->direction == 1) {
-			this->directiontomove = 2;
+		else {
+			if(this->direction == 1) {
+				this->directiontomove = 2;
+			}
+			if(this->direction == 0) {
+				this->directiontomove = -2;
+			}
+			this->pos.x += 1 * this->directiontomove;
 		}
-		if(this->direction == 0) {
-			this->directiontomove = -2;
-		}
-		this->pos.x += 1 * this->directiontomove;
 	}
 	void daBunbun::endState_Charge() {
 		this->charging = 0;
