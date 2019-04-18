@@ -35,7 +35,6 @@ public:
 	int isInvulnerableCountdown;
 	int isTurningCountdown;
 	char charging;
-	int flashing;
 	int directiontomove;
 
 	float dying;
@@ -274,7 +273,7 @@ int daBunbun::onCreate() {
 	allocator.unlink();
 
 	// Stuff I do understand
-	this->scale = (Vec){0.5, 0.5, 0.5};
+	this->scale = (Vec){1.0, 1.0, 1.0};
 
 	this->rot.x = 0; // X is vertical axis
 	this->rot.y = 0xD800; // Y is horizontal axis
@@ -289,7 +288,6 @@ int daBunbun::onCreate() {
 
 	this->isInSpace = this->settings & 0xF;
 	this->fromBehind = 0;
-	this->flashing = 0;
 
 
 	ActivePhysics::Info HitMeBaby;
@@ -358,17 +356,10 @@ int daBunbun::onExecute() {
 
 int daBunbun::onDraw() {
 
-	if (this->isInvulnerable == 1) {
-		this->flashing++;
-	}
-
-	if (this->flashing < 5) {
-		bodyModel.scheduleForDrawing();
-	}
+	bodyModel.scheduleForDrawing();
 
 	bodyModel._vf1C();
 
-	if (this->flashing > 8) { this->flashing = 0; }
 
 	return true;
 }
@@ -396,7 +387,6 @@ void daBunbun::updateModelMatrices() {
 	}
 
 	void daBunbun::executeState_Intro() {
-
 		if(this->animationChr.isAnimationDone()) {
 			this->animationChr.setCurrentFrame(0.0);
 		}
@@ -464,12 +454,12 @@ void daBunbun::updateModelMatrices() {
 			doStateChange(&StateID_Turn);
 		}
 		if(this->direction == 1) {
-			this->directiontomove = -1;
-		}
-		if(this->direction == 0) {
 			this->directiontomove = 1;
 		}
-		this->pos.x += 4 * this->directiontomove;
+		if(this->direction == 0) {
+			this->directiontomove = -1;
+		}
+		this->pos.x += 1 * this->directiontomove;
 	}
 	void daBunbun::endState_Charge() {
 		this->charging = 0;
@@ -522,7 +512,9 @@ void daBunbun::updateModelMatrices() {
 		bindAnimChr_and_setUpdateRate("dead", 1, 0.0, 1.0);
 	}
 	void daBunbun::executeState_Outro() {
-
+		if(this->animationChr.isAnimationDone()) {
+			animationChr.setCurrentFrame(0.0);
+		}
 		if (this->dying == 1) {
 			if (this->timer > 180) { ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE); }
 			if (this->timer == 60) { PlayerVictoryCries(this); }
@@ -532,7 +524,7 @@ void daBunbun::updateModelMatrices() {
 		}
 
 		bool ret;
-		ret = ShrinkBoss(this, &this->pos, 0.5, this->timer);
+		ret = ShrinkBoss(this, &this->pos, 1, this->timer);
 
 		if (ret == true) 	{
 			BossExplode(this, &this->pos);
