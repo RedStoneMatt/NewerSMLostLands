@@ -295,8 +295,8 @@ int daBunbun::onCreate() {
 	HitMeBaby.xDistToCenter = 0.0;
 	HitMeBaby.yDistToCenter = 24.0;
 
-	HitMeBaby.xDistToEdge = 15.0;
-	HitMeBaby.yDistToEdge = 15.0;
+	HitMeBaby.xDistToEdge = 28.0;
+	HitMeBaby.yDistToEdge = 24.0;
 
 	HitMeBaby.category1 = 0x3;
 	HitMeBaby.category2 = 0x0;
