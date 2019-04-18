@@ -451,13 +451,21 @@ void daBunbun::updateModelMatrices() {
 
 		bool ret = calculateTileCollisions();
 		if (ret) {
-			doStateChange(&StateID_Turn);
+			u16 amt;
+			amt = (this->direction == 0) ? 0x2800 : 0xD800;
+			int done = SmoothRotation(&this->rot.y, amt, 0x800);
+			if(this->rot.y == 0xD800) {
+				this->direction = 1;
+			}
+			if(this->rot.y == 0x2800) {
+				this->direction = 0;
+			}
 		}
 		if(this->direction == 1) {
-			this->directiontomove = 1;
+			this->directiontomove = 2;
 		}
 		if(this->direction == 0) {
-			this->directiontomove = -1;
+			this->directiontomove = -2;
 		}
 		this->pos.x += 1 * this->directiontomove;
 	}
