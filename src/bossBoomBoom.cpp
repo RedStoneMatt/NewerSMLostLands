@@ -291,7 +291,7 @@ int daBunbun::onCreate() {
 	this->isInSpace = this->settings & 0xF;
 	this->fromBehind = 0;
 	
-	this->xposlimitright = this->pos.x + 40;
+	this->xposlimitright = this->pos.x + 60;
 	this->xposlimitleft = this->pos.x - 150;
 
 
@@ -360,7 +360,7 @@ int daBunbun::onExecute() {
 		this->direction = 0;
 	}
 	if(this->rot.y == 0xD800) {
-		this->direction = 0;
+		this->direction = 1;
 	}
 	
 	return true;
@@ -464,7 +464,7 @@ void daBunbun::updateModelMatrices() {
 			this->direction = 0;
 		}
 		if(this->rot.y == 0xD800) {
-			this->direction = 0;
+			this->direction = 1;
 		}
 		if(this->direction == 1) {
 			this->directiontomove = 1;
