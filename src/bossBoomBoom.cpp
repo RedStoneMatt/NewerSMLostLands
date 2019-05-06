@@ -350,7 +350,14 @@ int daBunbun::onDelete() {
 int daBunbun::onExecute() {
 	acState.execute();
 	updateModelMatrices();
-
+	
+	if(this->rot.y == 0x2800) {
+		this->direction = 0;
+	}
+	if(this->rot.y == 0xD800) {
+		this->direction = 0;
+	}
+	
 	return true;
 }
 
@@ -448,21 +455,25 @@ void daBunbun::updateModelMatrices() {
 		if(this->animationChr.isAnimationDone()) {
 			this->animationChr.setCurrentFrame(0.0);
 		}
-
+		if(this->rot.y == 0x2800) {
+			this->direction = 0;
+		}
+		if(this->rot.y == 0xD800) {
+			this->direction = 0;
+		}
 		bool ret = calculateTileCollisions();
 		if (ret) {
-			u16 amt;
-			amt = (this->direction == 0) ? 0x2800 : 0xD800;
-			int done = SmoothRotation(&this->rot.y, amt, 0x800);
-			this->direction = this->direction * -1;
-			this->directiontomove = this->directiontomove * -1;
-			this->pos.x += 60 * this->directiontomove * -1;
-			if(this->rot.y == 0xD800) {
-				this->direction = 1;
-			}
-			if(this->rot.y == 0x2800) {
-				this->direction = 0;
-			}
+			// u16 amt;
+			// amt = (this->direction == 0) ? 0x2800 : 0xD800;
+			// int done = SmoothRotation(&this->rot.y, amt, 0x800);
+			// this->pos.x += 60 * this->directiontomove * -1;
+			// if(this->rot.y == 0xD800) {
+				// this->direction = 1;
+			// }
+			// if(this->rot.y == 0x2800) {
+				// this->direction = 0;
+			// }
+			doStateChange(&StateID_Turn);
 		}
 		else {
 			if(this->direction == 1) {
