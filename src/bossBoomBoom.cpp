@@ -36,6 +36,8 @@ public:
 	int isTurningCountdown;
 	char charging;
 	int directiontomove;
+	int xposlimitright;
+	int xposlimitleft;
 
 	float dying;
 
@@ -288,6 +290,9 @@ int daBunbun::onCreate() {
 
 	this->isInSpace = this->settings & 0xF;
 	this->fromBehind = 0;
+	
+	this->xposlimitright = this->pos.x + 40;
+	this->xposlimitleft = this->pos.x - 150;
 
 
 	ActivePhysics::Info HitMeBaby;
@@ -461,29 +466,19 @@ void daBunbun::updateModelMatrices() {
 		if(this->rot.y == 0xD800) {
 			this->direction = 0;
 		}
-		bool ret = calculateTileCollisions();
-		if (ret) {
-			// u16 amt;
-			// amt = (this->direction == 0) ? 0x2800 : 0xD800;
-			// int done = SmoothRotation(&this->rot.y, amt, 0x800);
-			// this->pos.x += 60 * this->directiontomove * -1;
-			// if(this->rot.y == 0xD800) {
-				// this->direction = 1;
-			// }
-			// if(this->rot.y == 0x2800) {
-				// this->direction = 0;
-			// }
+		if(this->direction == 1) {
+			this->directiontomove = 1;
+		}
+		if(this->direction == 0) {
+			this->directiontomove = -1;
+		}
+		if(this->pos.x > this->xposlimitright) {
 			doStateChange(&StateID_Turn);
 		}
-		else {
-			if(this->direction == 1) {
-				this->directiontomove = 1;
-			}
-			if(this->direction == 0) {
-				this->directiontomove = -1;
-			}
-			this->pos.x += 2 * this->directiontomove;
+		if(this->pos.x < this->xposlimitleft) {
+			doStateChange(&StateID_Turn);
 		}
+		this->pos.x += 2 * this->directiontomove;
 	}
 	void daBunbun::endState_Charge() {
 		this->charging = 0;
