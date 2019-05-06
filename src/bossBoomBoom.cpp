@@ -454,7 +454,7 @@ void daBunbun::updateModelMatrices() {
 			u16 amt;
 			amt = (this->direction == 0) ? 0x2800 : 0xD800;
 			int done = SmoothRotation(&this->rot.y, amt, 0x800);
-			this->pos.x += 15 * this->directiontomove * -1;
+			this->pos.x += 30 * this->directiontomove * -1;
 			if(this->rot.y == 0xD800) {
 				this->direction = 1;
 			}
