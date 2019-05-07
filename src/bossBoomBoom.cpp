@@ -426,12 +426,12 @@ void daBunbun::updateModelMatrices() {
 // Turn State
 ///////////////
 	void daBunbun::beginState_Turn() {
-		if(this->direction == 0) {
-			this->direction = 1;
-		}
-		else {
+		OSReport("dir was: %d\n", this->direction);
+		this->direction++;
+		if(this->direction == 2) {
 			this->direction = 0;
 		}
+		OSReport("dir is now: %d\n", this->direction);
 		this->direction ^= 1;
 		this->speed.x = 0.0;
 		this->doOneTime = 0;
