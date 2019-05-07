@@ -467,10 +467,10 @@ void daBunbun::updateModelMatrices() {
 			this->direction = 1;
 		}
 		if(this->direction == 1) {
-			this->directiontomove = 1;
+			this->directiontomove = -1;
 		}
 		if(this->direction == 0) {
-			this->directiontomove = -1;
+			this->directiontomove = 1;
 		}
 		if(this->pos.x > this->xposlimitright) {
 			doStateChange(&StateID_Turn);
