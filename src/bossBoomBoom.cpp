@@ -426,7 +426,7 @@ void daBunbun::updateModelMatrices() {
 // Turn State
 ///////////////
 	void daBunbun::beginState_Turn() {
-		this->direction ^= 1;
+		// this->direction ^= 1;
 		this->speed.x = 0.0;
 		this->doOneTime = 0;
 	}
