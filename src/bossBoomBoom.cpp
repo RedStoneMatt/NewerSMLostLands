@@ -435,6 +435,7 @@ void daBunbun::updateModelMatrices() {
 		}
 
 		u16 amt = (this->direction == 0) ? 0x2800 : 0xD800;
+		OSReport("amtdir: %d\namtrot: %d\n", this->direction, this->rot.y);
 		int done = SmoothRotation(&this->rot.y, amt, 0x800);
 
 		if(done) {
@@ -444,6 +445,7 @@ void daBunbun::updateModelMatrices() {
 			if(this->direction == 1) {
 				this->direction = 0;
 			}
+		OSReport("donedir: %d\ndonerot: %d\n", this->direction, this->rot.y);
 			doStateChange(&StateID_Charge);
 		}
 	}
