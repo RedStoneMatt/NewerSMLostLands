@@ -38,6 +38,7 @@ public:
 	int directiontomove;
 	int xposlimitright;
 	int xposlimitleft;
+	int doOneTime;
 
 	float dying;
 
@@ -427,6 +428,7 @@ void daBunbun::updateModelMatrices() {
 	void daBunbun::beginState_Turn() {
 		this->direction ^= 1;
 		this->speed.x = 0.0;
+		this->doOneTime = 0;
 	}
 	void daBunbun::executeState_Turn() {
 
@@ -435,21 +437,22 @@ void daBunbun::updateModelMatrices() {
 		}
 
 		u16 amt = (this->direction == 0) ? 0x2800 : 0xD800;
-		OSReport("amtdir: %d\namtrot: %d\n", this->direction, amt);
+		if(this->doOneTime == 0) {
+			OSReport("amtdir: %d\namtrot: %d\n", this->direction, amt);
+			this->doOneTime++;
+		}
 		int done = SmoothRotation(&this->rot.y, amt, 0x800);
 
 		if(done) {
-			if(this->direction == 0) {
-				this->direction = 1;
-			}
-			else {
-				this->direction = 0;
-			}
-		OSReport("donedir: %d\ndonerot: %d\n", this->direction, this->rot.y);
+			OSReport("donedir: %d\ndonerot: %d\n", this->direction, this->rot.y);
+			this->doOneTime = 0;
 			doStateChange(&StateID_Charge);
 		}
 	}
-	void daBunbun::endState_Turn() { this->rot.y = (this->direction) ? 0xD800 : 0x2800; }
+	void daBunbun::endState_Turn() { 
+		this->rot.y = (this->direction) ? 0xD800 : 0x2800; 
+		this->doOneTime = 0;
+	}
 
 
 
