@@ -438,6 +438,12 @@ void daBunbun::updateModelMatrices() {
 		int done = SmoothRotation(&this->rot.y, amt, 0x800);
 
 		if(done) {
+			if(this->direction == 0) {
+				this->direction = 1;
+			}
+			if(this->direction == 1) {
+				this->direction = 0;
+			}
 			doStateChange(&StateID_Charge);
 		}
 	}
