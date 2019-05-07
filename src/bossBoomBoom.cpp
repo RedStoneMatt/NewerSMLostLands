@@ -426,13 +426,7 @@ void daBunbun::updateModelMatrices() {
 // Turn State
 ///////////////
 	void daBunbun::beginState_Turn() {
-		OSReport("dir was: %d\n", this->direction);
-		this->direction++;
-		if(this->direction == 2) {
-			this->direction = 0;
-		}
-		OSReport("dir is now: %d\n", this->direction);
-		this->direction ^= 1;
+		// this->direction ^= 1;
 		this->speed.x = 0.0;
 		this->doOneTime = 0;
 	}
@@ -491,8 +485,20 @@ void daBunbun::updateModelMatrices() {
 		}
 		if(this->pos.x > this->xposlimitright) {
 			doStateChange(&StateID_Turn);
+			OSReport("dir was: %d\n", this->direction);
+			this->direction++;
+			if(this->direction == 2) {
+				this->direction = 0;
+			}
+			OSReport("dir is now: %d\n", this->direction);
 		}
 		if(this->pos.x < this->xposlimitleft) {
+			OSReport("dir was: %d\n", this->direction);
+			this->direction++;
+			if(this->direction == 2) {
+				this->direction = 0;
+			}
+			OSReport("dir is now: %d\n", this->direction);
 			doStateChange(&StateID_Turn);
 		}
 		this->pos.x += 2 * this->directiontomove;
