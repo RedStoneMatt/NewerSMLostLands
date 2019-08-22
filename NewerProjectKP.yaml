@@ -36,6 +36,7 @@ modules:
   - processed/switchblock.yaml
   - processed/eventblock.yaml
   - processed/msgbox.yaml
+  - processed/layoutsprite.yaml
   - processed/replay.yaml
   - processed/growup.yaml
   - processed/eventlooper.yaml

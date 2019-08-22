@@ -1,0 +1,15 @@
+---
+#Replaces Actor 327 EN_TESTMAN (Sprite 415)
+
+
+source_files: [../src/layoutsprite.cpp]
+hooks:
+  - name: LytSpriteBuild
+    type: add_func_pointer
+    src_addr_pal: 0x80B0B090
+    target_func: 'daEnLytSprite_c::build()'
+    
+  - name: LytSpriteManagerBuild
+    type: add_func_pointer
+    src_addr_pal: 0x8097FE80
+    target_func: 'dLytSpriteManager_c::build()'

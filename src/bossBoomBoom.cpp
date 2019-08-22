@@ -39,6 +39,7 @@ public:
 	int xposlimitright;
 	int xposlimitleft;
 	int doOneTime;
+	int canImoveUstupid;
 
 	float dying;
 
@@ -294,6 +295,7 @@ int daBunbun::onCreate() {
 	
 	this->xposlimitright = this->pos.x + 60;
 	this->xposlimitleft = this->pos.x - 150;
+	this->canImoveUstupid = 1;
 
 
 	ActivePhysics::Info HitMeBaby;
@@ -428,7 +430,6 @@ void daBunbun::updateModelMatrices() {
 	void daBunbun::beginState_Turn() {
 		// this->direction ^= 1;
 		this->speed.x = 0.0;
-		this->doOneTime = 0;
 	}
 	void daBunbun::executeState_Turn() {
 
@@ -445,13 +446,11 @@ void daBunbun::updateModelMatrices() {
 
 		if(done) {
 			OSReport("donedir: %d\ndonerot: %d\n", this->direction, this->rot.y);
-			this->doOneTime = 0;
 			doStateChange(&StateID_Charge);
 		}
 	}
 	void daBunbun::endState_Turn() { 
 		this->rot.y = (this->direction) ? 0xD800 : 0x2800; 
-		this->doOneTime = 0;
 	}
 
 
@@ -471,37 +470,41 @@ void daBunbun::updateModelMatrices() {
 		if(this->animationChr.isAnimationDone()) {
 			this->animationChr.setCurrentFrame(0.0);
 		}
-		if(this->rot.y == 0x2800) {
-			this->direction = 0;
-		}
-		if(this->rot.y == 0xD800) {
-			this->direction = 1;
-		}
+		// if(this->rot.y == 0x2800) {
+			// this->direction = 0;
+		// }
+		// if(this->rot.y == 0xD800) {
+			// this->direction = 1;
+		// }
 		if(this->direction == 1) {
 			this->directiontomove = -1;
 		}
 		if(this->direction == 0) {
 			this->directiontomove = 1;
 		}
-		if(this->pos.x > this->xposlimitright) {
-			doStateChange(&StateID_Turn);
-			OSReport("dir was: %d\n", this->direction);
-			this->direction++;
-			if(this->direction == 2) {
-				this->direction = 0;
+		if(this->pos.x >= this->xposlimitright) {
+			u16 amt = 0xD800;
+			int done = SmoothRotation(&this->rot.y, amt, 0x800);
+			OSReport("this->pos.x >= this->xposlimitright --> turning to 0xD800\n");
+			if(this->rot.y == 0xD800) {
+				this->direction = 1;
+				this->directiontomove = -1;
+				this->pos.x += -4;
 			}
-			OSReport("dir is now: %d\n", this->direction);
 		}
-		if(this->pos.x < this->xposlimitleft) {
-			OSReport("dir was: %d\n", this->direction);
-			this->direction++;
-			if(this->direction == 2) {
+		if(this->pos.x <= this->xposlimitleft) {
+			u16 amt = 0x2800;
+			int done = SmoothRotation(&this->rot.y, amt, 0x800);
+			OSReport("this->pos.x <= this->xposlimitleft --> turning to 0x2800\n");
+			if(this->rot.y == 0x2800) {
 				this->direction = 0;
+				this->directiontomove = 1;
+				this->pos.x += 4;
 			}
-			OSReport("dir is now: %d\n", this->direction);
-			doStateChange(&StateID_Turn);
 		}
-		this->pos.x += 2 * this->directiontomove;
+		if(this->pos.x > this->xposlimitleft && this->pos.x < this->xposlimitright) {
+			this->pos.x += 2 * this->directiontomove;
+		}
 	}
 	void daBunbun::endState_Charge() {
 		this->charging = 0;

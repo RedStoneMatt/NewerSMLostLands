@@ -1,0 +1,8 @@
+hooks:
+- {name: LytSpriteBuild, src_addr_jpn: 2159061392, src_addr_jpn2: 2159061424, src_addr_ntsc: 2159063216,
+  src_addr_ntsc2: 2159063248, src_addr_pal: 2159063184, src_addr_pal2: 2159063216,
+  target_func: 'daEnLytSprite_c::build()', type: add_func_pointer}
+- {name: LytSpriteManagerBuild, src_addr_jpn: 2157442920, src_addr_jpn2: 2157442936,
+  src_addr_ntsc: 2157444736, src_addr_ntsc2: 2157444752, src_addr_pal: 2157444736,
+  src_addr_pal2: 2157444752, target_func: 'dLytSpriteManager_c::build()', type: add_func_pointer}
+source_files: [../src/layoutsprite.cpp]

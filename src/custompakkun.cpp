@@ -31,6 +31,7 @@ class daCustomPakkun : public dEn_c {
 	
 	int spawnersettings;
 	int type;
+	int isupsidedown;
 
 	static daCustomPakkun *build();
 
@@ -138,6 +139,7 @@ void daCustomPakkun::setupBodyModel() {
 int daCustomPakkun::onCreate() {
 
 	this->type = this->settings >> 28 & 0xF;
+	this->isupsidedown = (this->settings & 0xF0) >> 4;
 	if (this->type == 0) {
 		this->brresName = "g3d/t01.brres";
 	}
@@ -156,8 +158,12 @@ int daCustomPakkun::onCreate() {
 	
 	setupBodyModel();
 
-
-	this->scale = (Vec){1.0, 1.0, 1.0};
+	if(this->isupsidedown == 0) {
+		this->scale = (Vec){1.0, 1.0, 1.0};
+	}
+	if(this->isupsidedown == 1) {
+		this->scale = (Vec){1.0, -1.0, 1.0};
+	}
 	this->rot.x = 0; // X is vertical axis
 	this->rot.y = 0xD800; // Y is horizontal axis
 	this->rot.z = 0; // Z is ... an axis >.>
