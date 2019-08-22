@@ -161,12 +161,13 @@ int daCustomPakkun::onCreate() {
 	this->scale = (Vec){1.0, 1.0, 1.0};
 	if(this->isupsidedown == 0) {
 		this->rot.x = 0;
+		this->rot.y = 0xD800;
 	}
 	if(this->isupsidedown == 1) {
-		this->rot.x = 0x30D40;
+		this->rot.x = 32000;
+		this->rot.y = 0x5500;
 	}
-	 // X is vertical axis
-	this->rot.y = 0xD800; // Y is horizontal axis
+	 // X is vertical axis // Y is horizontal axis
 	this->rot.z = 0; // Z is ... an axis >.>
 	this->direction = 1; // Heading left.
 
@@ -245,7 +246,7 @@ void daCustomPakkun::executeState_Attack() {
 				this->rot.y = 0xD800;
 			}
 			if(this->isupsidedown == 1) {
-				this->rot.y = 0x2800;
+				this->rot.y = 0x5500;
 			}
 		}
 		else {
@@ -253,7 +254,7 @@ void daCustomPakkun::executeState_Attack() {
 				this->rot.y = 0x2800;
 			}
 			if(this->isupsidedown == 1) {
-				this->rot.y = 0xD800;
+				this->rot.y = -0x5B00;
 			}
 		}
 	}
@@ -265,7 +266,12 @@ void daCustomPakkun::executeState_Attack() {
 	if(this->delayforshooting == 0 || this->delayforshooting == 1) {
 		if(this->animationChr.isAnimationDone()) {
 			if(this->delayforshooting == 1) {
-				bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+				if(this->isupsidedown == 0) {
+					bindAnimChr_and_setUpdateRate("fire_attack_down", 1, 0.0, 1.0);
+				}
+				if(this->isupsidedown == 1) {
+					bindAnimChr_and_setUpdateRate("fire_attack_up", 1, 0.0, 1.0);
+				}
 			}
 			this->animationChr.setCurrentFrame(0.0);
 			this->delayforshooting++;
