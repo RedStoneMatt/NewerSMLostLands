@@ -163,7 +163,7 @@ int daCustomPakkun::onCreate() {
 		this->rot.x = 0;
 	}
 	if(this->isupsidedown == 1) {
-		this->rot.x = 180;
+		this->rot.x = 0x30D40;
 	}
 	 // X is vertical axis
 	this->rot.y = 0xD800; // Y is horizontal axis
