@@ -157,14 +157,15 @@ int daCustomPakkun::onCreate() {
 	}
 	
 	setupBodyModel();
-
+	
+	this->scale = (Vec){1.0, 1.0, 1.0};
 	if(this->isupsidedown == 0) {
-		this->scale = (Vec){1.0, 1.0, 1.0};
+		this->rot.x = 0;
 	}
 	if(this->isupsidedown == 1) {
-		this->scale = (Vec){1.0, -1.0, 1.0};
+		this->rot.x = 180;
 	}
-	this->rot.x = 0; // X is vertical axis
+	 // X is vertical axis
 	this->rot.y = 0xD800; // Y is horizontal axis
 	this->rot.z = 0; // Z is ... an axis >.>
 	this->direction = 1; // Heading left.
@@ -240,10 +241,20 @@ void daCustomPakkun::executeState_Attack() {
 	if (facing != this->direction) {
 		this->direction = facing;
 		if (this->direction == 1) {
-			this->rot.y = 0xD800;
+			if(this->isupsidedown == 0) {
+				this->rot.y = 0xD800;
+			}
+			if(this->isupsidedown == 1) {
+				this->rot.y = 0x2800;
+			}
 		}
 		else {
-			this->rot.y = 0x2800;
+			if(this->isupsidedown == 0) {
+				this->rot.y = 0x2800;
+			}
+			if(this->isupsidedown == 1) {
+				this->rot.y = 0xD800;
+			}
 		}
 	}
 	if(this->animationChr.isAnimationDone() && this->delayforshooting == 2) {
