@@ -1,7 +1,9 @@
 #include <common.h>
 #include <game.h>
+#include <newer.h>
 #include "sfx.h"
 #include "powerlayout.h"
+#include "koopatlas/hud.h"
 
 // Replaces: EN_LIFT_ROTATION_HALF (Sprite 107; Profile ID 481 @ 80AF96F8)
 
@@ -46,7 +48,7 @@ int dPowerLayout_c::onCreate() {
 		layout.loadGroups(groupNames, (int[2]){0,1}, 2);
 		layout.disableAllAnimations();
 
-		layout.drawOrder = 140;
+		layout.drawOrder = 1;
 
 		layoutLoaded = true;
 	}
@@ -64,21 +66,88 @@ int dPowerLayout_c::onExecute() {
 
 	layout.execAnimations();
 	layout.update();
-	dAcPy_c *player;
-	player = dAcPy_c::findByID(0);
-	int p = CheckExistingPowerup(player);
-	if(p == 0) {
-		layout.findPictureByName("P_marioIcon_00")->SetVisible(1);
-		layout.findPictureByName("P_marioIcon_01")->SetVisible(0);
+	dAcPy_c *player1;
+	dAcPy_c *player2;
+	dAcPy_c *player3;
+	dAcPy_c *player4;
+	player1 = dAcPy_c::findByID(0);
+	player2 = dAcPy_c::findByID(0);
+	player3 = dAcPy_c::findByID(0);
+	player4 = dAcPy_c::findByID(0);
+	int p1 = CheckExistingPowerup(player1);
+	int p2 = CheckExistingPowerup(player2);
+	int p3 = CheckExistingPowerup(player3);
+	int p4 = CheckExistingPowerup(player4);
+	// Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
+	if(p1 == 0) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(1); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
 	}
-	if(p == 1) {
-		layout.findPictureByName("P_marioIcon_00")->SetVisible(1);
-		layout.findPictureByName("P_marioIcon_01")->SetVisible(0);
+	if(p1 == 1) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(1); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
 	}
-	if(p == 2) {
-		layout.findPictureByName("P_marioIcon_00")->SetVisible(0);
-		layout.findPictureByName("P_marioIcon_01")->SetVisible(1);
+	if(p1 == 2) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(0); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(1); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
 	}
+	if(p1 == 3) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(1); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
+	}
+	if(p1 == 4) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(0); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(1); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
+	}
+	if(p1 == 5) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(0); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(1); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
+	}
+	if(p1 == 6) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(0); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(1); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(0); //hammer
+	}
+	if(p1 == 7) {
+		layout.findPictureByName("P_marioIcon_00")->SetVisible(0); //classic
+		layout.findPictureByName("P_marioIcon_01")->SetVisible(0); //fire
+		layout.findPictureByName("P_marioIcon_02")->SetVisible(0); //ice
+		layout.findPictureByName("P_marioIcon_03")->SetVisible(0); //prop
+		layout.findPictureByName("P_marioIcon_04")->SetVisible(0); //peng
+		layout.findPictureByName("P_marioIcon_05")->SetVisible(1); //hammer
+	}
+	int pl1 = SearchForIndexOfPlayerID(0);
+	int pl2 = SearchForIndexOfPlayerID(1);
+	int pl3 = SearchForIndexOfPlayerID(2);
+	int pl4 = SearchForIndexOfPlayerID(3);
+	OSReport("player 1 -> %d\nplayer 2 -> %d\nplayer 3 -> %d\nplayer 4 -> %d\n", pl1, pl2, pl3, pl4);
 
 	return true;
 }
