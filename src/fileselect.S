@@ -327,12 +327,12 @@ WarpZoneName:
 
 .align 4
 DefaultSavefileInfoData:
-.string "Toxic Beach   " #15
+.string "Yoshi's Island" #15
 .byte 0,0,0,0,0,0,0,0,0,0,0 # 11
 .byte 0,0,0,0,0,0 # 6
-.long 0xFFFFFFFF,0x00FF1FFF
-.long 0x00FF1FFF,0x00C618FF
-.long 0xFFFFFFFF,0x00FF1FFF
+.long 0xFFFF99FF,0x1FB423FF
+.long 0x173714FF,0x3C9135FF
+.long 0xFFFF99FF,0x1FB423FF
 .short 0x75
 .byte 0x2E,0xB
 .byte 1,1

@@ -36,8 +36,6 @@ modules:
   - processed/switchblock.yaml
   - processed/eventblock.yaml
   - processed/msgbox.yaml
-  - processed/powerlayout.yaml
-  - processed/layoutsprite.yaml
   - processed/replay.yaml
   - processed/growup.yaml
   - processed/eventlooper.yaml
@@ -56,7 +54,7 @@ modules:
   - processed/bossWrenchThrow.yaml
   - processed/bossSamurshai.yaml
   - processed/bossPodouble.yaml
-  - processed/bossBoomBoom.yaml
+  - processed/bossTopman.yaml
   - processed/bossCaptainBowser.yaml
   - processed/bossBridgeBowser.yaml
   - processed/effectVideo.yaml
@@ -70,7 +68,5 @@ modules:
   - processed/challengeStar.yaml
   - processed/singAlong.yaml
   - processed/pumpkinGoomba.yaml
-  - processed/custompakkun.yaml
-  - processed/poisonball.yaml
   # - processed/pengi.yaml
 #  - processed/actorlog.yaml

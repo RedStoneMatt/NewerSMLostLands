@@ -1,4 +1,7 @@
 hooks:
+- {branch_type: bl, name: DoOpeningLevel, src_addr_jpn: 2157022996, src_addr_jpn2: 2157023012,
+  src_addr_ntsc: 2157023700, src_addr_ntsc2: 2157023716, src_addr_pal: 2157023700,
+  src_addr_pal2: 2157023716, target_func: EnterOpeningLevel, type: branch_insn}
 - {name: BuildCutScene, src_addr_jpn: 2157495840, src_addr_jpn2: 2157495856, src_addr_ntsc: 2157497656,
   src_addr_ntsc2: 2157497672, src_addr_pal: 2157497624, src_addr_pal2: 2157497640,
   target_func: 'dScCutScene_c::build()', type: add_func_pointer}

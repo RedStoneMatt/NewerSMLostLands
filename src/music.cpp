@@ -21,53 +21,53 @@ struct Hijacker {
 
 
 const char* SongNameList [] = {
-	"AIRSHIP", //100
-	"BOSS_TOWER", //101
-	"MENU", //102
-	"UNDERWATER", //103
-	"ATHLETIC", //104
-	"CASTLE", //105
-	"MAIN", //106
-	"MOUNTAIN", //107
-	"TOWER", //108
-	"UNDERGROUND", //109
-	"DESERT", //110
-	"FIRE", //111
-	"FOREST", //112
-	"FREEZEFLAME", //113
-	"JAPAN", //114
-	"PUMPKIN", //115
-	"SEWER", //116
-	"SPACE", //117
-	"BOWSER", //118
-	"BONUS", //119
-	"AMBUSH", //120	
-	"BRIDGE_DRUMS", //121	
-	"SNOW2", //122	
-	"MINIMEGA", //123	
-	"CLIFFS", //124
-	"AUTUMN", //125
-	"CRYSTALCAVES", //126
-	"GHOST_HOUSE", //127
-	"GRAVEYARD", //128
-	"JUNGLE", //129
-	"TROPICAL", //130
-	"SKY_CITY", //131
-	"SNOW", //132
-	"STAR_HAVEN", //133
-	"SINGALONG", //134
-	"FACTORY", //135
-	"TANK", //136
-	"TRAIN", //137
-	"YOSHIHOUSE", //138
-	"TOXIC_BEACH", //139
-	"CAVERN", //140
-	"SAND", //141
-	"SHYGUY", //142
-	"MINIGAME", //143
-	"BONUS_AREA", //144
-	"CHALLENGE", //145
-	"BOWSER_CASTLE", //146
+	"AIRSHIP",
+	"BOSS_TOWER",
+	"MENU",
+	"UNDERWATER",
+	"ATHLETIC",
+	"CASTLE",
+	"MAIN",
+	"MOUNTAIN",
+	"TOWER",
+	"UNDERGROUND",
+	"DESERT",
+	"FIRE",
+	"FOREST",
+	"FREEZEFLAME",
+	"JAPAN",
+	"PUMPKIN",
+	"SEWER",
+	"SPACE",
+	"BOWSER",
+	"BONUS",	
+	"AMBUSH",	
+	"BRIDGE_DRUMS",	
+	"SNOW2",	
+	"MINIMEGA",	
+	"CLIFFS",
+	"AUTUMN",
+	"CRYSTALCAVES",
+	"GHOST_HOUSE",
+	"GRAVEYARD",
+	"JUNGLE",
+	"TROPICAL",
+	"SKY_CITY",
+	"SNOW",
+	"STAR_HAVEN",
+	"SINGALONG",
+	"FACTORY",
+	"TANK",
+	"TRAIN",
+	"YOSHIHOUSE",
+	"FACTORYB",
+	"CAVERN",
+	"SAND",
+	"SHYGUY",
+	"MINIGAME",
+	"BONUS_AREA",
+	"CHALLENGE",
+	"BOWSER_CASTLE",
 	"",
 	"",
 	"",
@@ -77,8 +77,8 @@ const char* SongNameList [] = {
 	"",
 	"",
 	"",
-	"BOSS_CASTLE", //147
-	"BOSS_AIRSHIP", //148
+	"BOSS_CASTLE",
+	"BOSS_AIRSHIP",
 	NULL	
 };
 

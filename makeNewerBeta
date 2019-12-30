@@ -1,22 +1,22 @@
 #!/bin/sh
 
 remove_files() {
-	rm ~/Dropbox/Public/NewerBeta/LostlASM/System$1.bin
-	rm ~/Dropbox/Public/NewerBeta/LostlASM/DLCode$1.bin
-	rm ~/Dropbox/Public/NewerBeta/LostlASM/DLRelocs$1.bin
+	rm ~/Dropbox/Public/NewerBeta/NewerRes/System$1.bin
+	rm ~/Dropbox/Public/NewerBeta/NewerRes/DLCode$1.bin
+	rm ~/Dropbox/Public/NewerBeta/NewerRes/DLRelocs$1.bin
 }
 
 copy_files() {
-	mv NewerASM/n_$1_loader.bin ~/Dropbox/Public/NewerBeta/LostlASM/System$2.bin
-	mv NewerASM/n_$1_dlcode.bin ~/Dropbox/Public/NewerBeta/LostlASM/DLCode$2.bin
-	mv NewerASM/n_$1_dlrelocs.bin ~/Dropbox/Public/NewerBeta/LostlASM/DLRelocs$2.bin
+	mv NewerASM/n_$1_loader.bin ~/Dropbox/Public/NewerBeta/NewerRes/System$2.bin
+	mv NewerASM/n_$1_dlcode.bin ~/Dropbox/Public/NewerBeta/NewerRes/DLCode$2.bin
+	mv NewerASM/n_$1_dlrelocs.bin ~/Dropbox/Public/NewerBeta/NewerRes/DLRelocs$2.bin
 }
 
 
 
 rm -r ~/Dropbox/Public/NewerBeta/*
 cp -R ~/Dropbox/NEWERsmbw/Test\ Pack ~/Dropbox/Public/NewerBeta/Test\ Pack
-mv ~/Dropbox/Public/NewerBeta/Test\ Pack/NewerSMBW/LostlASM ~/Dropbox/Public/NewerBeta/LostlASM
+mv ~/Dropbox/Public/NewerBeta/Test\ Pack/NewerSMBW/NewerRes ~/Dropbox/Public/NewerBeta/NewerRes
 
 pushd ~/Dropbox/Public/NewerBeta/
 zip -r9 TestPackAssetsRC$1.zip Test\ Pack
@@ -51,7 +51,7 @@ for i in {1..12}
 	copy_files jpn2 JP_2
 
 	pushd ~/Dropbox/Public/NewerBeta/
-	zip -r9 TestPackBuildRC$1-$i.zip LostlASM
+	zip -r9 TestPackBuildRC$1-$i.zip NewerRes
 	zip -d TestPackBuildRC$1-$i.zip *.DS_Store __MACOSX*
 	popd
 

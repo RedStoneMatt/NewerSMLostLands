@@ -46,7 +46,7 @@ modules:
   - processed/bossWrenchThrow.yaml
   - processed/bossSamurshai.yaml
   - processed/bossPodouble.yaml
-  - processed/bossBoomBoom.yaml
+  - processed/bossTopman.yaml
   - processed/bossCaptainBowser.yaml
   - processed/bossBridgeBowser.yaml
   - processed/effectVideo.yaml

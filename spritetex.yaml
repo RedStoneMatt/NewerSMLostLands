@@ -53,27 +53,6 @@ hooks:
     branch_type: bl
     src_addr_pal: 0x80031384
     target_func: 'TEX_Goomba'
-    
-    
-  - name: TEX_PiranhaPlantOne
-    type: branch_insn
-    branch_type: bl
-    src_addr_pal: 0x800284C4
-    target_func: 'TEX_PiranhaPlant'
-    
-    
-  - name: TEX_PiranhaPlantTwo
-    type: branch_insn
-    branch_type: bl
-    src_addr_pal: 0x8002CD84
-    target_func: 'TEX_PiranhaPlant'
-    
-    
-  - name: TEX_PiranhaPlantThree
-    type: branch_insn
-    branch_type: bl
-    src_addr_pal: 0x8002F120
-    target_func: 'TEX_PiranhaPlant'
 
 
   - name: TEX_BigGoomba

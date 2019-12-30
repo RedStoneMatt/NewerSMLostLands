@@ -245,7 +245,7 @@ int dScNewerWorldMap_c::onCreate() {
 	}
 
 	EmbeddedLayout_ctor(this->layout);
-	EmbeddedLayout_LoadArc(this->layout, "LostlASM/wmap.arc");
+	EmbeddedLayout_LoadArc(this->layout, "NewerRes/wmap.arc");
 
 	if (!EmbeddedLayout_Build(this->layout, "levelSelect.brlyt", 0)) {
 		InfiniteLoop;
@@ -306,7 +306,7 @@ int dScNewerWorldMap_c::onCreate() {
 	*CurrentDrawFunc = NewerMapDrawFunc;
 
 	// level info
-	this->levelInfo = LoadFile(&this->levelInfoFH, "/LostlASM/LevelInfo.bin");
+	this->levelInfo = LoadFile(&this->levelInfoFH, "/NewerRes/LevelInfo.bin");
 	LevelInfo_Prepare(&this->levelInfoFH);
 
 	// load the menu info

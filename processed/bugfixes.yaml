@@ -43,8 +43,6 @@ hooks:
     0301 0306 0400 0402 0501 0503 0104 0900 0900, name: TitleReplayLevels, type: patch}
 - {area_jpn: 2155355784, area_jpn2: 2155355848, area_ntsc: 2155356088, area_ntsc2: 2155356152,
   area_pal: 2155356088, area_pal2: 2155356152, name: NoTitleScreenMovie, type: nop_insn}
-- {area_jpn: 2155355744, area_jpn2: 2155355808, area_ntsc: 2155356048, area_ntsc2: 2155356112,
-  area_pal: 2155356048, area_pal2: 2155356112, name: NoTitleReplayStageFour, type: nop_insn}
 - {area_jpn: 2148783936, area_jpn2: 2148783936, area_ntsc: 2148784432, area_ntsc2: 2148784432,
   area_pal: 2148784752, area_pal2: 2148784752, name: MPDeathPauseFix, type: nop_insn}
 - {addr_jpn: 2148422224, addr_jpn2: 2148422224, addr_ntsc: 2148422352, addr_ntsc2: 2148422352,

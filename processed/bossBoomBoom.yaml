@@ -1,8 +1,0 @@
-hooks:
-- {name: BossBoomBoomBuild, src_addr_jpn: 2157426088, src_addr_jpn2: 2157426104, src_addr_ntsc: 2157427904,
-  src_addr_ntsc2: 2157427920, src_addr_pal: 2157427904, src_addr_pal2: 2157427920,
-  target_func: 'daBunbun::build()', type: add_func_pointer}
-- {name: BossBoomBoomSpriteFileInfo, src_addr_jpn: 2150738496, src_addr_jpn2: 2150738496,
-  src_addr_ntsc: 2150738976, src_addr_ntsc2: 2150738976, src_addr_pal: 2150739768,
-  src_addr_pal2: 2150739768, target_func: BBarcNameList, type: add_func_pointer}
-source_files: [../src/bossBoomBoom.cpp]

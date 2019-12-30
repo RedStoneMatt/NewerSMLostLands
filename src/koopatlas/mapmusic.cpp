@@ -70,7 +70,7 @@ extern "C" void AxVoice_SetADPCM(void *axVoice, void *adpcm);
 extern "C" void Voice_SetADPCMLoop(void *voice, int channel, void *adpcmLoop);
 
 bool dKPMusic::loadInfo() {
-	return s_adpcmInfoLoader.load("/LostlASM/MapADPCMInfo.bin");
+	return s_adpcmInfoLoader.load("/NewerRes/MapADPCMInfo.bin");
 }
 
 void dKPMusic::execute() {

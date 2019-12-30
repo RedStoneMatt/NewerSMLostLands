@@ -346,8 +346,6 @@ TEX_BigBoo:
 
 .global TEX_GabonRock
 TEX_GabonRock:
-.global TEX_PiranhaPlant
-TEX_PiranhaPlant:
 .global TEX_BigBlock
 TEX_BigBlock:
 .global TEX_Manta

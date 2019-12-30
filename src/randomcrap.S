@@ -612,7 +612,7 @@ ReplaceExceptionOccurred:
 
 .data
 NewExceptionOccurred:
-.string "Too bad! Lost Lands v1.0 has crashed.\nYou can see the crash report below, but i think nobody know how to use this crash report.\n"
+.string "Whoops! Newer 1.0.2 has crashed.\nPlease take a screenshot of the info below\nand send it to newer@newerteam.com.\nYou can scroll through this report using the D-Pad.\n"
 UniLogStr: .string "[ULog] returning %8x to: %x > %x > %x > %x > %x > %x\n"
 #WillAlloc: .string "[AH] Will allocate %x bytes aligned by %x\n"
 #Alloced: .string "[AH] Allocated %p\n"

@@ -1,5 +1,0 @@
-hooks:
-- {name: PowerLayoutBuild, src_addr_jpn: 2157282368, src_addr_jpn2: 2157282384, src_addr_ntsc: 2157284184,
-  src_addr_ntsc2: 2157284200, src_addr_pal: 2157284184, src_addr_pal2: 2157284200,
-  target_func: 'dPowerLayout_c::build()', type: add_func_pointer}
-source_files: [../src/powerlayout.cpp]

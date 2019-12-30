@@ -158,7 +158,7 @@ int dCreditsMgr_c::onCreate() {
 	if (!loadTitleLayout())
 		return false;
 
-	if (!scriptLoader.load("/LostlASM/NewerStaffRoll.bin"))
+	if (!scriptLoader.load("/NewerRes/NewerStaffRoll.bin"))
 		return false;
 
 	scriptPos = (const u8*)scriptLoader.buffer;
