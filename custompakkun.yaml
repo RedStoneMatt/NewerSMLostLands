@@ -1,0 +1,24 @@
+---
+#Replaces Actor 329 AC_ITEM_KEY (Sprite 77)
+
+
+source_files: [../src/custompakkun.cpp]
+hooks:
+  - name: CustomPakkunBuild
+    type: add_func_pointer
+    src_addr_pal: 0x8095E108
+    target_func: 'daCustomPakkun::build()'
+
+  - name: CustomPakkunSpriteFileInfo
+    type: add_func_pointer
+    src_addr_pal: 0x8031ac80
+    target_func: 'YParcNameList'
+    # 0x8031AB4C + sprite num * 0x4 == offset
+
+  - name: UpdateCustomPakkunSpriteInfo
+    type: patch
+    # 0x8030A340 + sprite num * 0x28 == offset
+    addr_pal: 0x8030af48
+    #      -ID- ----  -X Offs- -Y Offs-  -RectX1- -RectY1- -RectX2- -RectY2-  -1C- -1E- -20- -22-  Flag ----
+    # Orig 01FC 0000  00000008 00000000  00000000 FFFFFFC0 00000010 00000040  0030 0030 0000 0000  0008 0000
+    data: '0149 0000  00000008 00000010  00000000 FFFFFFF8 00000008 00000008  0000 0000 0000 0000  0000 0000'
