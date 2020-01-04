@@ -1,0 +1,8 @@
+---
+source_files: [../src/layeredit.S]
+hooks:
+  - name: PorcuPufferZ
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x80A24C34
+    target_func: 'PorcuPufferZ'

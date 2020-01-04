@@ -21,64 +21,64 @@ struct Hijacker {
 
 
 const char* SongNameList [] = {
-	"AIRSHIP",
-	"BOSS_TOWER",
-	"MENU",
+	"INFECTED_ZONE",			//100
+	"POISONUS_UG",
+	"TOXIC_FACTORY",
 	"UNDERWATER",
 	"ATHLETIC",
-	"CASTLE",
+	"CASTLE",			//105
 	"MAIN",
 	"MOUNTAIN",
 	"TOWER",
 	"UNDERGROUND",
-	"DESERT",
+	"DESERT",			//110
 	"FIRE",
 	"FOREST",
 	"FREEZEFLAME",
 	"JAPAN",
-	"PUMPKIN",
+	"PUMPKIN",			//115
 	"SEWER",
 	"SPACE",
 	"BOWSER",
 	"BONUS",	
-	"AMBUSH",	
+	"AMBUSH",			//120	
 	"BRIDGE_DRUMS",	
 	"SNOW2",	
 	"MINIMEGA",	
 	"CLIFFS",
-	"AUTUMN",
+	"AUTUMN",			//125
 	"CRYSTALCAVES",
 	"GHOST_HOUSE",
 	"GRAVEYARD",
 	"JUNGLE",
-	"TROPICAL",
+	"TROPICAL",			//130
 	"SKY_CITY",
 	"SNOW",
 	"STAR_HAVEN",
 	"SINGALONG",
-	"FACTORY",
+	"FACTORY",			//135
 	"TANK",
 	"TRAIN",
 	"YOSHIHOUSE",
 	"FACTORYB",
-	"CAVERN",
+	"CAVERN",			//140
 	"SAND",
 	"SHYGUY",
 	"MINIGAME",
 	"BONUS_AREA",
-	"CHALLENGE",
+	"CHALLENGE",		//145
 	"BOWSER_CASTLE",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
 	"BOSS_CASTLE",
 	"BOSS_AIRSHIP",
+	"",
+	"",					//150
+	"",
+	"",
+	"",
+	"",
+	"",					//155
+	"",
+	"",
 	NULL	
 };
 

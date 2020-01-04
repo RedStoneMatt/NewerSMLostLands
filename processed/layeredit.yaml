@@ -1,0 +1,5 @@
+hooks:
+- {branch_type: bl, name: PorcuPufferZ, src_addr_jpn: 2158118196, src_addr_jpn2: 2158118228,
+  src_addr_ntsc: 2158120020, src_addr_ntsc2: 2158120052, src_addr_pal: 2158119988,
+  src_addr_pal2: 2158120020, target_func: PorcuPufferZ, type: branch_insn}
+source_files: [../src/layeredit.S]
