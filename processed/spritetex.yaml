@@ -17,6 +17,15 @@ hooks:
 - {branch_type: bl, name: TEX_Goomba, src_addr_jpn: 2147685252, src_addr_jpn2: 2147685252,
   src_addr_ntsc: 2147685252, src_addr_ntsc2: 2147685252, src_addr_pal: 2147685252,
   src_addr_pal2: 2147685252, target_func: TEX_Goomba, type: branch_insn}
+- {branch_type: bl, name: TEX_PiranhaPlantOne, src_addr_jpn: 2147648708, src_addr_jpn2: 2147648708,
+  src_addr_ntsc: 2147648708, src_addr_ntsc2: 2147648708, src_addr_pal: 2147648708,
+  src_addr_pal2: 2147648708, target_func: TEX_PiranhaPlant, type: branch_insn}
+- {branch_type: bl, name: TEX_PiranhaPlantTwo, src_addr_jpn: 2147667332, src_addr_jpn2: 2147667332,
+  src_addr_ntsc: 2147667332, src_addr_ntsc2: 2147667332, src_addr_pal: 2147667332,
+  src_addr_pal2: 2147667332, target_func: TEX_PiranhaPlant, type: branch_insn}
+- {branch_type: bl, name: TEX_PiranhaPlantThree, src_addr_jpn: 2147676448, src_addr_jpn2: 2147676448,
+  src_addr_ntsc: 2147676448, src_addr_ntsc2: 2147676448, src_addr_pal: 2147676448,
+  src_addr_pal2: 2147676448, target_func: TEX_PiranhaPlant, type: branch_insn}
 - {branch_type: bl, name: TEX_BigGoomba, src_addr_jpn: 2147693392, src_addr_jpn2: 2147693392,
   src_addr_ntsc: 2147693392, src_addr_ntsc2: 2147693392, src_addr_pal: 2147693392,
   src_addr_pal2: 2147693392, target_func: TEX_BigGoomba, type: branch_insn}
