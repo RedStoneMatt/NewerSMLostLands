@@ -17,7 +17,8 @@ class daEnMagicPlatform_c : public dEn_c {
 			ThinLineLeft = 4,
 			ThinLineTop = 5,
 			ThinLineBottom = 6,
-			NoneWithZ500 = 7
+			NoneWithZ500 = 7,
+			NoneWithZ5000 = 8
 		};
 
 		// Settings
@@ -150,8 +151,12 @@ int daEnMagicPlatform_c::onCreate() {
 		int putItBehind = settings >> 29;
 		pos.z = -3600.0f - (putItBehind * 16);
 	}
-	if (collisionType == NoneWithZ500)
+	if (collisionType == NoneWithZ500) {
 		pos.z = 500.0f;
+	}
+	if (collisionType == NoneWithZ5000) {
+		pos.z = 5000.0f;
+	}
 
 	setupMovement();
 
