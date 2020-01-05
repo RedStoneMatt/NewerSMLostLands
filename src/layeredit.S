@@ -6,9 +6,9 @@ PorcuPufferZ:
     mflr   r0
     stw    r0, 0x24(sp)
     stw    r3, 0x1C(sp)
-	lis    r3, CustomZValue@ha
-	lfs    f0, CustomZValue@l(r3) 
-	stfs   f0, 0xB4(r30) 
+    lis    r3, CustomZValue@ha
+    lfs    f0, CustomZValue@l(r3)
+    stfs   f0, 0xB4(r30)
     lwz    r3, 0x1C(sp)
     lwz    r0, 0x24(sp)
     mtlr   r0
