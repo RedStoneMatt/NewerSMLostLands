@@ -24,6 +24,15 @@ GabonRock_CrushState = 0x80998CD0;
 forceHCGROPushBack = 0x8001DED0;
 continueFromHCGRO = 0x8001DEC8;
 
+_ZN14dGameDisplay_c14onExecute_origEv = 0x801580D0;
+onExecute_orig__14dGameDisplay_cFv = 0x801580D0;
+_ZN14dGameDisplay_c13onCreate_origEv = 0x80157B70;
+onCreate_orig__14dGameDisplay_cFv = 0x80157B70;
+_ZN14dGameDisplay_c8instanceE = 0x8042A608;
+instance__14dGameDisplay_c = 0x8042A608;
+_ZN7dAcPy_c15setPowerup_origEj = 0x801468F0;
+setPowerup_orig__7dAcPy_cFUi = 0x801468F0;
+
 DanceValues_AnimSpeed = 0x80427C2E;
 DanceValues_DummyBlockAndGrass = 0x8042A049;
 DanceValues_Bahps = 0x8042A04A;

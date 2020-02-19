@@ -3,7 +3,7 @@
 #include "koopatlas/player.h"
 #include "music.h"
 
-extern int powerupthing;
+// extern int powerupthing;
 
 extern "C" void LoadMapScene();
 extern u8 MaybeFinishingLevel[2];
@@ -521,7 +521,6 @@ void dScKoopatlas_c::endState_ContinueWait() {
 
 
 void dScKoopatlas_c::executeState_Normal() {
-	powerupthing = Player_Powerup[0];
 	// ghb
 	if (pathManager.completionMessagePending) {
 		OSReport("Going to set CompletionMsg\n");
@@ -748,7 +747,6 @@ void dScKoopatlas_c::executeState_PowerupsWait() {
 
 	if (!stockItem->show) {
 		player->modelHandler->mdlClass->setPowerup(Player_Powerup[0]);
-		powerupthing = Player_Powerup[0];
 		player->bindPats();
 
 		state.setState(&StateID_Normal);

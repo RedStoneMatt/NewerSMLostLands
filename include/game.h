@@ -2305,6 +2305,8 @@ class dAcPy_c : public daPlBase_c {
 		void *getYoshi(); // 80139A90
 
 		static dAcPy_c *findByID(int id);
+		u32 setPowerup_orig(u32 powerup_id);
+		u32 patch_thing(u32 powerup_id);
 };
 
 daPlBase_c *GetPlayerOrYoshi(int id);

@@ -2,7 +2,7 @@
 #include "levelinfo.h"
 #include <newer.h>
 
-extern int powerupthing;
+// extern int powerupthing;
 
 class PregameLytHandler {
 	public:

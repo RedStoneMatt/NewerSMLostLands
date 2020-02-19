@@ -17,6 +17,11 @@ SECTIONS {
 	GabonRock_CrushState = 0x80998CB0;
 	forceHCGROPushBack = 0x8001DED0;
 	continueFromHCGRO = 0x8001DEC8;
+	
+	onExecute_orig__14dGameDisplay_cFv = 0x801580D0;
+	onCreate_orig__14dGameDisplay_cFv = 0x80157B70;
+	instance__14dGameDisplay_c = 0x8042a608;
+	setPowerup_orig__7dAcPy_cFUi = 0x801468F0;
 
 	DanceValues_AnimSpeed = 0x80427C2E;
 	DanceValues_DummyBlockAndGrass = 0x8042A049;

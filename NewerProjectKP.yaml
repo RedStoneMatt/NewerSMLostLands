@@ -17,6 +17,7 @@ modules:
   - processed/bugfixes.yaml
   - processed/koopatlas.yaml
   - processed/pregame.yaml
+  - processed/powerlayout.yaml
   - processed/layouthax.yaml
   - processed/animtiles.yaml
   - processed/soundPlayer.yaml

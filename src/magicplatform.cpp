@@ -155,7 +155,7 @@ int daEnMagicPlatform_c::onCreate() {
 		pos.z = 500.0f;
 	}
 	if (collisionType == NoneWithZ5000) {
-		pos.z = 5000.0f;
+		pos.z = 5500.0f;
 	}
 
 	setupMovement();

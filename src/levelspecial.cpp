@@ -178,10 +178,16 @@ void LevelSpecial_Update(LevelSpecial *self) {
 				}
 				else
 				{											//Anti-grav
-					MarioDescentRate = 0.5;
-					MarioJumpArc = 4.0;
-					MiniMarioJumpArc = 4.0;
-					MarioJumpMax = 0.0;
+					// MarioDescentRate = 0.5;
+					// MarioJumpArc = 4.0;
+					// MiniMarioJumpArc = 4.0;
+					// MarioJumpMax = 0.0;
+					MarioDescentRate = 4;
+					MarioJumpMax = -3.628;
+					MarioJumpArc = -2.5;
+					MiniMarioJumpArc = -2.5;
+					// MarioSize = -1;
+					OSReport("GameTimer = %d\n", GameTimer);
 				}
 				break;
 	

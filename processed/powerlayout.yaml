@@ -1,0 +1,8 @@
+hooks:
+- {name: GS_powerlayout, src_addr_jpn: 2150781548, src_addr_jpn2: 2150781548, src_addr_ntsc: 2150782212,
+  src_addr_ntsc2: 2150782212, src_addr_pal: 2150783052, src_addr_pal2: 2150783052,
+  target_func: 'dAcPy_c::patch_thing(unsigned int)', type: add_func_pointer}
+- {name: GS_powerlayout_fix, src_addr_jpn: 2150790240, src_addr_jpn2: 2150790240,
+  src_addr_ntsc: 2150790904, src_addr_ntsc2: 2150790904, src_addr_pal: 2150791744,
+  src_addr_pal2: 2150791744, target_func: 'dGameDisplay_c::patch_fix()', type: add_func_pointer}
+source_files: [../src/powerlayout.cpp]
