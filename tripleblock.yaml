@@ -1,0 +1,10 @@
+---
+#Replaces Actor 157 EN_PUKUPUKU_PARENT (Sprite 247)
+
+
+source_files: [../src/tripleblock.cpp]
+hooks:
+  - name: TripleBlockBuild
+    type: add_func_pointer
+    src_addr_pal: 0x80B03D70
+    target_func: 'daEnTripleBlock_c::build()'

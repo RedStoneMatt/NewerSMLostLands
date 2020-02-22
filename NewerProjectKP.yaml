@@ -72,5 +72,6 @@ modules:
   - processed/pumpkinGoomba.yaml
   - processed/custompakkun.yaml
   - processed/poisonball.yaml
+  - processed/tripleblock.yaml
   # - processed/pengi.yaml
 #  - processed/actorlog.yaml

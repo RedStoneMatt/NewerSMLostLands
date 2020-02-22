@@ -1,0 +1,5 @@
+hooks:
+- {name: TripleBlockBuild, src_addr_jpn: 2159031920, src_addr_jpn2: 2159031952, src_addr_ntsc: 2159033744,
+  src_addr_ntsc2: 2159033776, src_addr_pal: 2159033712, src_addr_pal2: 2159033744,
+  target_func: 'daEnTripleBlock_c::build()', type: add_func_pointer}
+source_files: [../src/tripleblock.cpp]
