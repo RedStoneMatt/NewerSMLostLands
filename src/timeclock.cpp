@@ -55,8 +55,8 @@ class daTimeClock_c : public dEn_c {
 
 void daTimeClock_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
 	ClockMusicPlayer();
-	OSReport("Time: %d\n", dGameDisplay_c::instance->timer);
-	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + 10);
+	// OSReport("Time: %d\n", dGameDisplay_c::instance->timer);
+	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	this->Delete(1);
 }
 
@@ -106,7 +106,12 @@ int daTimeClock_c::onCreate() {
 	allocator.link(-1, GameHeaps[0], 0, 0x20);
 
 	nw4r::g3d::ResFile rf(getResource("clock", "g3d/clock.brres"));
-	bodyModel.setup(rf.GetResMdl("Clock"), &allocator, 0x224, 1, 0);
+	if((this->settings >> 16 & 0xF) == 0) {
+		bodyModel.setup(rf.GetResMdl("ClockGreen"), &allocator, 0x224, 1, 0);
+	}
+	if((this->settings >> 16 & 0xF) == 1) {
+		bodyModel.setup(rf.GetResMdl("ClockBlue"), &allocator, 0x224, 1, 0);
+	}
 	SetupTextures_MapObj(&bodyModel, 0);
 
 	allocator.unlink();
@@ -126,9 +131,9 @@ int daTimeClock_c::onCreate() {
 	this->aPhysics.initWithStruct(this, &HitMeBaby);
 	this->aPhysics.addToList();
 
-	this->scale.x = 0.39;
-	this->scale.y = 0.39;
-	this->scale.z = 0.39;
+	this->scale.x = 1.0;
+	this->scale.y = 1.0;
+	this->scale.z = 1.0;
 
 	this->pos.z = 3300.0;
 
