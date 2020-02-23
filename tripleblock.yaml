@@ -8,3 +8,11 @@ hooks:
     type: add_func_pointer
     src_addr_pal: 0x80B03D70
     target_func: 'daEnTripleBlock_c::build()'
+
+  - name: UpdateTripleBlockSpriteInfo
+    type: patch
+    # 0x8030A340 + sprite num * 0x28 == offset
+    addr_pal: 0x8030c9d8
+    #      -ID- ----  -X Offs- -Y Offs-  -RectX1- -RectY1- -RectX2- -RectY2-  -1C- -1E- -20- -22-  Flag ----
+    # Orig 01FC 0000  00000008 FFFFFFF8  00000000 00000000 00000010 00000010  0000 0000 0000 0000  0008 0000
+    data: '009D 0000  00000008 FFFFFFF0  00000000 00000000 00000010 00000010  0000 0000 0000 0000  0008 0000'

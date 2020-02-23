@@ -33,6 +33,9 @@ instance__14dGameDisplay_c = 0x8042A328;
 _ZN7dAcPy_c15setPowerup_origEj = 0x801467B0;
 setPowerup_orig__7dAcPy_cFUi = 0x801467B0;
 
+_ZN10daEnItem_c13onCreate_origEv = 0x80A26C70;
+onCreate_orig__10daEnItem_cFv = 0x80A26C70;
+
 DanceValues_AnimSpeed = 0x8042792E;
 DanceValues_DummyBlockAndGrass = 0x80429D69;
 DanceValues_Bahps = 0x80429D6A;

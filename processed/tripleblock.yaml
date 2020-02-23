@@ -2,4 +2,8 @@ hooks:
 - {name: TripleBlockBuild, src_addr_jpn: 2159031920, src_addr_jpn2: 2159031952, src_addr_ntsc: 2159033744,
   src_addr_ntsc2: 2159033776, src_addr_pal: 2159033712, src_addr_pal2: 2159033744,
   target_func: 'daEnTripleBlock_c::build()', type: add_func_pointer}
+- {addr_jpn: 2150679800, addr_jpn2: 2150679800, addr_ntsc: 2150680280, addr_ntsc2: 2150680280,
+  addr_pal: 2150681048, addr_pal2: 2150681048, data: 009D 0000  00000008 FFFFFFF0  00000000
+    00000000 00000010 00000010  0000 0000 0000 0000  0008 0000, name: UpdateTripleBlockSpriteInfo,
+  type: patch}
 source_files: [../src/tripleblock.cpp]

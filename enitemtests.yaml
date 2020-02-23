@@ -1,0 +1,7 @@
+---
+source_files: [../src/enitemtests.cpp]
+hooks:
+  - name: EN_ITEM_test
+    type: add_func_pointer
+    src_addr_pal: 0x80AF11D8
+    target_func: 'daEnItem_c::getsettings()'

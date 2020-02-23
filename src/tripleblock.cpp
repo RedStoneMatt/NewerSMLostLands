@@ -5,9 +5,9 @@
 
 class daEnTripleBlock_c : public daEnBlockMain_c {
 public:
-	TileRenderer tileLeft;
-	TileRenderer tileMiddle;
 	TileRenderer tileRight;
+	TileRenderer tileMiddle;
+	TileRenderer tileLeft;
 	Physics::Info physicsInfo;
 
 	int onCreate();
@@ -53,12 +53,12 @@ int daEnTripleBlock_c::onCreate() {
 	
 	TileRenderer::List *list = dBgGm_c::instance->getTileRendererList(0);
 	
-	//Left
-	list->add(&tileLeft);
+	//Right
+	list->add(&tileRight);
 
-	tileLeft.x = pos.x + 8;
-	tileLeft.y = -(16 + pos.y);
-	tileLeft.tileNumber = 0x9B;
+	tileRight.x = pos.x + 8;
+	tileRight.y = -(16 + pos.y);
+	tileRight.tileNumber = 0x9B;
 
 	//Middle
 	list->add(&tileMiddle);
@@ -67,14 +67,15 @@ int daEnTripleBlock_c::onCreate() {
 	tileMiddle.y = -(16 + pos.y);
 	tileMiddle.tileNumber = 0x9A;
 
-	//Right
-	list->add(&tileRight);
+	//Left
+	list->add(&tileLeft);
 
-	tileRight.x = pos.x - 24;
-	tileRight.y = -(16 + pos.y);
-	tileRight.tileNumber = 0x99;
+	tileLeft.x = pos.x - 24;
+	tileLeft.y = -(16 + pos.y);
+	tileLeft.tileNumber = 0x99;
 
 	this->wasIHit = 0;
+	this->pos.z = 200.0f;
 	
 	doStateChange(&daEnTripleBlock_c::StateID_Wait);
 
@@ -84,9 +85,9 @@ int daEnTripleBlock_c::onCreate() {
 
 int daEnTripleBlock_c::onDelete() {
 	TileRenderer::List *list = dBgGm_c::instance->getTileRendererList(0);
-	list->remove(&tileLeft);
-	list->remove(&tileMiddle);
 	list->remove(&tileRight);
+	list->remove(&tileMiddle);
+	list->remove(&tileLeft);
 
 	physics.removeFromList();
 
@@ -99,14 +100,14 @@ int daEnTripleBlock_c::onExecute() {
 	physics.update();
 	blockUpdate();
 
-	tileLeft.setPosition(pos.x+8, -(16+pos.y), pos.z);
-	tileLeft.setVars(scale.x);
+	tileRight.setPosition(pos.x+8, -(16+pos.y), pos.z);
+	tileRight.setVars(scale.x);
 	
 	tileMiddle.setPosition(pos.x-8, -(16+pos.y), pos.z);
 	tileMiddle.setVars(scale.x);
 	
-	tileRight.setPosition(pos.x-24, -(16+pos.y), pos.z);
-	tileRight.setVars(scale.x);
+	tileLeft.setPosition(pos.x-24, -(16+pos.y), pos.z);
+	tileLeft.setVars(scale.x);
 
 	// now check zone bounds based on state
 	if (acState.getCurrentState()->isEqual(&StateID_Wait)) {
@@ -125,28 +126,44 @@ daEnTripleBlock_c *daEnTripleBlock_c::build() {
 
 void daEnTripleBlock_c::blockWasHit(bool isDown) {
 	pos.y = initialY;
+	
 
+	
 	Vec coinPosL = (Vec){this->pos.x - 24, this->pos.y + 32, this->pos.z};
 	Vec coinPosR = (Vec){this->pos.x + 8, this->pos.y + 32, this->pos.z};
-	dStageActor_c *coinLeft = dStageActor_c::create(EN_COIN, 9, &coinPosL, 0, 0);
-	dStageActor_c *coinRight = dStageActor_c::create(EN_COIN, 9, &coinPosR, 0, 0);
+	
+	
 	u32 enitemsettings;
-	u32 reggieToIG[] = {0x0,0x1,0x2,0x7,0x9,0xE,0x11,0x15,0x19,0x6};
-	u32 powerupToSet = reggieToIG[(this->settings >> 20 & 0xF)];
-	enitemsettings = 0 | (powerupToSet << 0);
-	if(isGroundPound && powerupToSet != 7) {
+	u32 reggieToIG[] = {0x0,0x1,0x2,0x7,0x9,0xE,0x11,0x15,0x19,0x6}; //Mushroom, Star, Coin, 1UP, Fire Flower, Ice Flower, Penguin, Propeller, Mini Shroom, Hammer
+	u32 powerupToSet = reggieToIG[(this->settings >> 20 & 0xF)]; //Spritedata ID to EN_ITEM ID
+	enitemsettings = 0 | (powerupToSet << 0) | (2 << 18) | (4 << 9) | (2 << 10); //Setting non-GP settings
+	
+	u32 coinsettings;
+	coinsettings = 0 | (0x2 << 0) | (2 << 18) | (4 << 9) | (2 << 10);
+	
+	if(isGroundPound) { //Ignoring propeller because groundpound or not, it has to spawn by the top
 		OSReport("isGroundPound\n");
-		enitemsettings = 0 | (powerupToSet << 0) | (3 << 5) | (2 << 26);
+		enitemsettings = 0 | (powerupToSet << 0) | (3 << 18) | (4 << 9) | (2 << 10);
+		coinsettings = 0 | (0x2 << 0) | (3 << 18) | (4 << 9) | (2 << 10);
+		coinPosL = (Vec){this->pos.x - 24, this->pos.y, this->pos.z};
+		coinPosR = (Vec){this->pos.x + 8, this->pos.y, this->pos.z};
 	}
-	if(powerupToSet != 2) {
+	if(powerupToSet != 0x2 && powerupToSet != 0x15) { //Propeller does a different sound, Coin doesn't do any sound
 		nw4r::snd::SoundHandle handle;
 		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_APPEAR, 1);
 	}
+	if(powerupToSet == 0x15) { //Propeller sound
+		nw4r::snd::SoundHandle handle;
+		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_PRPL_APPEAR, 1);
+	}
 	dStageActor_c *PowerUp = dStageActor_c::create(EN_ITEM, enitemsettings, &this->pos, 0, 0);
+	dStageActor_c *coinLeft = dStageActor_c::create(EN_COIN, coinsettings, &coinPosL, 0, 0); //Creating coins
+	dStageActor_c *coinRight = dStageActor_c::create(EN_COIN, coinsettings, &coinPosR, 0, 0);
 
 	physics.setup(this, &physicsInfo, 3, currentLayerID);
 	physics.addToList();
 	
+	this->wasIHit = 1;
 	doStateChange(&StateID_Wait);
 }
 
@@ -181,18 +198,16 @@ void daEnTripleBlock_c::executeState_Wait() {
 			doStateChange(&daEnBlockMain_c::StateID_UpMove);
 			anotherFlag = 2;
 			isGroundPound = false;
-			this->wasIHit = 1;
 		} else {
 			doStateChange(&daEnBlockMain_c::StateID_DownMove);
 			anotherFlag = 1;
 			isGroundPound = true;
-			this->wasIHit = 1;
 		}
 	}
-	if(this->wasIHit == 1 && this->doOneTime == 0) {
-		tileLeft.tileNumber = 0xA8;
+	if(this->wasIHit == 1 && this->doOneTime == 0) { //Was already hit ? Change the tiles.
+		tileRight.tileNumber = 0xA8;
 		tileMiddle.tileNumber = 0xA7;
-		tileRight.tileNumber = 0xA6;
+		tileLeft.tileNumber = 0xA6;
 		this->doOneTime++;
 	}
 }
