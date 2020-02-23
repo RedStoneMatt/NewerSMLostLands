@@ -73,6 +73,6 @@ modules:
   - processed/custompakkun.yaml
   - processed/poisonball.yaml
   - processed/tripleblock.yaml
-  - processed/enitemtests.yaml
+  # - processed/enitemtests.yaml
   # - processed/pengi.yaml
 #  - processed/actorlog.yaml
