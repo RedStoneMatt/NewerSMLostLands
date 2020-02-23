@@ -19,7 +19,10 @@ public:
 
 	void blockWasHit(bool isDown);
 	
-	int wasIHit;
+	virtual bool isOutOfView();
+	virtual void willBeDeleted();
+	
+	float wasIHit;
 	int doOneTime;
 
 	USING_STATES(daEnTripleBlock_c);
@@ -74,8 +77,10 @@ int daEnTripleBlock_c::onCreate() {
 	tileLeft.y = -(16 + pos.y);
 	tileLeft.tileNumber = 0x99;
 
-	this->wasIHit = 0;
+	this->wasIHit = 0.0f;
 	this->pos.z = 200.0f;
+	
+	this->spriteSomeRectX = 6000.0f;
 	
 	doStateChange(&daEnTripleBlock_c::StateID_Wait);
 
@@ -127,44 +132,50 @@ daEnTripleBlock_c *daEnTripleBlock_c::build() {
 void daEnTripleBlock_c::blockWasHit(bool isDown) {
 	pos.y = initialY;
 	
-
+	Vec coinPosL = (Vec){this->pos.x - 16, this->pos.y + 8, this->pos.z}; //Setting non-GP coinLeft position
+	Vec coinPosR = (Vec){this->pos.x + 16, this->pos.y + 8, this->pos.z}; //Setting non-GP coinRight position
 	
-	Vec coinPosL = (Vec){this->pos.x - 24, this->pos.y + 32, this->pos.z};
-	Vec coinPosR = (Vec){this->pos.x + 8, this->pos.y + 32, this->pos.z};
+	nw4r::snd::SoundHandle handle; //Sound Handle
 	
-	
-	u32 enitemsettings;
-	u32 reggieToIG[] = {0x0,0x1,0x2,0x7,0x9,0xE,0x11,0x15,0x19,0x6}; //Mushroom, Star, Coin, 1UP, Fire Flower, Ice Flower, Penguin, Propeller, Mini Shroom, Hammer
+	u32 enitemsettings; //EN_ITEM settings
+	u32 reggieToIG[] = {0x0,0x1,0x2,0x7,0x9,0xE,0x11,0x15,0x19,0x6,0x2}; //Mushroom, Star, Coin, 1UP, Fire Flower, Ice Flower, Penguin, Propeller, Mini Shroom, Hammer, 10 Coins
 	u32 powerupToSet = reggieToIG[(this->settings >> 20 & 0xF)]; //Spritedata ID to EN_ITEM ID
 	enitemsettings = 0 | (powerupToSet << 0) | (2 << 18) | (4 << 9) | (2 << 10); //Setting non-GP settings
 	
-	u32 coinsettings;
-	coinsettings = 0 | (0x2 << 0) | (2 << 18) | (4 << 9) | (2 << 10);
+	u32 coinsettings; //Coins settings (which are EN_ITEM variant)
+	coinsettings = 0 | (0x2 << 0) | (2 << 18) | (4 << 9) | (2 << 10); //Setting non-GP settings
 	
-	if(isGroundPound) { //Ignoring propeller because groundpound or not, it has to spawn by the top
-		OSReport("isGroundPound\n");
-		enitemsettings = 0 | (powerupToSet << 0) | (3 << 18) | (4 << 9) | (2 << 10);
-		coinsettings = 0 | (0x2 << 0) | (3 << 18) | (4 << 9) | (2 << 10);
-		coinPosL = (Vec){this->pos.x - 24, this->pos.y, this->pos.z};
-		coinPosR = (Vec){this->pos.x + 8, this->pos.y, this->pos.z};
+	if(isGroundPound) { //If the player groundpounded the block, change some setting and positions
+		OSReport("isGroundPound\n"); //Debug
+		enitemsettings = 0 | (powerupToSet << 0) | (3 << 18) | (4 << 9) | (2 << 10); //Changing value 0xD98 from 2 to 3
+		coinsettings = 0 | (0x2 << 0) | (3 << 18) | (4 << 9) | (2 << 10); //Changing value 0xD98 from 2 to 3
+		coinPosL = (Vec){this->pos.x - 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
+		coinPosR = (Vec){this->pos.x + 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
 	}
-	if(powerupToSet != 0x2 && powerupToSet != 0x15) { //Propeller does a different sound, Coin doesn't do any sound
-		nw4r::snd::SoundHandle handle;
-		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_APPEAR, 1);
+	if(powerupToSet != 0x2 && powerupToSet != 0x15) { //Propeller does a different sound and Coin doesn't do any sound
+		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_APPEAR, 1); //Item sound
 	}
-	if(powerupToSet == 0x15) { //Propeller sound
-		nw4r::snd::SoundHandle handle;
-		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_PRPL_APPEAR, 1);
+	if(powerupToSet == 0x15) { //If powerup = propeller
+		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_PRPL_APPEAR, 1); //Propeller sound
 	}
-	dStageActor_c *PowerUp = dStageActor_c::create(EN_ITEM, enitemsettings, &this->pos, 0, 0);
-	dStageActor_c *coinLeft = dStageActor_c::create(EN_COIN, coinsettings, &coinPosL, 0, 0); //Creating coins
-	dStageActor_c *coinRight = dStageActor_c::create(EN_COIN, coinsettings, &coinPosR, 0, 0);
+	dStageActor_c *PowerUp = dStageActor_c::create(EN_ITEM, enitemsettings, &this->pos, 0, 0); //Creating PowerUp
+	dStageActor_c *coinLeft = dStageActor_c::create(EN_ITEM, coinsettings, &coinPosL, 0, 0); //Creating coinLeft
+	dStageActor_c *coinRight = dStageActor_c::create(EN_ITEM, coinsettings, &coinPosR, 0, 0); //Creating coinRight
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_GET_COIN, 1); //Coin sound
+	if(powerupToSet != 0x15) { //If powerup =/= propeller
+		PowerUp->pos.z = 100.0f; //make the powerup behind the triple block
+	}
 
 	physics.setup(this, &physicsInfo, 3, currentLayerID);
 	physics.addToList();
 	
-	this->wasIHit = 1;
-	doStateChange(&StateID_Wait);
+	if((this->settings >> 20 & 0xF) == 10) { //If 10 Coins variant, then only add 0.1 to wasIHit
+		this->wasIHit += 0.1f;
+	}
+	else { //Otherwise, add 1
+		this->wasIHit = 1.0f;
+	}
+	doStateChange(&StateID_Wait); //Back to waiting state
 }
 
 
@@ -188,7 +199,7 @@ void daEnTripleBlock_c::endState_Wait() {
 }
 
 void daEnTripleBlock_c::executeState_Wait() {
-	if(this->wasIHit == 0) {
+	if(this->wasIHit < 1.0f) {
 		int result = blockResult();
 
 		if (result == 0)
@@ -204,10 +215,19 @@ void daEnTripleBlock_c::executeState_Wait() {
 			isGroundPound = true;
 		}
 	}
-	if(this->wasIHit == 1 && this->doOneTime == 0) { //Was already hit ? Change the tiles.
+	if(this->wasIHit > 0.9f && this->doOneTime == 0) { //Was already hit ? Change the tiles.
 		tileRight.tileNumber = 0xA8;
 		tileMiddle.tileNumber = 0xA7;
 		tileLeft.tileNumber = 0xA6;
 		this->doOneTime++;
 	}
+}
+
+bool daEnTripleBlock_c::isOutOfView() {
+	// OSReport("isOutOfView\n"); //Debug
+}
+
+void daEnTripleBlock_c::willBeDeleted() {
+	// OSReport("willBeDeleted\n"); //Debug
+	return;
 }
