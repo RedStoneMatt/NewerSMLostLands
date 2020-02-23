@@ -33,6 +33,11 @@ instance__14dGameDisplay_c = 0x8042A608;
 _ZN7dAcPy_c15setPowerup_origEj = 0x801468F0;
 setPowerup_orig__7dAcPy_cFUi = 0x801468F0;
 
+_ZN10TimeKeeper8instanceE = 0x8042A350;
+instance__10TimeKeeper = 0x8042A350;
+_ZN10TimeKeeper7setTimeEi = 0x800E3A00;
+setTime__10TimeKeeperFi = 0x800E3A00;
+
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C50;
 onCreate_orig__10daEnItem_cFv = 0x80A26C50;
 

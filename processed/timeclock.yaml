@@ -1,0 +1,12 @@
+hooks:
+- {name: TimeClockBuild, src_addr_jpn: 2157268024, src_addr_jpn2: 2157268040, src_addr_ntsc: 2157269840,
+  src_addr_ntsc2: 2157269856, src_addr_pal: 2157269840, src_addr_pal2: 2157269856,
+  target_func: 'daTimeClock_c::build()', type: add_func_pointer}
+- {name: TimeClockSpriteFileInfo, src_addr_jpn: 2150739416, src_addr_jpn2: 2150739416,
+  src_addr_ntsc: 2150739896, src_addr_ntsc2: 2150739896, src_addr_pal: 2150740688,
+  src_addr_pal2: 2150740688, target_func: TCarcNameList, type: add_func_pointer}
+- {addr_jpn: 2150689160, addr_jpn2: 2150689160, addr_ntsc: 2150689640, addr_ntsc2: 2150689640,
+  addr_pal: 2150690408, addr_pal2: 2150690408, data: 0113 0000  00000008 00000010  00000000
+    FFFFFFF8 00000008 00000008  0000 0000 0000 0000  0000 0000, name: UpdateTimeClockSpriteInfo,
+  type: patch}
+source_files: [../src/timeclock.cpp]

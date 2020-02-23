@@ -23,6 +23,9 @@ SECTIONS {
 	instance__14dGameDisplay_c = 0x8042a608;
 	setPowerup_orig__7dAcPy_cFUi = 0x801468F0;
 	
+	instance__10TimeKeeper = 0x8042A350;
+	setTime__10TimeKeeperFi = 0x800E3A00;
+	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
 
 	DanceValues_AnimSpeed = 0x80427C2E;
