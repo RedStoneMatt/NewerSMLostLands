@@ -189,6 +189,7 @@ int daCustomPakkun::onCreate() {
 	this->aPhysics.initWithStruct(this, &HitMeBaby);
 	this->aPhysics.addToList();
 
+	this->spriteSomeRectX = 100.0f;
 
 	bindAnimChr_and_setUpdateRate("fire_wait_up", 1, 0.0, 1.0);
 

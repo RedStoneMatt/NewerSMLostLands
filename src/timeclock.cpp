@@ -55,23 +55,31 @@ void daTimeClock_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOthe
 }
 
 bool daTimeClock_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-	return true;
+	int sID;
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
+	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
+	removeMyActivePhysics();
+	this->immaGonnaDisappear++;
 }
 bool daTimeClock_c::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
-	return true;
+	return collisionCat7_GroundPound(apThis, apOther);
 }
 bool daTimeClock_c::collisionCatD_Drill(ActivePhysics *apThis, ActivePhysics *apOther) {
 	return collisionCat9_RollingObject(apThis, apOther);
 }
 bool daTimeClock_c::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther) {
-	return true;
+	int sID;
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
+	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
+	removeMyActivePhysics();
+	this->immaGonnaDisappear++;
 }
 
 bool daTimeClock_c::collisionCat1_Fireball_E_Explosion(ActivePhysics *apThis, ActivePhysics *apOther) {
-	return true;
+	return collisionCat9_RollingObject(apThis, apOther);
 }
 bool daTimeClock_c::collisionCat2_IceBall_15_YoshiIce(ActivePhysics *apThis, ActivePhysics *apOther) {
-	return true;
+	return collisionCat9_RollingObject(apThis, apOther);
 }
 bool daTimeClock_c::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
 	return true;
