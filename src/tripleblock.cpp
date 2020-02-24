@@ -128,9 +128,12 @@ daEnTripleBlock_c *daEnTripleBlock_c::build() {
 	return new(buffer) daEnTripleBlock_c;
 }
 
+extern "C" int CheckExistingPowerup(void * Player);
 
 void daEnTripleBlock_c::blockWasHit(bool isDown) {
 	pos.y = initialY;
+	
+	int p = CheckExistingPowerup(dAcPy_c::findByID(0));
 	
 	Vec coinPosL = (Vec){this->pos.x - 16, this->pos.y + 8, this->pos.z}; //Setting non-GP coinLeft position
 	Vec coinPosR = (Vec){this->pos.x + 16, this->pos.y + 8, this->pos.z}; //Setting non-GP coinRight position
@@ -152,17 +155,17 @@ void daEnTripleBlock_c::blockWasHit(bool isDown) {
 		coinPosL = (Vec){this->pos.x - 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
 		coinPosR = (Vec){this->pos.x + 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
 	}
-	if(powerupToSet != 0x2 && powerupToSet != 0x15) { //Propeller does a different sound and Coin doesn't do any sound
+	if((powerupToSet != 0x2 && powerupToSet != 0x15) || p == 0) { //Propeller does a different sound and Coin doesn't do any sound
 		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_APPEAR, 1); //Item sound
 	}
-	if(powerupToSet == 0x15) { //If powerup = propeller
+	if(powerupToSet == 0x15 && p != 0) { //If powerup = propeller
 		PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_ITEM_PRPL_APPEAR, 1); //Propeller sound
 	}
 	dStageActor_c *PowerUp = dStageActor_c::create(EN_ITEM, enitemsettings, &this->pos, 0, 0); //Creating PowerUp
 	dStageActor_c *coinLeft = dStageActor_c::create(EN_ITEM, coinsettings, &coinPosL, 0, 0); //Creating coinLeft
 	dStageActor_c *coinRight = dStageActor_c::create(EN_ITEM, coinsettings, &coinPosR, 0, 0); //Creating coinRight
 	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_OBJ_GET_COIN, 1); //Coin sound
-	if(powerupToSet != 0x15) { //If powerup =/= propeller
+	if(powerupToSet != 0x15 || p == 0) { //If powerup =/= propeller OR actual powerup = 0
 		PowerUp->pos.z = 100.0f; //make the powerup behind the triple block
 	}
 

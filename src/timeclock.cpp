@@ -14,16 +14,6 @@ static nw4r::snd::StrmSoundHandle handle;
 
 u8 hijackMusicWithSongName(const char *songName, int themeID, bool hasFast, int channelCount, int trackCount, int *wantRealStreamID);
 
-void ClockMusicPlayer() {
-	if (handle.Exists())
-		handle.Stop(0);
-
-	int sID;
-	hijackMusicWithSongName("sfx/clock", -1, false, 2, 1, &sID);
-	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, sID, 1);
-}
-
-
 class daTimeClock_c : public dEn_c {
 	int onCreate();
 	int onExecute();
@@ -32,6 +22,9 @@ class daTimeClock_c : public dEn_c {
 
 	mHeapAllocator_c allocator;
 	m3d::mdl_c bodyModel;
+	
+	int immaGonnaDisappear;
+	int timer;
 
 	static daTimeClock_c *build();
 
@@ -54,10 +47,13 @@ class daTimeClock_c : public dEn_c {
 
 
 void daTimeClock_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
-	ClockMusicPlayer();
+	int sID;
+	// hijackMusicWithSongName("sfx/clock", -1, false, 1, 1, &sID);
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045]
 	// OSReport("Time: %d\n", dGameDisplay_c::instance->timer);
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
-	this->Delete(1);
+	removeMyActivePhysics();
+	this->immaGonnaDisappear++;
 }
 
 bool daTimeClock_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
@@ -118,7 +114,7 @@ int daTimeClock_c::onCreate() {
 
 	ActivePhysics::Info HitMeBaby;
 	HitMeBaby.xDistToCenter = 0.0;
-	HitMeBaby.yDistToCenter = -3.0;
+	HitMeBaby.yDistToCenter = 0.0;
 	HitMeBaby.xDistToEdge = 12.0;
 	HitMeBaby.yDistToEdge = 15.0;
 	HitMeBaby.category1 = 0x5;
@@ -131,9 +127,9 @@ int daTimeClock_c::onCreate() {
 	this->aPhysics.initWithStruct(this, &HitMeBaby);
 	this->aPhysics.addToList();
 
-	this->scale.x = 1.0;
-	this->scale.y = 1.0;
-	this->scale.z = 1.0;
+	this->scale.x = 50.0;
+	this->scale.y = 50.0;
+	this->scale.z = 50.0;
 
 	this->pos.z = 3300.0;
 
@@ -164,7 +160,28 @@ void daTimeClock_c::updateModelMatrices() {
 int daTimeClock_c::onExecute() {
 	updateModelMatrices();
 
-	this->rot.y -= 0x200;
+	if(immaGonnaDisappear == 1) {
+		this->rot.y -= 0x1000;
+		this->timer++;
+		this->scale = (Vec){this->scale.x - 2.1f, this->scale.y - 2.1f, this->scale.z - 2.1f};
+		if(this->timer == 1) {
+			S16Vec rotation = {0,0,0};
+			Vec scale = {1.0, 1.0, 1.0};
+			SpawnEffect("Wm_ob_starcoinget_ring", 0, &this->pos, &rotation, &scale);	
+		}
+		if(this->timer < 8) {
+			this->pos.y += 2;
+		}
+		if(this->timer > 7 && this->timer < 16) {
+			this->pos.y -= 2;
+		}
+		if(this->timer > 16) {
+			this->Delete(1);
+		}
+	}
+	else {
+		this->rot.y -= 0x200;
+	}
 	return true;
 }
 
