@@ -85,9 +85,6 @@ u32 dAcPy_c::patch_thing(u32 powerup_id) { //the function that is executed when 
 int dGameDisplay_c::patch_fix() { //the function that is executed when the gameScene layout is created
     int orig_val = this->onCreate_orig(); //to preserve the original dGameDisplay_c::onCreate function
 
-
-    OSReport("player_icon: %p\n", this->p_marioIcon_00); //debugging
-
     if (this->p_marioIcon_00 == NULL) { //if the pane wasn't found, returning the original value to avoid a crash
         return orig_val;
     }
@@ -101,9 +98,6 @@ int dGameDisplay_c::patch_fix() { //the function that is executed when the gameS
 }
 
 void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //the function to change the icons (duh)
-
-
-    OSReport("powerup = %d\n", powerup); //debugging
 
     char tpl_name_m[64]; //creating the tpl names chars
     char tpl_name_l[64];
@@ -125,7 +119,7 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_m == 0) { //if it doesn't exist, then return to avoid a crash
 			return;
 		}
-		OSReport("MARIO_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_m, res_m); //debugging
+		// OSReport("MARIO_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_m, res_m); //debugging
 		player_icon->material->texMaps[0].ReplaceImage( //replacing the actual image with the new one
         (TPLPalette*) MARIO_ICON_TPL_FILE.ptr(), 0
 		);
@@ -136,7 +130,7 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_l == 0) {
 			return;
 		}
-		OSReport("LUIGI_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_l, res_l);
+		// OSReport("LUIGI_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_l, res_l);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) LUIGI_ICON_TPL_FILE.ptr(), 0
 		);
@@ -147,7 +141,7 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_kb == 0) {
 			return;
 		}
-		OSReport("KINOB_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_kb, res_kb);
+		// OSReport("KINOB_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_kb, res_kb);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) KINOB_ICON_TPL_FILE.ptr(), 0
 		);
@@ -158,7 +152,7 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_ky == 0) {
 			return;
 		}
-		OSReport("KINOY_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_ky, res_ky);
+		// OSReport("KINOY_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_ky, res_ky);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) KINOY_ICON_TPL_FILE.ptr(), 0
 		);

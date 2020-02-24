@@ -48,9 +48,7 @@ class daTimeClock_c : public dEn_c {
 
 void daTimeClock_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
 	int sID;
-	// hijackMusicWithSongName("sfx/clock", -1, false, 1, 1, &sID);
-	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045]
-	// OSReport("Time: %d\n", dGameDisplay_c::instance->timer);
+	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	removeMyActivePhysics();
 	this->immaGonnaDisappear++;
