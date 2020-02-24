@@ -27,6 +27,8 @@ SECTIONS {
 	setTime__10TimeKeeperFi = 0x800E3A00;
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
+	
+	_Z38ConvertStagePositionIntoScreenPositionP4VEC3S0_P19ClassWithCameraInfo = 0x8006A4B0; /*addAnyway*/
 
 	DanceValues_AnimSpeed = 0x80427C2E;
 	DanceValues_DummyBlockAndGrass = 0x8042A049;

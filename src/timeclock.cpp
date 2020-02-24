@@ -47,15 +47,19 @@ class daTimeClock_c : public dEn_c {
 
 
 void daTimeClock_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
-	int sID;
 	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	removeMyActivePhysics();
+	// ClassWithCameraInfo *cwci = ClassWithCameraInfo::instance;
+	// Vec debug = ConvertStagePositionIntoScreenPosition(&dGameDisplay_c::instance->timerBox->trans, &this->pos, ClassWithCameraInfo::instance);
+	// OSReport("trans.x = %d trans.y = %d trans.z %d\n", dGameDisplay_c::instance->timerBox->trans.x, dGameDisplay_c::instance->timerBox->trans.y, dGameDisplay_c::instance->timerBox->trans.z);
+	// OSReport("pos.x = %d pos.y = %d pos.z %d\n", this->pos.x, this->pos.y, this->pos.z);
+	// OSReport("newtrans.x = %d newtrans.y = %d newtrans.z = %d\n", debug.x, debug.y, debug.z);
+	// dGameDisplay_c::instance->timerBox->trans = ConvertStagePositionIntoScreenPosition(&dGameDisplay_c::instance->timerBox->trans, &this->pos, ClassWithCameraInfo::instance);
 	this->immaGonnaDisappear++;
 }
 
 bool daTimeClock_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-	int sID;
 	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	removeMyActivePhysics();
@@ -68,7 +72,6 @@ bool daTimeClock_c::collisionCatD_Drill(ActivePhysics *apThis, ActivePhysics *ap
 	return collisionCat9_RollingObject(apThis, apOther);
 }
 bool daTimeClock_c::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther) {
-	int sID;
 	PlaySoundWithFunctionB4(SoundRelatedClass, &handle, SE_DEMO_OP_V_PCH_INTO_CAKE, 1); //Audio[1045], replaced with the clock sound
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	removeMyActivePhysics();
