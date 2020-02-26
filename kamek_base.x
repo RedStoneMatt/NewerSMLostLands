@@ -28,6 +28,8 @@ SECTIONS {
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
 	
+	GetGameLanguage = 0x800B4630;
+	
 	_Z38ConvertStagePositionIntoScreenPositionP4VEC3S0_P19ClassWithCameraInfo = 0x8006A4B0; /*addAnyway*/
 
 	DanceValues_AnimSpeed = 0x80427C2E;

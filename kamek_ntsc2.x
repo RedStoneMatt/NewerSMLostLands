@@ -41,6 +41,8 @@ setTime__10TimeKeeperFi = 0x800E3910;
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C70;
 onCreate_orig__10daEnItem_cFv = 0x80A26C70;
 
+GetGameLanguage = 0x800B45E0;
+
 _Z38ConvertStagePositionIntoScreenPositionP4VEC3S0_P19ClassWithCameraInfo = 0x8006A4B0; /*addAnyway*/
 
 DanceValues_AnimSpeed = 0x8042792E;
