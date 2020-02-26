@@ -232,7 +232,7 @@ void dWMHud_c::loadHeaderInfo() {
 	int charCount = 0;
 	
 	while (*sourceLevelName != 0 && charCount < 99) {
-		convertedLevelName[charCount] = *sourceLevelName;
+		convertedLevelName[charCount] = *((unsigned char*)sourceLevelName);
 		sourceLevelName++;
 		charCount++;
 	}
