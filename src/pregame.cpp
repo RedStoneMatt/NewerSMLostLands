@@ -2,8 +2,6 @@
 #include "levelinfo.h"
 #include <newer.h>
 
-// extern int powerupthing;
-
 class PregameLytHandler {
 	public:
 		m2d::EmbedLayout_c layout;
@@ -26,15 +24,13 @@ class PregameLytHandler {
 			*P_batB_1x[4], *P_bat_01,
 			*P_batB_2x[4], *P_bat_02,
 			*P_batB_3x[4], *P_bat_03,
-			*P_luijiIcon_00_o, *P_luijiIcon_10_o, *P_coinStage_00,
-			*P_Header_00, *P_Upper_00;
+			*P_luijiIcon_00_o, *P_luijiIcon_10_o, *P_coinStage_00;
 
 		nw4r::lyt::Pane
 			*N_mario_00, *N_luiji_00, *N_kinoB_01, *N_kinoY_00,
 			*N_zankiPos_x[4], *N_zanki_00,
 			*Null_battPosxP[4], *N_batt_x[4],
-			*N_batt, *N_otasukePlay_00,
-			*N_Header_00;
+			*N_batt, *N_otasukePlay_00;
 
 		u8 layoutLoaded, somethingHasBeenDone, isVisible, hasShownLuigiThing_orSomething;
 
@@ -56,7 +52,6 @@ class PregameLytHandler {
 
 extern char CurrentLevel;
 extern char CurrentWorld;
-extern "C" int CheckExistingPowerup(void * Player);
 
 void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 	nw4r::lyt::TextBox
@@ -75,7 +70,7 @@ void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 		const char *srcLevelName = dLevelInfo_c::s_info.getNameForLevel(level);
 		int i = 0;
 		while (i < 159 && srcLevelName[i]) {
-			convLevelName[i] = srcLevelName[i];
+			convLevelName[i] = (unsigned char)(srcLevelName[i]);
 			i++;
 		}
 		convLevelName[i] = 0;
@@ -103,58 +98,22 @@ void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 		LevelNameShadow->SetString(L"Not found in LevelInfo!");
 		LevelName->SetString(L"Not found in LevelInfo!");
 	}
-	
-}
-
-void levelsamplething(m2d::EmbedLayout_c *layout) {
-}
-
-void powerlayoutthing(m2d::EmbedLayout_c *layout) {
 }
 
 #include "fileload.h"
 void PregameLytHandler::hijack_loadLevelNumber() {
 	LoadPregameStyleNameAndNumber(&layout);
-	static File tpl;
-	// static File tpll;
-	
-	
+
 	nw4r::lyt::Picture *LevelSample;
 	LevelSample = layout.findPictureByName("LevelSample");
-	// nw4r::lyt::Picture *P_marioIcon_00;
-	// P_marioIcon_00 = layout.findPictureByName("P_marioIcon_00");
-	
-	
+
 	// this is not the greatest way to read a file but I suppose it works in a pinch
 	char tplName[64];
 	sprintf(tplName, "/LevelSamples/%02d-%02d.tpl", CurrentWorld+1, CurrentLevel+1);
+	static File tpl;
 	if (tpl.open(tplName)) {
 		LevelSample->material->texMaps[0].ReplaceImage((TPLPalette*)tpl.ptr(), 0);
-	}	
-	
-	// dAcPy_c *player1;
-	// dAcPy_c *player2;
-	// dAcPy_c *player3;
-	// dAcPy_c *player4;
-	// player1 = dAcPy_c::findByID(0);
-	// player2 = dAcPy_c::findByID(1);
-	// player3 = dAcPy_c::findByID(2);
-	// player4 = dAcPy_c::findByID(3);
-	// int p1 = CheckExistingPowerup(player1); // Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
-	// int p2 = CheckExistingPowerup(player2);
-	// int p3 = CheckExistingPowerup(player3);
-	// int p4 = CheckExistingPowerup(player4);
-	// p1 = powerupthing;
-	
-	// OSReport("CurrentWorld = %d and CurrentLevel = %d\n", CurrentWorld+1, CurrentLevel+1);
-	// OSReport("p1 = %d, p2 = %d, p3 = %d, p4 = %d\n", p1, p2, p3, p4);
-	
-	// char tpllName[64];
-	// sprintf(tpllName, "/LevelSamples/im_marioIcon_0%d.tpl\n", p1);
-	// OSReport("tpllName = %s", tpllName);
-	// if (tpll.open(tpllName)) {
-		// LevelSample->material->texMaps[0].ReplaceImage((TPLPalette*)tpll.ptr(), 0);
-	// }
+	}
 }
 
 

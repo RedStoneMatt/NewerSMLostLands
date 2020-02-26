@@ -344,7 +344,7 @@ void dWMHud_c::loadFooterInfo() {
 	wchar_t convertedWorldName[32];
 	int i;
 	for (i = 0; i < 32; i++) {
-		convertedWorldName[i] = save->newerWorldName[i];
+		convertedWorldName[i] = (unsigned char)(save->newerWorldName[i]);
 		if (convertedWorldName[i] == 0)
 			break;
 	}
