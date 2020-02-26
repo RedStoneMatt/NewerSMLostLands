@@ -88,9 +88,10 @@ int dWMStarCoin_c::onCreate() {
 
 		static const char *tbNames[] = {
 			"LeftTitle", "RightTitle", "TotalCoinCount", "UnspentCoinCount",
-			"EarnedCoinCount", "EarnedCoinMax", "BtnBackText",
+			"EarnedCoinCount", "EarnedCoinMax", "BtnBackText", "CollectedTitle", "UnspentTitle",
+			"BtnWorldSelText", "TotalCoinsTitle",
 		};
-		layout.getTextBoxes(tbNames, &LeftTitle, 7);
+		layout.getTextBoxes(tbNames, &LeftTitle, 11);
 
 		static const char *picNames[] = {
 			"DPadLeft", "DPadRight",
@@ -191,8 +192,54 @@ bool dWMStarCoin_c::canScrollRight() const {
 	return (currentSectionIndex < (availableSectionCount - 1));
 }
 
+extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+
 void dWMStarCoin_c::loadInfo() {
 	WriteBMGToTextBox(BtnBackText, GetBMG(), 3, 1, 0);
+	
+	// Language-related things
+	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
+		UnspentTitle->SetString(L"unspent");
+		CollectedTitle->SetString(L"collected");
+		BtnWorldSelText->SetString(L"Select World     ");
+		BtnBackText->SetString(L"Back †");
+		TotalCoinsTitle->SetString(L"Star Coins:");
+	}
+	if(GetGameLanguage(4) == 2) { // German (by ?)
+		UnspentTitle->SetString(L"");
+		CollectedTitle->SetString(L"");
+		BtnWorldSelText->SetString(L"");
+		BtnBackText->SetString(L"");
+		TotalCoinsTitle->SetString(L"");
+	}
+	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
+		UnspentTitle->SetString(L"restantes");
+		CollectedTitle->SetString(L"collectées");
+		BtnWorldSelText->SetString(L"Choisir Monde    ");
+		BtnBackText->SetString(L"Retour †");
+		TotalCoinsTitle->SetString(L"Pièces Étoiles:");
+	}
+	if(GetGameLanguage(4) == 4) { // Spanish (by ?)
+		UnspentTitle->SetString(L"");
+		CollectedTitle->SetString(L"");
+		BtnWorldSelText->SetString(L"");
+		BtnBackText->SetString(L"");
+		TotalCoinsTitle->SetString(L"");
+	}
+	if(GetGameLanguage(4) == 5) { // Italian (by ?)
+		UnspentTitle->SetString(L"");
+		CollectedTitle->SetString(L"");
+		BtnWorldSelText->SetString(L"");
+		BtnBackText->SetString(L"");
+		TotalCoinsTitle->SetString(L"");
+	}
+	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
+		UnspentTitle->SetString(L"");
+		CollectedTitle->SetString(L"");
+		BtnWorldSelText->SetString(L"");
+		BtnBackText->SetString(L"");
+		TotalCoinsTitle->SetString(L"");
+	}
 
 	int unspentCoins = getUnspentStarCoinCount();
 	int coins = getStarCoinCount();

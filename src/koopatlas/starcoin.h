@@ -71,7 +71,9 @@ class dWMStarCoin_c : public dActor_c {
 			*LeftTitle, *RightTitle,
 			*TotalCoinCount, *UnspentCoinCount,
 			*EarnedCoinCount, *EarnedCoinMax,
-			*BtnBackText;
+			*BtnBackText, *CollectedTitle,
+			*UnspentTitle, *BtnWorldSelText,
+			*TotalCoinsTitle;
 
 		dStateWrapper_c<dWMStarCoin_c> state;
 
