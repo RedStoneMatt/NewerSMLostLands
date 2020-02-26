@@ -52,7 +52,7 @@ void WriteAsciiToTextBox(nw4r::lyt::TextBox *tb, const char *source) {
 	int i = 0;
 	wchar_t buffer[1024];
 	while (i < 1023 && source[i]) {
-		buffer[i] = source[i];
+		buffer[i] = (unsigned char)(source[i]);
 		i++;
 	}
 	buffer[i] = 0;
