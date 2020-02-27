@@ -195,7 +195,6 @@ bool dWMStarCoin_c::canScrollRight() const {
 extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
 
 void dWMStarCoin_c::loadInfo() {
-	WriteBMGToTextBox(BtnBackText, GetBMG(), 3, 1, 0);
 	
 	// Language-related things
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
