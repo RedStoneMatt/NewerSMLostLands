@@ -86,13 +86,50 @@ int dMsgBoxManager_c::onDelete() {
 
 /*****************************************************************************/
 // Load Resources
+
+extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+
 CREATE_STATE_E(dMsgBoxManager_c, LoadRes);
 
 void dMsgBoxManager_c::executeState_LoadRes() {
-	if (msgDataLoader.load("/NewerRes/Messages.bin")) {
-		state.setState(&StateID_Wait);
-	} else {
+	
+	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
+		if (msgDataLoader.load("/NewerRes/MessagesEN.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
 	}
+	if(GetGameLanguage(4) == 2) { // German (by ?)
+		if (msgDataLoader.load("/NewerRes/MessagesGE.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
+	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
+		if (msgDataLoader.load("/NewerRes/MessagesFR.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
+	if(GetGameLanguage(4) == 4) { // Spanish (by ?)
+		if (msgDataLoader.load("/NewerRes/MessagesSP.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
+	if(GetGameLanguage(4) == 5) { // Italian (by ?)
+		if (msgDataLoader.load("/NewerRes/MessagesIT.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
+	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
+		if (msgDataLoader.load("/NewerRes/MessagesDU.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
+
 }
 
 /*****************************************************************************/
