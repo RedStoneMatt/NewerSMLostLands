@@ -132,6 +132,9 @@ hooks:
 - {branch_type: bl, name: DFNiceTitle, src_addr_jpn: 2155335444, src_addr_jpn2: 2155335508,
   src_addr_ntsc: 2155335748, src_addr_ntsc2: 2155335812, src_addr_pal: 2155335748,
   src_addr_pal2: 2155335812, target_func: DFNiceTitle, type: branch_insn}
+- {name: DFNewFile, src_addr_jpn: 2157190032, src_addr_jpn2: 2157190048, src_addr_ntsc: 2157191288,
+  src_addr_ntsc2: 2157191304, src_addr_pal: 2157191288, src_addr_pal2: 2157191304,
+  target_func: 'dDateFile_c::newFile()', type: add_func_pointer}
 - {branch_type: bl, name: DFNiceWorldName, src_addr_jpn: 2155337952, src_addr_jpn2: 2155338016,
   src_addr_ntsc: 2155338256, src_addr_ntsc2: 2155338320, src_addr_pal: 2155338256,
   src_addr_pal2: 2155338320, target_func: DFNiceWorldName, type: branch_insn}

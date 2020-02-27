@@ -146,6 +146,11 @@ hooks:
 
   - {name: DFNiceTitle, type: branch_insn, branch_type: bl, src_addr_pal: 0x8077D044, target_func: 'DFNiceTitle'}
     
+  - name: DFNewFile
+    type: add_func_pointer
+    src_addr_pal: 0x80942078
+    target_func: 'dDateFile_c::newFile()'
+    
   - {name: DFNiceWorldName, type: branch_insn, branch_type: bl, src_addr_pal: 0x8077DA10, target_func: 'DFNiceWorldName'}
 
   - {name: DefaultSavefileInfo, type: branch_insn, branch_type: b, src_addr_pal: 0x800CE100, target_func: 'DefaultSavefileInfo'}

@@ -91,6 +91,8 @@ class dDateFile_c : dBase_c {
 		u32 field_E54;
 		
 		void fileNum();
+		int onExecute_orig();
+		int newFile();
 };
 
 extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
@@ -120,7 +122,19 @@ void dDateFile_c::fileNum() {
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
 		T_fileNumber_01->SetString(L"UT ");
 	}
-	if(isNew) {
-		T_fileNumber_01->SetVisible(false);
+}
+
+int dDateFile_c::newFile() {
+	int orig_val = this->onExecute_orig(); //to preserve the original dDateFile_c::loadMyInfo function
+	if(this->_70 > 34 && this->_70 < 36) {
+		OSReport("nyeh1: %d\n", this->isNew);
+		if(this->isNew) {
+			T_fileNumber_01->SetVisible(false);
+		}
+		this->_70++;
 	}
+	else if(this->_70 < 36) {
+		this->_70++;
+	}
+	return orig_val;
 }

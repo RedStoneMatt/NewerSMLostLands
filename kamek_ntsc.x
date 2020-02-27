@@ -41,8 +41,8 @@ setTime__10TimeKeeperFi = 0x800E3910;
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C50;
 onCreate_orig__10daEnItem_cFv = 0x80A26C50;
 
-_ZN11dDateFile_c13onCreate_origEv = 0x8077CE80;
-onCreate_orig__11dDateFile_cFv = 0x8077CE80;
+_ZN11dDateFile_c14onExecute_origEv = 0x8077D0D0;
+onExecute_orig__11dDateFile_cFv = 0x8077D0D0;
 
 GetGameLanguage = 0x800B45E0;
 

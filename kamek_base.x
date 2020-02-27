@@ -28,7 +28,7 @@ SECTIONS {
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
 	
-	onCreate_orig__11dDateFile_cFv = 0x8077CE80;
+	onExecute_orig__11dDateFile_cFv = 0x8077D0D0;
 	
 	GetGameLanguage = 0x800B4630;
 	
