@@ -120,4 +120,7 @@ void dDateFile_c::fileNum() {
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
 		T_fileNumber_01->SetString(L"UT ");
 	}
+	if(isNew) {
+		T_fileNumber_01->SetVisible(false);
+	}
 }
