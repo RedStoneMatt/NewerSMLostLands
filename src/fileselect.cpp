@@ -97,9 +97,7 @@ class dDateFile_c : dBase_c {
 
 extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
 
-void dDateFile_c::fileNum() {	
-	// OSReport("fileNum_maybe: %d\n", this->fileNum_maybe);
-	
+void dDateFile_c::fileNum() {
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"   File 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"   File 2"); }
@@ -125,10 +123,9 @@ void dDateFile_c::fileNum() {
 }
 
 int dDateFile_c::newFile() {
-	int orig_val = this->onExecute_orig(); //to preserve the original dDateFile_c::loadMyInfo function
-	if(this->_70 > 34 && this->_70 < 36) {
-		OSReport("nyeh1: %d\n", this->isNew);
-		if(this->isNew) {
+	int orig_val = this->onExecute_orig(); //to preserve the original dDateFile_c::onExecute_orig function
+	if(this->_70 > 34 && this->_70 < 36) { //this->_70 being unused, use it as a checker to see if isNew is ready to be used
+		if(this->isNew) { //file is new, remove that nyeh pane
 			T_fileNumber_01->SetVisible(false);
 		}
 		this->_70++;

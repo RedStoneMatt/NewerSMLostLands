@@ -119,7 +119,6 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_m == 0) { //if it doesn't exist, then return to avoid a crash
 			return;
 		}
-		// OSReport("MARIO_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_m, res_m); //debugging
 		player_icon->material->texMaps[0].ReplaceImage( //replacing the actual image with the new one
         (TPLPalette*) MARIO_ICON_TPL_FILE.ptr(), 0
 		);
@@ -130,7 +129,6 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_l == 0) {
 			return;
 		}
-		// OSReport("LUIGI_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_l, res_l);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) LUIGI_ICON_TPL_FILE.ptr(), 0
 		);
@@ -141,7 +139,6 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_kb == 0) {
 			return;
 		}
-		// OSReport("KINOB_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_kb, res_kb);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) KINOB_ICON_TPL_FILE.ptr(), 0
 		);
@@ -152,7 +149,6 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //t
 		if (res_ky == 0) {
 			return;
 		}
-		// OSReport("KINOY_ICON_TPL_FILE.open('%s'): %d\n", tpl_name_ky, res_ky);
 		player_icon->material->texMaps[0].ReplaceImage(
         (TPLPalette*) KINOY_ICON_TPL_FILE.ptr(), 0
 		);
