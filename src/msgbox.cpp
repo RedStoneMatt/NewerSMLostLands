@@ -92,7 +92,6 @@ extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
 CREATE_STATE_E(dMsgBoxManager_c, LoadRes);
 
 void dMsgBoxManager_c::executeState_LoadRes() {
-	
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		if (msgDataLoader.load("/NewerRes/MessagesEN.bin")) {
 			state.setState(&StateID_Wait);
@@ -129,7 +128,6 @@ void dMsgBoxManager_c::executeState_LoadRes() {
 		} else {
 		}
 	}
-
 }
 
 /*****************************************************************************/

@@ -41,10 +41,12 @@ setTime__10TimeKeeperFi = 0x800E3910;
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C70;
 onCreate_orig__10daEnItem_cFv = 0x80A26C70;
 
+TEST_REGION = 0x80768D90;
+
 _ZN11dDateFile_c14onExecute_origEv = 0x8077D110;
 onExecute_orig__11dDateFile_cFv = 0x8077D110;
 
-GetGameLanguage = 0x800B45E0;
+GetGameLanguage = 0x801DD320;
 
 _Z38ConvertStagePositionIntoScreenPositionP4VEC3S0_P19ClassWithCameraInfo = 0x8006A4B0; /*addAnyway*/
 
