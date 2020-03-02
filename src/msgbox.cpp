@@ -87,11 +87,17 @@ int dMsgBoxManager_c::onDelete() {
 /*****************************************************************************/
 // Load Resources
 
-extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 CREATE_STATE_E(dMsgBoxManager_c, LoadRes);
 
 void dMsgBoxManager_c::executeState_LoadRes() {
+	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
+		if (msgDataLoader.load("/NewerRes/MessagesJP.bin")) {
+			state.setState(&StateID_Wait);
+		} else {
+		}
+	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		if (msgDataLoader.load("/NewerRes/MessagesEN.bin")) {
 			state.setState(&StateID_Wait);

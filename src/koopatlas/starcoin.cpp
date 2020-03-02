@@ -192,11 +192,18 @@ bool dWMStarCoin_c::canScrollRight() const {
 	return (currentSectionIndex < (availableSectionCount - 1));
 }
 
-extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void dWMStarCoin_c::loadInfo() {
 	
 	// Language-related things
+	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
+		UnspentTitle->SetString(L"");
+		CollectedTitle->SetString(L"");
+		BtnWorldSelText->SetString(L"");
+		BtnBackText->SetString(L"");
+		TotalCoinsTitle->SetString(L"");
+	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		UnspentTitle->SetString(L"unspent");
 		CollectedTitle->SetString(L"collected");

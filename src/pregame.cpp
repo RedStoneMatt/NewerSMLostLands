@@ -52,7 +52,7 @@ class PregameLytHandler {
 
 extern char CurrentLevel;
 extern char CurrentWorld;
-extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 	nw4r::lyt::TextBox
@@ -79,6 +79,9 @@ void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 		LevelName->SetString(convLevelName);
 
 		wchar_t levelNumber[32];
+		if(GetGameLanguage(4) == 0) { // Japanese (by ?)
+			wcscpy(levelNumber, L" ");
+		}
 		if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 			wcscpy(levelNumber, L"World ");
 		}

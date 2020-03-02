@@ -95,9 +95,12 @@ class dDateFile_c : dBase_c {
 		int newFile();
 };
 
-extern "C" int GetGameLanguage(int nyeh); //nyeh is alway 4 for some reasons
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void dDateFile_c::fileNum() {
+	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
+		T_fileNumber_01->SetString(L"UT ");
+	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"   File 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"   File 2"); }
