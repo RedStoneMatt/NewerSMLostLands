@@ -61,6 +61,7 @@ modules:
   - processed/bossBridgeBowser.yaml
   - processed/effectVideo.yaml
   - processed/fakeStarCoin.yaml
+  - processed/debugsprite.yaml
   - processed/shyguy.yaml
   - processed/shyguyGiants.yaml
   - processed/meteor.yaml

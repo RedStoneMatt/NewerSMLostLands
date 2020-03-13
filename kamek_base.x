@@ -27,6 +27,8 @@ SECTIONS {
 	setTime__10TimeKeeperFi = 0x800E3A00;
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
+
+	pow = 0x802E5894;
 	
 	TEST_REGION = 0x80768D50;
 	

@@ -41,6 +41,8 @@ setTime__10TimeKeeperFi = 0x800E3910;
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C50;
 onCreate_orig__10daEnItem_cFv = 0x80A26C50;
 
+pow = 0x802E55A4;
+
 TEST_REGION = 0x80768D50;
 
 _ZN11dDateFile_c14onExecute_origEv = 0x8077D0D0;
