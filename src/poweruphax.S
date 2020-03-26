@@ -7,6 +7,7 @@
 .extern dAcPy_c__ChangePowerupWithAnimation
 .extern PlayPlayerSound
 .extern CreateActor
+.extern CreateActorTwo
 .extern PlayerProjectileShooting
 .extern Actor_SearchByName
 .extern SomeTable_802F5440
@@ -463,12 +464,16 @@ ThrowHammer:
 	li r4, 498
 	li r5, 0
 	bl PlayPlayerSound
+
 	
-	li r3, 0x73			# Hammer
-	li r4, 0				# Settings
+	li r3, 0x176			# Hammer
+
+	lwz r4, 0x14D4(r30)		# Settings
+	addi r4, r4, 2
+
 	addi r5, sp, 0x2C		# Position
 	li r6, 0				# Rotation
-	lbz r7, 0x38F(r30)	# Layer
+	lbz r7, 0x38F(r30)		# Layer
 	bl CreateActor
 	
 	# Store player ID
@@ -585,18 +590,23 @@ loop:
 	
 	addi r31, r31, 1
 	
+.extern doWait
 startOrContinueLoop:
 	mr r4, r3
-	li r3, 0x73
-	bl Actor_SearchByName
+
+	li r3, 0x22B
+	bl Actor_SearchByName #I let that here even if i don't use it just because i am afraid that i get a crash
 	
 	cmpwi r3, 0
 	bne loop
-	
-	# now if the current count is >= 2, return 0
+
+	lis r4, doWait@ha
+	lwz r4, doWait@l(r4) #store doWait in r4
+
+	# now if the frames to wait are > 0, return 0
 	# otherwise return 1
-	cmpwi r31, 2
-	bge tooManyHammers
+	cmpwi r4, 0
+	bgt tooManyHammers
 	
 	li r3, 1
 	b gotHammerStatus
@@ -868,7 +878,7 @@ hgrExit:
 .extern continueFromHCGRO
 HammerCallbackGabonRockOverride:
 	lhz r3, 8(r30) #objThis
-	cmpwi r3, 115 #HAMMER
+	cmpwi r3, 555 #HAMMER
 	bne continueHCGRO
 
 	lhz r3, 8(r30) #objOther
@@ -954,6 +964,14 @@ ToadTextures:
 .global BrosArcFileName
 BrosArcFileName:
 	.string "hammerM"
+
+.global CountString
+CountString:
+	.string "stupid count: %d\n"
+
+.global GabonArcFileName
+GabonArcFileName:
+	.string "gabon_rock"
 
 .global I_hammerArcFilename
 I_hammerArcFilename:

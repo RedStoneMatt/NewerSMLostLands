@@ -179,4 +179,3 @@ void dStockItem_c::setScalesOfSomeThings() {
 	shadow->hammerButtonBase->scale = newButtonBase[7]->scale;
 }
 
-

@@ -144,5 +144,7 @@ class dGameDisplay_c : dBase_c { //The dGameDisplay_c class, very important.
        
         static dGameDisplay_c* instance;
         int onCreate_orig();
+        int onExecute_orig();
         int patch_fix();
+        int doWaitCheck();
 };

@@ -1,5 +1,5 @@
 ---
-source_files: [../src/poweruphax.S, ../src/poweruphax.cpp]
+source_files: [../src/poweruphax.cpp, ../src/poweruphax.S]
 hooks:
   - {name: HammerDontTouchMario, type: nop_insn, area_pal: 0x8001DFDC}
   - {name: HammerDontTouchYoshi, type: nop_insn, area_pal: 0x8001E02C}
@@ -149,9 +149,14 @@ hooks:
     src_addr_pal: 0x8098C488
     target_func: 'BrosArcFileName'
 
+  - name: AlwaysLoadGabonArc
+    type: add_func_pointer
+    src_addr_pal: 0x8098C494
+    target_func: 'GabonArcFileName'
+
   - name: LoadHammerFromHammerMArc
     type: patch
-    addr_pal: 0x8095CDD4
+    addr_pal: 0x80AD8C90
     data: '68616D6D65724D00' # "hammerM\0"
     
   - name: AlwaysLoadBrosArc

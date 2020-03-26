@@ -1,0 +1,11 @@
+hooks:
+- {name: SpikyHaxBuild, src_addr_jpn: 2157442920, src_addr_jpn2: 2157442936, src_addr_ntsc: 2157444736,
+  src_addr_ntsc2: 2157444752, src_addr_pal: 2157444736, src_addr_pal2: 2157444752,
+  target_func: 'daSpikyHax_c::build()', type: add_func_pointer}
+- {name: GABON_ROCK_replace, src_addr_jpn: 2157297704, src_addr_jpn2: 2157297720,
+  src_addr_ntsc: 2157299520, src_addr_ntsc2: 2157299536, src_addr_pal: 2157299520,
+  src_addr_pal2: 2157299536, target_func: 'daGabonRock_c::getsettings()', type: add_func_pointer}
+- {name: GDisplay_doWait, src_addr_jpn: 2150790264, src_addr_jpn2: 2150790264, src_addr_ntsc: 2150790928,
+  src_addr_ntsc2: 2150790928, src_addr_pal: 2150791768, src_addr_pal2: 2150791768,
+  target_func: 'dGameDisplay_c::doWaitCheck()', type: add_func_pointer}
+source_files: [../src/spikyhax.cpp]

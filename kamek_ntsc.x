@@ -41,6 +41,9 @@ setTime__10TimeKeeperFi = 0x800E3910;
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C50;
 onCreate_orig__10daEnItem_cFv = 0x80A26C50;
 
+_ZN13daGabonRock_c13onCreate_origEv = 0x807F8B90;
+onCreate_orig__13daGabonRock_cFv = 0x807F8B90;
+
 pow = 0x802E55A4;
 
 TEST_REGION = 0x80768D50;

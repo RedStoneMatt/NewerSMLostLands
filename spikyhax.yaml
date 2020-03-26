@@ -1,0 +1,26 @@
+---
+#Replaces Actor 555 AC_WATER_BUBBLE_CANNON (Sprite 328)
+
+
+source_files: [../src/spikyhax.cpp]
+hooks:
+  - name: SpikyHaxBuild
+    type: add_func_pointer
+    src_addr_pal: 0x8097FE80
+    target_func: 'daSpikyHax_c::build()'
+
+#  - name: SpikyHaxSpriteFileInfo
+#    type: add_func_pointer
+#    src_addr_pal: 0x8031b06c
+#    target_func: 'SHarcNameList'
+    # 0x8031AB4C + sprite num * 0x4 == offset
+
+  - name: GABON_ROCK_replace
+    type: add_func_pointer
+    src_addr_pal: 0x8095C740
+    target_func: 'daGabonRock_c::getsettings()'
+
+  - name: GDisplay_doWait
+    type: add_func_pointer
+    src_addr_pal: 0x80327A58
+    target_func: 'dGameDisplay_c::doWaitCheck()'

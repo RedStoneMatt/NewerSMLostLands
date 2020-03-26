@@ -28,6 +28,9 @@ modules:
   - processed/spritetex.yaml
   - processed/layeredit.yaml
 #  - processed/gakenoko.yaml
+#  - processed/enitemtests.yaml
+  - processed/spikyhax.yaml
+  - processed/custompakkun.yaml
   - processed/poweruphax.yaml
   - processed/heapbar.yaml
   - processed/randtiles.yaml
@@ -71,10 +74,8 @@ modules:
   - processed/challengeStar.yaml
   - processed/singAlong.yaml
   - processed/pumpkinGoomba.yaml
-  - processed/custompakkun.yaml
   - processed/poisonball.yaml
   - processed/tripleblock.yaml
   - processed/timeclock.yaml
-  # - processed/enitemtests.yaml
   # - processed/pengi.yaml
 #  - processed/actorlog.yaml

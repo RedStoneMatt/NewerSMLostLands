@@ -1,5 +1,6 @@
 #include <game.h>
 #include <newer.h>
+#include <sfx.h>
 
 class daEnItem_c : dEn_c { //The daEnItem_c class, very important.
 	public:

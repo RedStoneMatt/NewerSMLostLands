@@ -27,6 +27,8 @@ SECTIONS {
 	setTime__10TimeKeeperFi = 0x800E3A00;
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
+	
+	onCreate_orig__13daGabonRock_cFv = 0x807F8B90;
 
 	pow = 0x802E5894;
 	
