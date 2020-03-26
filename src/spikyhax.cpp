@@ -78,7 +78,7 @@ daSpikyHax_c *daSpikyHax_c::build() {
 		if (name == EN_COIN || name == EN_EATCOIN || name == AC_BLOCK_COIN || name == EN_COIN_JUGEM || name == EN_COIN_ANGLE
 			|| name == EN_COIN_JUMP || name == EN_COIN_FLOOR || name == EN_COIN_VOLT || name == EN_COIN_WIND
 			|| name == EN_BLUE_COIN || name == EN_COIN_WATER || name == EN_REDCOIN || name == EN_GREENCOIN
-			|| name == EN_JUMPDAI || name == EN_ITEM)
+			|| name == EN_JUMPDAI || name == EN_ITEM || name == EN_STAR_COIN)
 			{ return; }
 
 
@@ -100,11 +100,11 @@ daSpikyHax_c *daSpikyHax_c::build() {
 	}
 
 	bool daSpikyHax_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-		return true;
+		return false;
 	}
 
 	bool daSpikyHax_c::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
-		return true;
+		return false;
 	}
 
 	bool daSpikyHax_c::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
@@ -121,7 +121,7 @@ daSpikyHax_c *daSpikyHax_c::build() {
 	}
 
 	bool daSpikyHax_c::collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther){
-		return true;
+		return false;
 	}
 
 	bool daSpikyHax_c::collisionCat14_YoshiFire(ActivePhysics *apThis, ActivePhysics *apOther){
