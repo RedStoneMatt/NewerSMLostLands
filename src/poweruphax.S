@@ -965,10 +965,6 @@ ToadTextures:
 BrosArcFileName:
 	.string "hammerM"
 
-.global CountString
-CountString:
-	.string "stupid count: %d\n"
-
 .global GabonArcFileName
 GabonArcFileName:
 	.string "gabon_rock"

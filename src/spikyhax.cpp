@@ -49,9 +49,7 @@ class daSpikyHax_c : public dEn_c {
 	bool collisionCatA_PenguinMario(ActivePhysics *apThis, ActivePhysics *apOther);
 
 	USING_STATES(daSpikyHax_c);
-	DECLARE_STATE(Out);
 	DECLARE_STATE(Walk);
-	DECLARE_STATE(Turn);
 	DECLARE_STATE(Die);
 };
 
@@ -65,9 +63,7 @@ daSpikyHax_c *daSpikyHax_c::build() {
 ///////////////////////
 
 
-	CREATE_STATE(daSpikyHax_c, Out);
 	CREATE_STATE(daSpikyHax_c, Walk);
-	CREATE_STATE(daSpikyHax_c, Turn);
 	CREATE_STATE(daSpikyHax_c, Die);
 
 
@@ -307,20 +303,6 @@ void daSpikyHax_c::updateModelMatrices() {
 
 
 ///////////////
-// Out State
-///////////////
-	void daSpikyHax_c::beginState_Out() {
-	}
-	void daSpikyHax_c::executeState_Out() {	
-		this->speed.x = 0.0;
-		this->speed.y = 0.0;
-		this->max_speed.x = 0.0;
-		this->max_speed.y = 0.0;
-	}
-	void daSpikyHax_c::endState_Out() { }
-
-
-///////////////
 // Walk State
 ///////////////
 	void daSpikyHax_c::beginState_Walk() {
@@ -339,19 +321,6 @@ void daSpikyHax_c::updateModelMatrices() {
 		}
 	}
 	void daSpikyHax_c::endState_Walk() { }
-
-
-///////////////
-// Turn State
-///////////////
-	void daSpikyHax_c::beginState_Turn() {
-		this->direction ^= 1;
-		this->speed.x *= -1;
-	}
-	void daSpikyHax_c::executeState_Turn() {
-		this->doStateChange(&StateID_Walk);
-	}
-	void daSpikyHax_c::endState_Turn() { }
 
 
 ///////////////
@@ -377,7 +346,7 @@ void daSpikyHax_c::updateModelMatrices() {
 /*Don't ask me how does it work, because i don't know*/
 /*****************************************************/
 
-extern "C" float pow(float num, float power);
+/*extern "C" float pow(float num, float power);
 
 int getNybbleValuee(u32 settings, int fromNybble, int toNybble) {
 	int numberOfNybble = (toNybble  - fromNybble) + 1;               //gets how many nybbles are used for the process (example: nybbles 4-6 -> there's nybbles 4, 5 and 6 used -> numberOfNybble = 3) 
@@ -385,7 +354,7 @@ int getNybbleValuee(u32 settings, int fromNybble, int toNybble) {
 	int fShit = pow(16, numberOfNybble) - 1;                         //gets the value to use with the "&" operator at the end 
 	OSReport("-> (settings >> %d) & 0x%x) => ", valueToUse, fShit);  //debugging
 	return ((settings >> valueToUse) & fShit);                       //uses everything to make the nybble value 
-}
+}*/
 
 
 class daGabonRock_c : dEn_c { //The daGabonRock_c class, very important.
@@ -396,7 +365,7 @@ class daGabonRock_c : dEn_c { //The daGabonRock_c class, very important.
 
 int daGabonRock_c::getsettings() {
 	int orig_val = this->onCreate_orig();
-	OSReport("--------\nSpawning daGabonRock_c:\n");
+	/*OSReport("--------\nSpawning daGabonRock_c:\n");
 	OSReport("this->settings: nybble 5  -> %d\n", getNybbleValuee(this->settings, 5, 5));
 	OSReport("this->settings: nybble 6  -> %d\n", getNybbleValuee(this->settings, 6, 6));
 	OSReport("this->settings: nybble 7  -> %d\n", getNybbleValuee(this->settings, 7, 7));
@@ -411,17 +380,17 @@ int daGabonRock_c::getsettings() {
 	OSReport("this->scale.x: %d\n", this->scale.x);
 	OSReport("this->scale.y: %d\n", this->scale.y);
 	OSReport("this->scale.z: %d\n", this->scale.z);
-	OSReport("this->direction: %d\n", this->direction);
+	OSReport("this->direction: %d\n", this->direction);*/
 	if(this->settings > 1) {
 		int playerID = this->settings - 2;
 		dAcPy_c *player = dAcPy_c::findByID(playerID);
-		OSReport("player ID: %d\n", playerID);
-		OSReport("player direction: %d\n", player->direction); //1 -> facing left | 0 -> facing right
+		//OSReport("player ID: %d\n", playerID);
+		//OSReport("player direction: %d\n", player->direction); //1 -> facing left | 0 -> facing right
 		PlaySound(player, SE_EMY_GABON_ROCK_THROW);
 		CreateActor(555, player->direction, player->pos, 0, 0);
 		doWait = 60;
 	}
-	OSReport("--------\n");
+	//OSReport("--------\n");
 	return orig_val;
 }
 
