@@ -289,7 +289,8 @@ void daCustomPakkun::executeState_Attack() {
 		if (type == 1) {
 			//Unused because for some reason the hammer don't spawn
 			shootItem = HAMMER;
-			soundID = SE_EMY_HAMMER_BROS_HAMMER;
+			//soundID = SE_EMY_HAMMER_BROS_HAMMER;
+			soundID = SE_EMY_HAMMER;
 			this->spawnersettings = 0;
 		}
 		if (type == 2) {

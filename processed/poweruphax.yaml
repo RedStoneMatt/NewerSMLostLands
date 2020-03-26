@@ -84,8 +84,8 @@ hooks:
 - {name: AlwaysLoadGabonArc, src_addr_jpn: 2157493660, src_addr_jpn2: 2157493676,
   src_addr_ntsc: 2157495476, src_addr_ntsc2: 2157495492, src_addr_pal: 2157495444,
   src_addr_pal2: 2157495460, target_func: GabonArcFileName, type: add_func_pointer}
-- {addr_jpn: 2158855568, addr_jpn2: 2158855600, addr_ntsc: 2158857392, addr_ntsc2: 2158857424,
-  addr_pal: 2158857360, addr_pal2: 2158857392, data: 68616D6D65724D00, name: LoadHammerFromHammerMArc,
+- {addr_jpn: 2157299388, addr_jpn2: 2157299404, addr_ntsc: 2157301204, addr_ntsc2: 2157301220,
+  addr_pal: 2157301204, addr_pal2: 2157301220, data: 68616D6D65724D00, name: LoadHammerFromHammerMArc,
   type: patch}
 - {name: AlwaysLoadBrosArc, src_addr_jpn: 2157493656, src_addr_jpn2: 2157493672, src_addr_ntsc: 2157495472,
   src_addr_ntsc2: 2157495488, src_addr_pal: 2157495440, src_addr_pal2: 2157495456,

@@ -364,6 +364,7 @@ void daSpikyHax_c::updateModelMatrices() {
 		PlaySound(this, SE_OBJ_WOOD_BOX_BREAK);
 		Vec2 nyeh = {this->pos.x, this->pos.y};
 		this->spawnHitEffectAtPosition(nyeh);
+		doWait = 0;
 		this->Delete(this->deleteForever);
 	}
 	void daSpikyHax_c::endState_Die() { }
@@ -414,14 +415,11 @@ int daGabonRock_c::getsettings() {
 	if(this->settings > 1) {
 		int playerID = this->settings - 2;
 		dAcPy_c *player = dAcPy_c::findByID(playerID);
-		int xofugnuzoqx = 0x22B;
-		int *count = (int *)Actor_SearchByID(0x22B);
-		OSReport("Count: %d\n", count);
 		OSReport("player ID: %d\n", playerID);
 		OSReport("player direction: %d\n", player->direction); //1 -> facing left | 0 -> facing right
 		PlaySound(player, SE_EMY_GABON_ROCK_THROW);
 		CreateActor(555, player->direction, player->pos, 0, 0);
-		doWait = 120;
+		doWait = 60;
 	}
 	OSReport("--------\n");
 	return orig_val;
