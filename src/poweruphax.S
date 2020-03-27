@@ -466,9 +466,9 @@ ThrowHammer:
 	bl PlayPlayerSound
 
 	
-	li r3, 0x176			# Hammer
+	li r3, 0x176			# Custom Spikeball
 
-	lwz r4, 0x14D4(r30)		# Settings
+	lwz r4, 0x38D(r30)		# Settings => dStageActor_c->associatedPlayerID (in nybble 6 for some reasons) + 2 (in nybble 12 because yes)
 	addi r4, r4, 2
 
 	addi r5, sp, 0x2C		# Position

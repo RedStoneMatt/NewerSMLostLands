@@ -346,15 +346,17 @@ void daSpikyHax_c::updateModelMatrices() {
 /*Don't ask me how does it work, because i don't know*/
 /*****************************************************/
 
-/*extern "C" float pow(float num, float power);
+extern "C" float pow(float num, float power);
 
-int getNybbleValuee(u32 settings, int fromNybble, int toNybble) {
+int getNybbleValuee(u32 settings, int fromNybble, int toNybble, bool doOSReport) {
 	int numberOfNybble = (toNybble  - fromNybble) + 1;               //gets how many nybbles are used for the process (example: nybbles 4-6 -> there's nybbles 4, 5 and 6 used -> numberOfNybble = 3) 
 	int valueToUse = 48 - (4 * toNybble);                            //gets the value to use with the bitshift at the end 
 	int fShit = pow(16, numberOfNybble) - 1;                         //gets the value to use with the "&" operator at the end 
-	OSReport("-> (settings >> %d) & 0x%x) => ", valueToUse, fShit);  //debugging
+	if(doOSReport) {
+		OSReport("-> (settings >> %d) & 0x%x) => ", valueToUse, fShit);  //debugging
+	}
 	return ((settings >> valueToUse) & fShit);                       //uses everything to make the nybble value 
-}*/
+}
 
 
 class daGabonRock_c : dEn_c { //The daGabonRock_c class, very important.
@@ -365,7 +367,58 @@ class daGabonRock_c : dEn_c { //The daGabonRock_c class, very important.
 
 int daGabonRock_c::getsettings() {
 	int orig_val = this->onCreate_orig();
-	/*OSReport("--------\nSpawning daGabonRock_c:\n");
+	OSReport("--------\nSpawning daGabonRock_c:\n");
+	OSReport("this->settings: nybble 5  -> %d\n", getNybbleValuee(this->settings, 5, 5, true));
+	OSReport("this->settings: nybble 6  -> %d\n", getNybbleValuee(this->settings, 6, 6, true));
+	OSReport("this->settings: nybble 7  -> %d\n", getNybbleValuee(this->settings, 7, 7, true));
+	OSReport("this->settings: nybble 8  -> %d\n", getNybbleValuee(this->settings, 8, 8, true));
+	OSReport("this->settings: nybble 9  -> %d\n", getNybbleValuee(this->settings, 9, 9, true));
+	OSReport("this->settings: nybble 10 -> %d\n", getNybbleValuee(this->settings, 10, 10, true));
+	OSReport("this->settings: nybble 11 -> %d\n", getNybbleValuee(this->settings, 11, 11, true));
+	OSReport("this->settings: nybble 12 -> %d\n", getNybbleValuee(this->settings, 12, 12, true));
+	OSReport("this->pos.x: %d\n", this->pos.x);
+	OSReport("this->pos.y: %d\n", this->pos.y);
+	OSReport("this->pos.z: %d\n", this->pos.z);
+	OSReport("this->scale.x: %d\n", this->scale.x);
+	OSReport("this->scale.y: %d\n", this->scale.y);
+	OSReport("this->scale.z: %d\n", this->scale.z);
+	OSReport("this->direction: %d\n", this->direction);
+	if(getNybbleValuee(this->settings, 12, 12, false) > 1) {
+		int playerID = getNybbleValuee(this->settings, 6, 6, false);
+		dAcPy_c *player = dAcPy_c::findByID(playerID);
+		OSReport("player ID: %d\n", playerID);
+		OSReport("player direction: %d\n", player->direction); //1 -> facing left | 0 -> facing right
+		PlaySound(player, SE_EMY_GABON_ROCK_THROW);
+		CreateActor(555, player->direction, player->pos, 0, 0);
+		doWait = 60;
+	}
+	OSReport("--------\n");
+	return orig_val;
+}
+
+int dGameDisplay_c::doWaitCheck() {
+	int orig_val = this->onExecute_orig();
+	if(doWait > 0) {
+		doWait--;
+	}
+	return orig_val;
+}
+
+
+
+
+/*
+class Projectile : dEn_c {
+	public:
+		int onCreate_orig();
+		int getsettings();
+};
+
+
+int Projectile::getsettings() {
+	int orig_val = this->onCreate_orig();
+	OSReport("--------\nSpawning Projectile:\n");
+	OSReport("this->settings: %d\n", this->settings);
 	OSReport("this->settings: nybble 5  -> %d\n", getNybbleValuee(this->settings, 5, 5));
 	OSReport("this->settings: nybble 6  -> %d\n", getNybbleValuee(this->settings, 6, 6));
 	OSReport("this->settings: nybble 7  -> %d\n", getNybbleValuee(this->settings, 7, 7));
@@ -380,24 +433,8 @@ int daGabonRock_c::getsettings() {
 	OSReport("this->scale.x: %d\n", this->scale.x);
 	OSReport("this->scale.y: %d\n", this->scale.y);
 	OSReport("this->scale.z: %d\n", this->scale.z);
-	OSReport("this->direction: %d\n", this->direction);*/
-	if(this->settings > 1) {
-		int playerID = this->settings - 2;
-		dAcPy_c *player = dAcPy_c::findByID(playerID);
-		//OSReport("player ID: %d\n", playerID);
-		//OSReport("player direction: %d\n", player->direction); //1 -> facing left | 0 -> facing right
-		PlaySound(player, SE_EMY_GABON_ROCK_THROW);
-		CreateActor(555, player->direction, player->pos, 0, 0);
-		doWait = 60;
-	}
-	//OSReport("--------\n");
+	OSReport("this->direction: %d\n", this->direction);
+	OSReport("--------\n");
 	return orig_val;
 }
-
-int dGameDisplay_c::doWaitCheck() {
-	int orig_val = this->onExecute_orig();
-	if(doWait > 0) {
-		doWait--;
-	}
-	return orig_val;
-}
+*/

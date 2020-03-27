@@ -64,6 +64,7 @@ bool daTimeClock_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysi
 	TimeKeeper::instance->setTime(dGameDisplay_c::instance->timer + ((this->settings >> 20 & 0xF) * 10));
 	removeMyActivePhysics();
 	this->immaGonnaDisappear++;
+	return false;
 }
 bool daTimeClock_c::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
 	return collisionCat7_GroundPound(apThis, apOther);

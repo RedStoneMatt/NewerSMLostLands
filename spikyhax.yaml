@@ -24,3 +24,8 @@ hooks:
     type: add_func_pointer
     src_addr_pal: 0x80327A58
     target_func: 'dGameDisplay_c::doWaitCheck()'
+
+#  - name: BOOMERANG_replace
+#    type: add_func_pointer
+#    src_addr_pal: 0x80953D20
+#    target_func: 'Projectile::getsettings()'

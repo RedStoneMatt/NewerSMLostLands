@@ -44,6 +44,9 @@ onCreate_orig__10daEnItem_cFv = 0x80A26C30;
 _ZN13daGabonRock_c13onCreate_origEv = 0x807F8B90;
 onCreate_orig__13daGabonRock_cFv = 0x807F8B90;
 
+_ZN10Projectile13onCreate_origEv = 0x8001DAD0;
+onCreate_orig__10ProjectileFv = 0x8001DAD0;
+
 pow = 0x802E5894;
 
 TEST_REGION = 0x80768D50;
