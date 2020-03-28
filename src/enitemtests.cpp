@@ -20,7 +20,7 @@ int daEnItem_c::getsettings() {
 	OSReport("0xD68: %d\n", (this->settings >> 12 & 0xF));
 	OSReport("0xDB0: %d\n", (this->settings >> 13 & 0xF));
 	OSReport("0xDA0: %d\n", (this->settings >> 14 & 0xF));
-	OSReport("Player ID: %d\n", (this->settings >> 16 & 0xF)); //8 or 12
+	OSReport("Player ID: %d\n", (this->settings >> 16 & 0xF)); //8 to 12
 	OSReport("0xD98: %d\n", (this->settings >> 18 & 0xF)); //2 or 3
 	OSReport("0xDA4: %d\n", (this->settings >> 20 & 0xF));
 	OSReport("0xDA8: %d\n", (this->settings >> 22 & 0xF));

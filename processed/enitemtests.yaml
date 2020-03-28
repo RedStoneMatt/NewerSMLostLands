@@ -2,7 +2,4 @@ hooks:
 - {name: EN_ITEM_test, src_addr_jpn: 2158955224, src_addr_jpn2: 2158955256, src_addr_ntsc: 2158957048,
   src_addr_ntsc2: 2158957080, src_addr_pal: 2158957016, src_addr_pal2: 2158957048,
   target_func: 'daEnItem_c::getsettings()', type: add_func_pointer}
-- {name: GABON_ROCK_test, src_addr_jpn: 2157297704, src_addr_jpn2: 2157297720, src_addr_ntsc: 2157299520,
-  src_addr_ntsc2: 2157299536, src_addr_pal: 2157299520, src_addr_pal2: 2157299536,
-  target_func: 'daGabonRock_c::getsettings()', type: add_func_pointer}
 source_files: [../src/enitemtests.cpp]
