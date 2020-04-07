@@ -294,17 +294,17 @@ void daCustomPakkun::executeState_Attack() {
 			this->spawnersettings = 0;
 		}
 		if (type == 2) {
-			shootItem = BIGHANA_MGR;
+			shootItem = BIGHANA_MGR; //poisonball.cpp
 			soundID = SE_EMY_PAKKUN_FIRE;
 			this->spawnersettings = 0;
 		}
 		if (type == 3) {
-			shootItem = BIGHANA_MGR;
+			shootItem = BIGHANA_MGR; //poisonball.cpp
 			soundID = SE_EMY_PAKKUN_MOUTH;
 			this->spawnersettings = 1;
 		}
 		if (type == 4) {
-			shootItem = BIGHANA_MGR;
+			shootItem = BIGHANA_MGR; //poisonball.cpp
 			soundID = SE_PLY_CANNON_SHOT;
 			this->spawnersettings = 2;
 		}

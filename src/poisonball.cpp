@@ -67,7 +67,7 @@ extern "C" void *EN_LandbarrelPlayerCollision(dEn_c* t, ActivePhysics *apThis, A
 extern "C" char usedForDeterminingStatePress_or_playerCollision(dEn_c* t, ActivePhysics *apThis, ActivePhysics *apOther, int unk1);
 
 void daPoisonBall::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) { 
-	if(this->settings == 0) {
+	if(this->settings == 0) { // Types - 0 = Poison; 1 = Plant; 2 = Cannonball
 		int p = CheckExistingPowerup(apOther->owner);
 		if (p != 0 && p != 3) {	// Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
 			dAcPy_c__ChangePowerupWithAnimation(apOther->owner, 0);
@@ -76,14 +76,14 @@ void daPoisonBall::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther
 		this->counter_504[apOther->owner->which_player] = 0x20;
 	}
 	if(this->settings == 1) {
-		EN_LandbarrelPlayerCollision(this, apThis, apOther);
+		//EN_LandbarrelPlayerCollision(this, apThis, apOther);
 		this->_vf220(apOther->owner);
 	}
 	if(this->settings == 2) {
 		char hitType;
 		hitType = usedForDeterminingStatePress_or_playerCollision(this, apThis, apOther, 0);
 		if(hitType > 0) {
-			this->Delete(1);
+			doStateChange(&dEn_c::StateID_DieFall);
 		}
 		else {
 			this->_vf220(apOther->owner);
