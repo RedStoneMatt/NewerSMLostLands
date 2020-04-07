@@ -29,3 +29,7 @@ hooks:
 #    type: add_func_pointer
 #    src_addr_pal: 0x80953D20
 #    target_func: 'Projectile::getsettings()'
+
+#  - name: NoHammerCoin
+#    type: nop_insn
+#    area_pal: 0x800A0478

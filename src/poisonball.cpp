@@ -21,11 +21,8 @@ class daPoisonBall : public dEn_c {
 	m3d::mdl_c bodyModel;
 	m3d::anmChr_c animationChr;
 
-	u32 timer;
-	bool isDieing;
 	
 
-	float XSpeed;
 	float Baseline;
 
 	static daPoisonBall *build();
@@ -83,7 +80,10 @@ void daPoisonBall::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther
 		char hitType;
 		hitType = usedForDeterminingStatePress_or_playerCollision(this, apThis, apOther, 0);
 		if(hitType > 0) {
-			doStateChange(&dEn_c::StateID_DieFall);
+			VEC2 shit;
+			shit.x = this->speed.x;
+			shit.y = this->speed.y;
+			dEn_c::killWithSpecifiedState(apOther->owner, &shit, &dEn_c::StateID_DieFumi, 0);
 		}
 		else {
 			this->_vf220(apOther->owner);
@@ -181,11 +181,7 @@ int daPoisonBall::onCreate() {
 
 	this->speed.x = 0.0;
 	this->speed.y = 0.0;
-	this->max_speed.x = 0.6;
-	this->x_speed_inc = 0.15;
 	this->Baseline = this->pos.y;
-	this->XSpeed = 0.6;
-	//this->pos.y = 0;
 
 	ActivePhysics::Info HitMeBaby;
 	
@@ -222,6 +218,10 @@ int daPoisonBall::onExecute() {
 	acState.execute();
 	updateModelMatrices();
 
+	HandleXSpeed();
+	HandleYSpeed();
+	doSpriteMovement();
+
 	if(this->animationChr.isAnimationDone()) {
 		this->animationChr.setCurrentFrame(0.0);
 	}
@@ -255,8 +255,8 @@ void daPoisonBall::beginState_Main() {
 }
 
 void daPoisonBall::executeState_Main() {
-	this->pos.x += this->speed.x;
-	this->pos.y += this->speed.y;
+	//this->pos.x += this->speed.x;
+	//this->pos.y += this->speed.y;
 	if(this->animationChr.isAnimationDone()) {
 		this->animationChr.setCurrentFrame(0.0);
 	}
