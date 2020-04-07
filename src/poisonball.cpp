@@ -95,11 +95,27 @@ bool daPoisonBall::collisionCat1_Fireball_E_Explosion(ActivePhysics *apThis, Act
 	return true;
 }
 bool daPoisonBall::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-	this->_vf220(apOther->owner);
+	if(this->settings == 2) {
+		VEC2 shit;
+		shit.x = this->speed.x;
+		shit.y = this->speed.y;
+		dEn_c::killWithSpecifiedState(apOther->owner, &shit, &dEn_c::StateID_DieFumi, 0);
+	}
+	else {
+		this->_vf220(apOther->owner);
+	}
 	return true;
 }
 bool daPoisonBall::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
-	this->_vf220(apOther->owner);
+	if(this->settings == 2) {
+		VEC2 shit;
+		shit.x = this->speed.x;
+		shit.y = this->speed.y;
+		dEn_c::killWithSpecifiedState(apOther->owner, &shit, &dEn_c::StateID_DieFumi, 0);
+	}
+	else {
+		this->_vf220(apOther->owner);
+	}
 	return true;
 }
 bool daPoisonBall::collisionCat9_RollingObject(ActivePhysics *apThis, ActivePhysics *apOther) {
