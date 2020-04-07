@@ -1,0 +1,12 @@
+hooks:
+- {name: PoisonCloudBuild, src_addr_jpn: 2157338816, src_addr_jpn2: 2157338832, src_addr_ntsc: 2157340632,
+  src_addr_ntsc2: 2157340648, src_addr_pal: 2157340632, src_addr_pal2: 2157340648,
+  target_func: 'daPoisonCloud_c::build()', type: add_func_pointer}
+- {addr_jpn: 2150672120, addr_jpn2: 2150672120, addr_ntsc: 2150672600, addr_ntsc2: 2150672600,
+  addr_pal: 2150673368, addr_pal2: 2150673368, data: 01CE 0000  00000008 FFFFFFF8  00000000
+    00000000 00000010 00000010  0000 0000 0000 0000  0000 0000, name: UpdatePoisonCloudSpriteInfo,
+  type: patch}
+- {name: PlayerReplace, src_addr_jpn: 2150781352, src_addr_jpn2: 2150781352, src_addr_ntsc: 2150782016,
+  src_addr_ntsc2: 2150782016, src_addr_pal: 2150782856, src_addr_pal2: 2150782856,
+  target_func: 'dAcPy_c::newOnExecute()', type: add_func_pointer}
+source_files: [../src/poisoncloud.cpp]

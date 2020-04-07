@@ -68,7 +68,6 @@ int MakeRandomNumberForTiles(int count);
 
 
 
-
 extern int Player_Active[4];
 extern int Player_ID[4];
 extern int Player_Powerup[4];

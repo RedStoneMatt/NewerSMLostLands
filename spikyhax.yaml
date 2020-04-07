@@ -33,3 +33,13 @@ hooks:
 #  - name: NoHammerCoin
 #    type: nop_insn
 #    area_pal: 0x800A0478
+
+  - name: CoinLimitChange
+    type: patch
+    addr_pal: 0x80427C04
+    data: '000003E7' #default is 0x63 = 99
+
+  - name: CoinCharacterLimitChange
+    type: patch
+    addr_pal: 0x80159AD8
+    data: '3882ab38' #default is 3882ab34 -> 2

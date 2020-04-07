@@ -1,5 +1,6 @@
 #include <common.h>
 #include <game.h>
+#include <stage.h>
 #include <g3dhax.h>
 #include <sfx.h>
 #include <timekeeper.h>
@@ -405,8 +406,13 @@ int daGabonRock_c::getsettings() {
 	return orig_val;
 }*/
 
+
 int dGameDisplay_c::doWaitCheck() {
 	int orig_val = this->onExecute_orig();
+	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
+	if(nowPressed & WPAD_B) {
+		ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);
+	}
 	if(doWait > 0) {
 		doWait--;
 	}

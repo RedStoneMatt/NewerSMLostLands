@@ -8,4 +8,10 @@ hooks:
 - {name: GDisplay_doWait, src_addr_jpn: 2150790264, src_addr_jpn2: 2150790264, src_addr_ntsc: 2150790928,
   src_addr_ntsc2: 2150790928, src_addr_pal: 2150791768, src_addr_pal2: 2150791768,
   target_func: 'dGameDisplay_c::doWaitCheck()', type: add_func_pointer}
+- {addr_jpn: 2151839364, addr_jpn2: 2151839364, addr_ntsc: 2151840004, addr_ntsc2: 2151840004,
+  addr_pal: 2151840772, addr_pal2: 2151840772, data: 000003E7, name: CoinLimitChange,
+  type: patch}
+- {addr_jpn: 2148898728, addr_jpn2: 2148898728, addr_ntsc: 2148899224, addr_ntsc2: 2148899224,
+  addr_pal: 2148899544, addr_pal2: 2148899544, data: 3882ab38, name: CoinCharacterLimitChange,
+  type: patch}
 source_files: [../src/spikyhax.cpp]

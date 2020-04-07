@@ -1,0 +1,22 @@
+---
+#Replaces Actor 462 AC_LIFT_BALANCE (Sprite 55)
+
+
+source_files: [../src/poisoncloud.cpp]
+hooks:
+  - name: PoisonCloudBuild
+    type: add_func_pointer
+    src_addr_pal: 0x809667D8
+    target_func: 'daPoisonCloud_c::build()'
+
+  - name: UpdatePoisonCloudSpriteInfo
+    type: patch
+    # 0x8030A340 + sprite num * 0x28 == offset
+    addr_pal: 0x8030abd8
+    #      -ID- ----  -X Offs- -Y Offs-  -RectX1- -RectY1- -RectX2- -RectY2-  -1C- -1E- -20- -22-  Flag ----
+    data: '01CE 0000  00000008 FFFFFFF8  00000000 00000000 00000010 00000010  0000 0000 0000 0000  0000 0000'
+
+  - name: PlayerReplace
+    type: add_func_pointer
+    src_addr_pal: 0x80325788
+    target_func: 'dAcPy_c::newOnExecute()'

@@ -549,7 +549,7 @@ void dWMHud_c::setupLives() {
 
 			nw4r::lyt::Picture *facePane = (&P_marioFace_00)[playerID];
 			facePane->trans = N_IconPosXP_00[playerCount - 1]->trans;
-			OSReport("duh powerup: %d\n", Player_Powerup[playerID]);
+			// OSReport("duh powerup: %d\n", Player_Powerup[playerID]);
 			if(didPowChanged[playerID] != Player_Powerup[playerID]) {
 				change_maphud_icon(Player_Powerup[playerID], facePane, playerID);
 			}

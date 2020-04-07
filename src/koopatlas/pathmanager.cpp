@@ -1534,14 +1534,17 @@ void dWMPathManager_c::activatePoint() {
 		}
 
 		if ((l >= 29) && (l <= 36)) {
-			SaveBlock *save = GetSaveFile()->GetBlock(-1);
-			u32 conds = save->GetLevelCondition(w, l);
+			int nowPressed = Remocon_GetPressed(GetActiveRemocon());
+			if(!(nowPressed & WPAD_B)) {
+				SaveBlock *save = GetSaveFile()->GetBlock(-1);
+				u32 conds = save->GetLevelCondition(w, l);
 
-			SpammyReport("Toad House Flags: %x", conds);
-			if (conds & 0x30) { 
-				nw4r::snd::SoundHandle something;
-				PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_INVALID, 1);
-				return;
+				SpammyReport("Toad House Flags: %x", conds);
+				if (conds & 0x30) { 
+					nw4r::snd::SoundHandle something;
+					PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_INVALID, 1);
+					return;
+				}
 			}
 		}
 
