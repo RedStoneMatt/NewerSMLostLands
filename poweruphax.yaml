@@ -151,7 +151,7 @@ hooks:
 
   - name: AlwaysLoadGabonArc
     type: add_func_pointer
-    src_addr_pal: 0x8098C494
+    src_addr_pal: 0x8098C474
     target_func: 'GabonArcFileName'
 
   - name: LoadHammerFromHammerMArc
@@ -179,9 +179,38 @@ hooks:
     src_addr_pal: 0x80AF1000
     target_func: 'I_hammerModelName'
 
-  - name: DisableHat99Thing
-    type: nop_insn
-    area_pal: 0x80060F0C
+#  - name: DisableHat99Thing
+#    type: nop_insn
+#    area_pal: 0x80060F0C
+
+#  - name: thatsNyeh
+#    type: add_func_pointer
+#    src_addr_pal: 0x80060EF0
+#    target_func: 'newCheckIfMarioShouldBeHatless()'
+
+  - name: thatsNyeh1
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x8005EC60
+    target_func: 'newCheckIfMarioShouldBeHatless()'
+
+  - name: thatsNyeh2
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x800E1A10
+    target_func: 'newCheckIfMarioShouldBeHatless()'
+
+  - name: thatsNyeh3
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x80918868
+    target_func: 'newCheckIfMarioShouldBeHatless()'
+
+  - name: thatsNyeh4
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x80927720
+    target_func: 'newCheckIfMarioShouldBeHatless()'
 
   - name: DisableHatForHammer
     type: branch_insn

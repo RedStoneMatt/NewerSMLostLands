@@ -225,11 +225,11 @@ void dWMStarCoin_c::loadInfo() {
 		BtnBackText->SetString(L"Retour †");
 		TotalCoinsTitle->SetString(L"Pièces Étoiles:");
 	}
-	if(GetGameLanguage(4) == 4) { // Spanish (by ?)
-		UnspentTitle->SetString(L"");
-		CollectedTitle->SetString(L"");
-		BtnWorldSelText->SetString(L"");
-		BtnBackText->SetString(L"");
+	if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
+		UnspentTitle->SetString(L"restantes");
+		CollectedTitle->SetString(L"obtenidas");
+		BtnWorldSelText->SetString(L"Seleccionar Mundo");
+		BtnBackText->SetString(L"Atrás †");
 		TotalCoinsTitle->SetString(L"");
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)

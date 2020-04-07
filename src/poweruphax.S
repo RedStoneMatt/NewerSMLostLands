@@ -21,10 +21,10 @@
 
 .global DisableHatForHammer
 DisableHatForHammer:
-	lwz r0, 0x17C(r31)
+	lwz r0, 0x17C(r31) # model_visibility_flags_maybe
 	clrlwi. r0, r0, 31
 	beq DontDrawTheFuckingHat_
-	lbz r0, 0x152(r31)
+	lbz r0, 0x152(r31) # powerup_ID
 	cmpwi r0, 7
 	beq DontDrawTheFuckingHat_
 	b DrawTheFuckingHat
@@ -603,6 +603,14 @@ startOrContinueLoop:
 	lis r4, doWait@ha
 	lwz r4, doWait@l(r4) #store doWait in r4
 
+
+	#lis r3, StupidString@h
+	#ori r3, r3, StupidString@l
+	#lwz r4, 0x3C6(r4)
+	#bl OSReport
+
+	#lwz r6, 0x3C6(r4)
+
 	# now if the frames to wait are > 0, return 0
 	# otherwise return 1
 	cmpwi r4, 0
@@ -1017,6 +1025,10 @@ wait2: .string "wait2"
 
 #DBString:
 #	.string "PW:%d\n"
+
+.global StupidString
+StupidString:
+	.string "AssemblyShit: %d\n"
 
 #.global BrosModelFilename
 #BrosModelFilename:

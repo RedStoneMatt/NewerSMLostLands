@@ -10,6 +10,20 @@
 void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player);
 
 
+extern int IsMarioHatless[4]; //0x80429FC8
+
+void anotherCheckIfMarioShouldBeHatless() { //0x80060EF0
+	OSReport("hey\n");
+	int m_lives = Player_Lives[0];
+	int m_pow = Player_Powerup[0];
+	if(m_lives == 0x63 && m_pow != 7) {
+		IsMarioHatless[0] = 1;
+	}
+	else {
+		IsMarioHatless[0] = 0;
+	}
+}
+
  
 #include "fileload.h"
 
@@ -32,6 +46,14 @@ int res_ky;
 
 
 u32 dAcPy_c::patch_thing(u32 powerup_id) { //the function that is executed when the powerup changes
+	if (dGameDisplay_c::instance != NULL) {
+		anotherCheckIfMarioShouldBeHatless();
+		if(IsMarioHatless[0] == 1) {
+			dPlayerModelHandler_c *handler = &this->modelCls;
+			dPlayerModel_c *victim = (dPlayerModel_c*)handler->mdlClass;
+			victim->model_visibility_flags_maybe = 0x200;
+		}
+	}
     u32 orig_val = this->setPowerup_orig(powerup_id); //to preserve the original dAcPy_c::setPowerup function
 	
 	int player = Player_ID[this->which_player]; //detect which player is what character

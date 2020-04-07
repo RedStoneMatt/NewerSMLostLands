@@ -451,6 +451,79 @@ void dWMHud_c::showFooter() {
 }
 
 
+#include "fileload.h"
+
+// Preparing the files to read
+
+static File M_ICON_TPL_FILE;		//Mario
+static File L_ICON_TPL_FILE;		//Luigi
+static File KB_ICON_TPL_FILE;	//Blue Toad
+static File KY_ICON_TPL_FILE;		//Yellow Toad
+
+int res_mar;
+int res_lui;
+int res_kblu;
+int res_kyel;
+
+int didPowChanged[4];
+
+void change_maphud_icon(int powerup, nw4r::lyt::Picture* player_icon, int player) { //the function to change the icons (duh)
+
+    char tpl_name_m[64]; //creating the tpl names chars
+    char tpl_name_l[64];
+    char tpl_name_kb[64];
+    char tpl_name_ky[64];
+    if (powerup == 0 || powerup == 3) { //converting the IG-Powerup IDs to the TPL-Powerup IDs
+        powerup = 1;
+    } else if (powerup == 6) {
+        powerup = 3;
+    } else if (powerup == 7) {
+        powerup = 6;
+    }
+	
+	if(player == 0) { //much shit to replace the correct images with the correct ones
+		sprintf(tpl_name_m, "/LevelSamples/im_marioIcon_0%d.tpl", powerup); //creating TPL name for mario
+		res_mar = M_ICON_TPL_FILE.open(tpl_name_m); //opening the TPL and store it in a res file
+		if (res_mar == 0) { //if it doesn't exist, then return to avoid a crash
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage( //replacing the actual image with the new one
+        (TPLPalette*) M_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 1) {
+		sprintf(tpl_name_l, "/LevelSamples/im_luijiIcon_0%d.tpl", powerup);
+		res_lui = L_ICON_TPL_FILE.open(tpl_name_l);
+		if (res_lui == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) L_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 2) {
+		sprintf(tpl_name_kb, "/LevelSamples/im_kinoBIcon_0%d.tpl", powerup);
+		res_kblu = KB_ICON_TPL_FILE.open(tpl_name_kb);
+		if (res_kblu == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) KB_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 3) {
+		sprintf(tpl_name_ky, "/LevelSamples/im_kinoYIcon_0%d.tpl", powerup);
+		res_kyel = KY_ICON_TPL_FILE.open(tpl_name_ky);
+		if (res_kyel == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) KY_ICON_TPL_FILE.ptr(), 0
+		);
+	}
+}
+
+
 void dWMHud_c::setupLives() {
 	static const int LogicalPlayerIDs[] = {0,1,3,2};
 
@@ -474,8 +547,13 @@ void dWMHud_c::setupLives() {
 		if (QueryPlayerAvailability(slotID)) {
 			playerCount++;
 
-			nw4r::lyt::Pane *facePane = (&P_marioFace_00)[playerID];
+			nw4r::lyt::Picture *facePane = (&P_marioFace_00)[playerID];
 			facePane->trans = N_IconPosXP_00[playerCount - 1]->trans;
+			OSReport("duh powerup: %d\n", Player_Powerup[playerID]);
+			if(didPowChanged[playerID] != Player_Powerup[playerID]) {
+				change_maphud_icon(Player_Powerup[playerID], facePane, playerID);
+			}
+			didPowChanged[playerID] = Player_Powerup[playerID];
 			facePane->SetVisible(true);
 		}
 	}

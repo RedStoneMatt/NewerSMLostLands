@@ -32,9 +32,15 @@ SECTIONS {
 	
 	onCreate_orig__10ProjectileFv = 0x8001DAD0;
 
+	onExecute_orig__7dAcPy_cFv = 0x80046BB0;
+
 	pow = 0x802E5894;
 	
 	TEST_REGION = 0x80768D50;
+
+	CheckIfMarioShouldBeHatless = 0x80060EF0;
+	IsMarioHatless = 0x80429FC8;
+	finaliseModel_PlumberModel = 0x800CA290;
 	
 	onExecute_orig__11dDateFile_cFv = 0x8077D0D0;
 	

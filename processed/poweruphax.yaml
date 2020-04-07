@@ -81,9 +81,9 @@ hooks:
 - {name: AlwaysLoadBrosArc, src_addr_jpn: 2157493648, src_addr_jpn2: 2157493664, src_addr_ntsc: 2157495464,
   src_addr_ntsc2: 2157495480, src_addr_pal: 2157495432, src_addr_pal2: 2157495448,
   target_func: BrosArcFileName, type: add_func_pointer}
-- {name: AlwaysLoadGabonArc, src_addr_jpn: 2157493660, src_addr_jpn2: 2157493676,
-  src_addr_ntsc: 2157495476, src_addr_ntsc2: 2157495492, src_addr_pal: 2157495444,
-  src_addr_pal2: 2157495460, target_func: GabonArcFileName, type: add_func_pointer}
+- {name: AlwaysLoadGabonArc, src_addr_jpn: 2157493628, src_addr_jpn2: 2157493644,
+  src_addr_ntsc: 2157495444, src_addr_ntsc2: 2157495460, src_addr_pal: 2157495412,
+  src_addr_pal2: 2157495428, target_func: GabonArcFileName, type: add_func_pointer}
 - {addr_jpn: 2157299388, addr_jpn2: 2157299404, addr_ntsc: 2157301204, addr_ntsc2: 2157301220,
   addr_pal: 2157301204, addr_pal2: 2157301220, data: 68616D6D65724D00, name: LoadHammerFromHammerMArc,
   type: patch}
@@ -99,8 +99,18 @@ hooks:
 - {name: ChangeHammerModel, src_addr_jpn: 2158954752, src_addr_jpn2: 2158954784, src_addr_ntsc: 2158956576,
   src_addr_ntsc2: 2158956608, src_addr_pal: 2158956544, src_addr_pal2: 2158956576,
   target_func: I_hammerModelName, type: add_func_pointer}
-- {area_jpn: 2147880716, area_jpn2: 2147880716, area_ntsc: 2147880716, area_ntsc2: 2147880716,
-  area_pal: 2147880716, area_pal2: 2147880716, name: DisableHat99Thing, type: nop_insn}
+- {branch_type: bl, name: thatsNyeh1, src_addr_jpn: 2147871840, src_addr_jpn2: 2147871840,
+  src_addr_ntsc: 2147871840, src_addr_ntsc2: 2147871840, src_addr_pal: 2147871840,
+  src_addr_pal2: 2147871840, target_func: newCheckIfMarioShouldBeHatless(), type: branch_insn}
+- {branch_type: bl, name: thatsNyeh2, src_addr_jpn: 2148407456, src_addr_jpn2: 2148407456,
+  src_addr_ntsc: 2148407584, src_addr_ntsc2: 2148407584, src_addr_pal: 2148407824,
+  src_addr_pal2: 2148407824, target_func: newCheckIfMarioShouldBeHatless(), type: branch_insn}
+- {branch_type: bl, name: thatsNyeh3, src_addr_jpn: 2157020584, src_addr_jpn2: 2157020600,
+  src_addr_ntsc: 2157021288, src_addr_ntsc2: 2157021304, src_addr_pal: 2157021288,
+  src_addr_pal2: 2157021304, target_func: newCheckIfMarioShouldBeHatless(), type: branch_insn}
+- {branch_type: bl, name: thatsNyeh4, src_addr_jpn: 2157081696, src_addr_jpn2: 2157081712,
+  src_addr_ntsc: 2157082400, src_addr_ntsc2: 2157082416, src_addr_pal: 2157082400,
+  src_addr_pal2: 2157082416, target_func: newCheckIfMarioShouldBeHatless(), type: branch_insn}
 - {branch_type: b, name: DisableHatForHammer, src_addr_jpn: 2148312296, src_addr_jpn2: 2148312296,
   src_addr_ntsc: 2148312424, src_addr_ntsc2: 2148312424, src_addr_pal: 2148312664,
   src_addr_pal2: 2148312664, target_func: DisableHatForHammer, type: branch_insn}

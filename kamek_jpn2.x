@@ -47,9 +47,16 @@ onCreate_orig__13daGabonRock_cFv = 0x807F8930;
 _ZN10Projectile13onCreate_origEv = 0x8001DAD0;
 onCreate_orig__10ProjectileFv = 0x8001DAD0;
 
+_ZN7dAcPy_c14onExecute_origEv = 0x80046BB0;
+onExecute_orig__7dAcPy_cFv = 0x80046BB0;
+
 pow = 0x802E53B4;
 
 TEST_REGION = 0x80768D90;
+
+CheckIfMarioShouldBeHatless = 0x80060EF0;
+IsMarioHatless = 0x80429A08;
+finaliseModel_PlumberModel = 0x800CA120;
 
 _ZN11dDateFile_c14onExecute_origEv = 0x8077CFE0;
 onExecute_orig__11dDateFile_cFv = 0x8077CFE0;

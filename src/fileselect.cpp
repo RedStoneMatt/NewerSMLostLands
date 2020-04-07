@@ -114,8 +114,10 @@ void dDateFile_c::fileNum() {
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Fichier 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Fichier 3"); }
 	}
-	if(GetGameLanguage(4) == 4) { // Spanish (by ?)
-		T_fileNumber_01->SetString(L"UT ");
+	if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Archivo 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Archivo 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Archivo 3"); }
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)
 		T_fileNumber_01->SetString(L"UT ");

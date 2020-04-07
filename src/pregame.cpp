@@ -54,6 +54,8 @@ extern char CurrentLevel;
 extern char CurrentWorld;
 extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
+
+
 void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 	nw4r::lyt::TextBox
 		*LevelNumShadow, *LevelNum,
@@ -91,8 +93,8 @@ void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 		if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
 			wcscpy(levelNumber, L"Monde ");
 		}
-		if(GetGameLanguage(4) == 4) { // Spanish (by ?)
-			wcscpy(levelNumber, L" ");
+		if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
+			wcscpy(levelNumber, L"Mundo ");
 		}
 		if(GetGameLanguage(4) == 5) { // Italian (by ?)
 			wcscpy(levelNumber, L" ");
@@ -122,6 +124,90 @@ void LoadPregameStyleNameAndNumber(m2d::EmbedLayout_c *layout) {
 }
 
 #include "fileload.h"
+
+// Preparing the files to read
+
+static File PIZZA_ICON_TPL_FILE;		//Mario
+static File CHICKEN_ICON_TPL_FILE;		//Luigi
+static File BLUEBERRY_ICON_TPL_FILE;	//Blue Toad
+static File IDIOT_ICON_TPL_FILE;		//Yellow Toad
+
+int res_ma;
+int res_lu;
+int res_kbl;
+int res_kyl;
+
+
+void change_pregame_icon(int powerup, nw4r::lyt::Picture* player_icon, nw4r::lyt::Picture* player_shadow, int player) { //the function to change the icons (duh)
+
+    char tpl_name_m[64]; //creating the tpl names chars
+    char tpl_name_l[64];
+    char tpl_name_kb[64];
+    char tpl_name_ky[64];
+    if (powerup == 0 || powerup == 3) { //converting the IG-Powerup IDs to the TPL-Powerup IDs
+        powerup = 1;
+    } else if (powerup == 6) {
+        powerup = 3;
+    } else if (powerup == 7) {
+        powerup = 6;
+    }
+	
+	
+
+	if(player == 0) { //much shit to replace the correct images with the correct ones
+		sprintf(tpl_name_m, "/LevelSamples/im_marioIcon_0%d.tpl", powerup); //creating TPL name for mario
+		res_ma = PIZZA_ICON_TPL_FILE.open(tpl_name_m); //opening the TPL and store it in a res file
+		if (res_ma == 0) { //if it doesn't exist, then return to avoid a crash
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage( //replacing the actual image with the new one
+        (TPLPalette*) PIZZA_ICON_TPL_FILE.ptr(), 0
+		);
+		player_shadow->material->texMaps[0].ReplaceImage( //replacing the actual image with the new one
+        (TPLPalette*) PIZZA_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 1) {
+		sprintf(tpl_name_l, "/LevelSamples/im_luijiIcon_0%d.tpl", powerup);
+		res_lu = CHICKEN_ICON_TPL_FILE.open(tpl_name_l);
+		if (res_lu == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) CHICKEN_ICON_TPL_FILE.ptr(), 0
+		);
+		player_shadow->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) CHICKEN_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 2) {
+		sprintf(tpl_name_kb, "/LevelSamples/im_kinoBIcon_0%d.tpl", powerup);
+		res_kbl = BLUEBERRY_ICON_TPL_FILE.open(tpl_name_kb);
+		if (res_kbl == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) BLUEBERRY_ICON_TPL_FILE.ptr(), 0
+		);
+		player_shadow->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) BLUEBERRY_ICON_TPL_FILE.ptr(), 0
+		);
+	}	
+	if(player == 3) {
+		sprintf(tpl_name_ky, "/LevelSamples/im_kinoYIcon_0%d.tpl", powerup);
+		res_kyl = IDIOT_ICON_TPL_FILE.open(tpl_name_ky);
+		if (res_kyl == 0) {
+			return;
+		}
+		player_icon->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) IDIOT_ICON_TPL_FILE.ptr(), 0
+		);
+		player_shadow->material->texMaps[0].ReplaceImage(
+        (TPLPalette*) IDIOT_ICON_TPL_FILE.ptr(), 0
+		);
+	}
+}
+
 void PregameLytHandler::hijack_loadLevelNumber() {
 	LoadPregameStyleNameAndNumber(&layout);
 
@@ -135,8 +221,26 @@ void PregameLytHandler::hijack_loadLevelNumber() {
 	if (tpl.open(tplName)) {
 		LevelSample->material->texMaps[0].ReplaceImage((TPLPalette*)tpl.ptr(), 0);
 	}
+	if(Player_Active[0] == 1) {
+		nw4r::lyt::Picture *marioicon = layout.findPictureByName("P_marioIcon_00");
+		nw4r::lyt::Picture *marioshadow = layout.findPictureByName("P_marioIcon_10");
+		change_pregame_icon(Player_Powerup[0], marioicon, marioshadow, 0);
+	}
+	if(Player_Active[1] == 1) {
+		nw4r::lyt::Picture *luigiicon = layout.findPictureByName("P_luijiIcon_00");
+		nw4r::lyt::Picture *luigishadow = layout.findPictureByName("P_luijiIcon_10");
+		change_pregame_icon(Player_Powerup[Player_ID[1]], luigiicon, luigishadow, Player_ID[1]);
+	}
+	if(Player_Active[2] == 1) {
+		nw4r::lyt::Picture *kinobicon = layout.findPictureByName("P_kinoB_00");
+		nw4r::lyt::Picture *kinobshadow = layout.findPictureByName("P_kinoB_10");
+		change_pregame_icon(Player_Powerup[Player_ID[2]], kinobicon, kinobshadow, Player_ID[2]);
+	}
+	if(Player_Active[3] == 1) {
+		nw4r::lyt::Picture *kinoyicon = layout.findPictureByName("P_kinoY_00");
+		nw4r::lyt::Picture *kinoyshadow = layout.findPictureByName("P_kinoY_10");
+		change_pregame_icon(Player_Powerup[Player_ID[3]], kinoyicon, kinoyshadow, Player_ID[3]);
+	}
 }
-
-
 
 

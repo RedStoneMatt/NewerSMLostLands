@@ -179,3 +179,16 @@ void dStockItem_c::setScalesOfSomeThings() {
 	shadow->hammerButtonBase->scale = newButtonBase[7]->scale;
 }
 
+extern int IsMarioHatless[4]; //0x80429FC8
+
+void newCheckIfMarioShouldBeHatless() { //0x80060EF0
+	OSReport("hey\n");
+	int m_lives = Player_Lives[0];
+	int m_pow = Player_Powerup[0];
+	if(m_lives == 0x63 && m_pow != 7) {
+		IsMarioHatless[0] = 1;
+	}
+	else {
+		IsMarioHatless[0] = 0;
+	}
+}

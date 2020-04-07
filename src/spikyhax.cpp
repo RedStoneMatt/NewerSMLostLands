@@ -396,6 +396,15 @@ int daGabonRock_c::getsettings() {
 	return orig_val;
 }
 
+/*int dAcPy_c::newOnExecute() {
+	int orig_val = this->onExecute_orig();
+	OSReport("that's so nyeh %d\n", this->_3C6);
+	if(this->_3C6 > 0) {
+		this->_3C6--;
+	}
+	return orig_val;
+}*/
+
 int dGameDisplay_c::doWaitCheck() {
 	int orig_val = this->onExecute_orig();
 	if(doWait > 0) {
@@ -403,7 +412,6 @@ int dGameDisplay_c::doWaitCheck() {
 	}
 	return orig_val;
 }
-
 
 
 
