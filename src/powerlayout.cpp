@@ -11,6 +11,7 @@ void change_icon(int powerup, nw4r::lyt::Picture* player_icon, int player);
 
 
 extern int IsMarioHatless[4]; //0x80429FC8
+extern bool enableDebugMode; // Not related to powerlayout at all, but had to put it in this file due to some reasons
 
 void anotherCheckIfMarioShouldBeHatless() { //0x80060EF0
 	OSReport("hey\n");
@@ -110,6 +111,9 @@ int dGameDisplay_c::patch_fix() { //the function that is executed when the gameS
     if (this->p_marioIcon_00 == NULL) { //if the pane wasn't found, returning the original value to avoid a crash
         return orig_val;
     }
+
+	nw4r::lyt::TextBox *debugText = dGameDisplay_c::instance->layout.findTextBoxByName("T_debug_00"); // Not related to powerlayout at all, but had to put it in this file due to some reasons
+	debugText->SetString(((enableDebugMode) ? L"Debug Mode" : L" ")); // Not related to powerlayout at all, but had to put it in this file due to some reasons
 
     change_icon(INITIAL_POWERUP1, this->p_marioIcon_00, 0); //setting up the correct icons for the different players using the change_icon function
     change_icon(INITIAL_POWERUP2, this->p_luijiIcon_00, 1);

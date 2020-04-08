@@ -146,11 +146,11 @@ void daEnTripleBlock_c::blockWasHit(bool isDown) {
 	enitemsettings = 0 | (powerupToSet << 0) | (2 << 18) | (4 << 9) | (2 << 10) | (this->playerID + 8 << 16); //Setting non-GP settings
 	
 	u32 coinsettings; //Coins settings (which are EN_ITEM variant)
-	coinsettings = 0 | (0x2 << 0) | (2 << 18) | (4 << 9) | (2 << 10); //Setting non-GP settings
+	coinsettings = 0 | (0x2 << 0) | (2 << 18) | (4 << 9) | (2 << 10) | (this->playerID + 8 << 16); //Setting non-GP settings
 	
 	if(isGroundPound) { //If the player groundpounded the block, change some setting and positions
 		enitemsettings = 0 | (powerupToSet << 0) | (3 << 18) | (4 << 9) | (2 << 10) | (this->playerID + 8 << 16); //Changing value 0xD98 from 2 to 3
-		coinsettings = 0 | (0x2 << 0) | (3 << 18) | (4 << 9) | (2 << 10); //Changing value 0xD98 from 2 to 3
+		coinsettings = 0 | (0x2 << 0) | (3 << 18) | (4 << 9) | (2 << 10) | (this->playerID + 8 << 16); //Changing value 0xD98 from 2 to 3
 		coinPosL = (Vec){this->pos.x - 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
 		coinPosR = (Vec){this->pos.x + 16, this->pos.y - 8, this->pos.z}; //Changing pos.y
 	}

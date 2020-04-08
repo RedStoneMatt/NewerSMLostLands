@@ -18,9 +18,10 @@ class APDebugDrawer : public m3d::proc_c {
 
 static APDebugDrawer defaultInstance;
 bool enableDebugMode = false;
+bool enableCollisionMode = false;
 
 int APDebugDraw() {
-	if (enableDebugMode)
+	if (enableCollisionMode)
 		defaultInstance.drawMe();
 	return 1;
 }

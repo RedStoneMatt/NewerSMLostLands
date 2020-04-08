@@ -580,50 +580,49 @@ void dWMStarCoin_c::executeState_Wait() {
 			if (enableDebugMode) {
 				MapSoundPlayer(SoundRelatedClass, SE_VOC_MA_GET_PRIZE, 1);
 
-				const int msgCount = 9;
+				const int msgCount = 8;
 				static const wchar_t *msg[msgCount] = {
-					L"You've found the Totally",
-					L"Secret Collision Debug Mode.",
-					L"We used this to make the",
-					L"hitboxes on our custom sprites",
-					L"and bosses suck less. Awesome,",
-					L"right?!",
-					L"Actually, I did it just to waste",
-					L"some time, but it ended up",
-					L"being pretty useful!",
+					L"You've enabled the Debug Mode !",
+					L"It originally was Treeki's",
+					L"totally secret debug collision",
+					L"mode but I added a few things in",
+					L"it, such as pressing the B button",
+					L"to beat any level instantly and",
+					L"to go in unusable levels such as",
+					L"Used Toad Houses or Shops.",
 				};
-				const int msgCount2 = 9;
+				const int msgCount2 = 4;
 				static const wchar_t *msg2[msgCount2] = {
-					L"And yes, I know it doesn't show",
-					L"a couple of things properly",
-					L"like round objects and rolling",
-					L"hills and so on.",
-					L"Can't have it all, can you?",
-					L"Wonder if Nintendo had",
-					L"something like this...",
+					L"Have fun beating the game in",
+					L"10 femtoseconds !",
 					L"",
-					L"    Treeki, 9th February 2013",
+					L"RedStoneMatt, 8th April 2020",
 				};
 				showSecretMessage(L"Groovy!", msg, msgCount, msg2, msgCount2);
 			} else {
-				const int msgCount = 6;
+				const int msgCount = 9;
 				static const wchar_t *msg[msgCount] = {
-					L"You've turned off the Totally",
-					L"Secret Collision Debug Mode.",
+					L"You've turned off the Debug",
+					L"Mode.",
 					L"",
-					L"... and no, I'm not going to write",
-					L"another ridiculously long",
-					L"message to go here. Sorry!",
+					L"...Wait is there really people",
+					L"that turns it off ? I mean, I",
+					L"just close my game when I",
+					L"finished to use it, so I never",
+					L"really turn it off by myself.",
+					L"Anyway, see ya !",
 				};
 				static const wchar_t *hiddenMsg[] = {
-					L"If you found these messages by",
-					L"looking through strings in the DLCode",
-					L"file, then... that's kind of cheating.",
-					L"Though I can't say I wouldn't do the",
-					L"same!",
-					L"You won't actually see this in game",
-					L"btw :p So why am I bothering with linebreaks anyway? I dunno. Oh well.",
-					L"Also, don't put this message on TCRF. Or do! Whatever. :(",
+					L"Bad boy, stop looking at the source",
+					L"code ! Anyway, since you're here, I",
+					L"have something for you:",
+					L"https://discord.gg/HrchBBF",
+					L"Join that server and tell me that",
+					L"you got the invite from here, i'll",
+					L"maybe have something to give you !",
+					L"Bye~",
+					L"",
+					L"RedStoneMatt, 8th April 2020",
 				};
 				showSecretMessage(L"Groovy!", msg, msgCount, hiddenMsg, 0);
 			}

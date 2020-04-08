@@ -1,4 +1,4 @@
-.text
+.text 
 #include <asm_setup.S>
 .align 4
 
@@ -22,7 +22,7 @@ TimerAdjustments:
 
 NoTimerAdjust:
 
-	subic.	r0, r3, 92	
+	subic.  r0, r3, 92	
 	blr
 
 

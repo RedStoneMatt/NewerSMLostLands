@@ -8,6 +8,7 @@
 #include <stage.h>
 
 extern "C" void PlaySoundWithFunctionB4(void *spc, nw4r::snd::SoundHandle *handle, int id, int unk);
+extern bool enableDebugMode;
 
 u8 MaybeFinishingLevel[2] = {0xFF,0xFF};
 u8 LastLevelPlayed[2] = {0xFF,0xFF};
@@ -1006,7 +1007,7 @@ void dWMPathManager_c::execute() {
 			}
 		} else if (nowPressed & WPAD_TWO) {
 			activatePoint();
-		} else if (nowPressed & WPAD_B) {
+		} else if ((nowPressed & WPAD_B) && (enableDebugMode)) {
 			debugPoint();
 		}
 	}

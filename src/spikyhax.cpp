@@ -406,12 +406,42 @@ int daGabonRock_c::getsettings() {
 	return orig_val;
 }*/
 
+extern bool enableDebugMode;
+extern bool enableCollisionMode;
+extern "C" void *dAcPy_c__ChangePowerupWithAnimation(void * Player, int powerup); 	// Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
+extern "C" int CheckExistingPowerup(void * Player);
+int minuscounter;
 
 int dGameDisplay_c::doWaitCheck() {
 	int orig_val = this->onExecute_orig();
 	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
-	if(nowPressed & WPAD_B) {
-		ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);
+	if(enableDebugMode) {
+		dAcPy_c *player = dAcPy_c::findByID(0);
+		if ((GetActiveRemocon()->heldButtons == 0x402) && (nowPressed & 0x402)) { // B + UP
+			int playerPowerup = ((CheckExistingPowerup(player) == 7) ? 0 : (CheckExistingPowerup(player) + 1));
+			dAcPy_c__ChangePowerupWithAnimation(player, playerPowerup);
+		}
+		if ((GetActiveRemocon()->heldButtons == 0x401) && (nowPressed & 0x401)) { // B + DOWN
+			ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);
+		}
+		if ((GetActiveRemocon()->heldButtons == 0x408) && (nowPressed & 0x408)) { // B + LEFT
+			enableCollisionMode = !enableCollisionMode;
+		}
+		if ((GetActiveRemocon()->heldButtons == 0x404) && (nowPressed & 0x404)) { // B + RIGHT
+			int enitemsettings = 0 | (1 << 0) | (2 << 18) | (4 << 9) | (2 << 10) | (8 << 16); //Setting the settings
+			dStageActor_c *Star = dStageActor_c::create(EN_ITEM, enitemsettings, &player->pos, 0, 0); //Creating the Star
+		}
+	}
+	OSReport("bleh %d\n", minuscounter);
+	if(nowPressed & WPAD_MINUS) {
+		minuscounter++;
+		if(minuscounter >= 16) {
+			minuscounter = 0;
+			enableDebugMode = !enableDebugMode;
+			nw4r::lyt::TextBox *debugText = dGameDisplay_c::instance->layout.findTextBoxByName("T_debug_00");
+			debugText->SetString(((enableDebugMode) ? L"Debug Mode" : L" "));
+			this->doHexCoin();
+		}
 	}
 	if(doWait > 0) {
 		doWait--;
@@ -420,15 +450,13 @@ int dGameDisplay_c::doWaitCheck() {
 }
 
 void dGameDisplay_c::doHexCoin() {
+	nw4r::lyt::TextBox *stupidcoin = dGameDisplay_c::instance->layout.findTextBoxByName("T_coin_00");
 	char str[3];
-	sprintf(str, "%03X", dGameDisplay_c::instance->coins);
-	OSReport("coinnum = %s\n", str);
+	sprintf(str, ((enableDebugMode) ? "%03X" : "%03d"), dGameDisplay_c::instance->coins);
 	wchar_t nyeh[3];
 	nyeh[0] = str[0];
 	nyeh[1] = str[1];
 	nyeh[2] = str[2];
-	OSReport("coinnum2 = %s\n", nyeh);
-	nw4r::lyt::TextBox *stupidcoin = dGameDisplay_c::instance->layout.findTextBoxByName("T_coin_00");
 	stupidcoin->SetString(nyeh, 0, 3);
 }
 
