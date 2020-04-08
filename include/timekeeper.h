@@ -147,4 +147,5 @@ class dGameDisplay_c : dBase_c { //The dGameDisplay_c class, very important.
         int onExecute_orig();
         int patch_fix();
         int doWaitCheck();
+        void doHexCoin();
 };

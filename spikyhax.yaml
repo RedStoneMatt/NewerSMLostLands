@@ -43,3 +43,13 @@ hooks:
     type: patch
     addr_pal: 0x80159AD8
     data: '3882ab38' #default is 3882ab34 -> 2
+
+  # - name: CoinNop
+  #   type: nop_insn
+  #   area_pal: [0x80159AD4,0x80159AE4]
+
+  - name: CoinHex
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x80159AE8
+    target_func: 'dGameDisplay_c::doHexCoin()'

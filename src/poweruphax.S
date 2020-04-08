@@ -570,7 +570,6 @@ CheckHammerLimit:
 	stw r0, 0x14(sp)
 	stw r31, 0xC(sp)
 	stw r30, 0x8(sp)
-	
 	# r30 = player number
 	mr r30, r3
 	addi r30, r30, 0x100
@@ -596,10 +595,8 @@ startOrContinueLoop:
 
 	li r3, 0x22B
 	bl Actor_SearchByName #I let that here even if i don't use it just because i am afraid that i get a crash
-	
 	cmpwi r3, 0
 	bne loop
-
 	lis r4, doWait@ha
 	lwz r4, doWait@l(r4) #store doWait in r4
 

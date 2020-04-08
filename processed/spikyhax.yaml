@@ -14,4 +14,7 @@ hooks:
 - {addr_jpn: 2148898728, addr_jpn2: 2148898728, addr_ntsc: 2148899224, addr_ntsc2: 2148899224,
   addr_pal: 2148899544, addr_pal2: 2148899544, data: 3882ab38, name: CoinCharacterLimitChange,
   type: patch}
+- {branch_type: bl, name: CoinHex, src_addr_jpn: 2148898744, src_addr_jpn2: 2148898744,
+  src_addr_ntsc: 2148899240, src_addr_ntsc2: 2148899240, src_addr_pal: 2148899560,
+  src_addr_pal2: 2148899560, target_func: 'dGameDisplay_c::doHexCoin()', type: branch_insn}
 source_files: [../src/spikyhax.cpp]

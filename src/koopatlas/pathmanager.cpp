@@ -1006,6 +1006,8 @@ void dWMPathManager_c::execute() {
 			}
 		} else if (nowPressed & WPAD_TWO) {
 			activatePoint();
+		} else if (nowPressed & WPAD_B) {
+			debugPoint();
 		}
 	}
 }
@@ -1535,18 +1537,41 @@ void dWMPathManager_c::activatePoint() {
 
 		if ((l >= 29) && (l <= 36)) {
 			int nowPressed = Remocon_GetPressed(GetActiveRemocon());
-			if(!(nowPressed & WPAD_B)) {
-				SaveBlock *save = GetSaveFile()->GetBlock(-1);
-				u32 conds = save->GetLevelCondition(w, l);
+			SaveBlock *save = GetSaveFile()->GetBlock(-1);
+			u32 conds = save->GetLevelCondition(w, l);
 
-				SpammyReport("Toad House Flags: %x", conds);
-				if (conds & 0x30) { 
-					nw4r::snd::SoundHandle something;
-					PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_INVALID, 1);
-					return;
-				}
+			SpammyReport("Toad House Flags: %x", conds);
+			if (conds & 0x30) { 
+				nw4r::snd::SoundHandle something;
+				PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_INVALID, 1);
+				return;
 			}
 		}
+
+		nw4r::snd::SoundHandle something;
+		PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_GAME_START, 1);
+
+		nw4r::snd::SoundHandle something2;
+		PlaySoundWithFunctionB4(SoundRelatedClass, &something2, (Player_Powerup[0] == 3) ? SE_VOC_MA_PLAYER_DECIDE_MAME: SE_VOC_MA_CS_COURSE_IN, 1);
+
+		daWMPlayer_c::instance->startAnimation(course_in, 1.2, 10.0, 0.0);
+		daWMPlayer_c::instance->setTargetRotY(0);
+
+		isEnteringLevel = true;
+		levelStartWait = 40;
+		enteredLevel = dLevelInfo_c::s_info.searchBySlot(w, l);
+
+		dKPMusic::stop();
+	}
+}
+
+void dWMPathManager_c::debugPoint() {
+	if (levelStartWait >= 0)
+		return;
+
+	if (currentNode->type == dKPNode_s::LEVEL) {
+		int w = currentNode->levelNumber[0] - 1;
+		int l = currentNode->levelNumber[1] - 1;
 
 		nw4r::snd::SoundHandle something;
 		PlaySoundWithFunctionB4(SoundRelatedClass, &something, SE_SYS_GAME_START, 1);

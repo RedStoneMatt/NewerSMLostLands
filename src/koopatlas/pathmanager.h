@@ -41,6 +41,7 @@ class dWMPathManager_c {
 		void startMovementTo(dKPPath_s *path);
 		void moveThroughPath(int pressedDir);
 		void activatePoint();
+		void debugPoint();
 		void unlockAllPaths(char type);
 
 		void copyWorldDefToSave(const dKPWorldDef_s *world);

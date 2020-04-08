@@ -419,6 +419,18 @@ int dGameDisplay_c::doWaitCheck() {
 	return orig_val;
 }
 
+void dGameDisplay_c::doHexCoin() {
+	char str[3];
+	sprintf(str, "%03X", dGameDisplay_c::instance->coins);
+	OSReport("coinnum = %s\n", str);
+	wchar_t nyeh[3];
+	nyeh[0] = str[0];
+	nyeh[1] = str[1];
+	nyeh[2] = str[2];
+	OSReport("coinnum2 = %s\n", nyeh);
+	nw4r::lyt::TextBox *stupidcoin = dGameDisplay_c::instance->layout.findTextBoxByName("T_coin_00");
+	stupidcoin->SetString(nyeh, 0, 3);
+}
 
 
 /*

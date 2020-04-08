@@ -56,6 +56,8 @@ class daPoisonCloud_c : public dEn_c {
 
 
 void daPoisonCloud_c::poisonDamage(ActivePhysics *apOther) {
+	howmuchpassed = 0;
+	playerCollisionFrame = true;
 	nw4r::lyt::Picture *poisonusbar = dGameDisplay_c::instance->layout.findPictureByName("P_PoisonBar_00");
 	if(poisonusbar->size.y > 0) {
 		VEC2 shit = {poisonusbar->size.x, poisonusbar->size.y - 0.1f};
@@ -71,23 +73,14 @@ void daPoisonCloud_c::poisonDamage(ActivePhysics *apOther) {
 }
 
 void daPoisonCloud_c::playerCollision(ActivePhysics *apThis, ActivePhysics *apOther) {
-	OSReport("We're at frame %d since the sprite was spawned\n", this->timer);
-	howmuchpassed = 0;
-	playerCollisionFrame = true;
 	poisonDamage(apOther);
 }
 
 bool daPoisonCloud_c::collisionCat7_GroundPound(ActivePhysics *apThis, ActivePhysics *apOther) {
-	OSReport("We're at frame %d since the sprite was spawned\n", this->timer);
-	howmuchpassed = 0;
-	playerCollisionFrame = true;
 	poisonDamage(apOther);
 	return false;
 }
 bool daPoisonCloud_c::collisionCat7_GroundPoundYoshi(ActivePhysics *apThis, ActivePhysics *apOther) {
-	OSReport("We're at frame %d since the sprite was spawned\n", this->timer);
-	howmuchpassed = 0;
-	playerCollisionFrame = true;
 	poisonDamage(apOther);
 	return false;
 }
