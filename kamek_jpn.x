@@ -50,6 +50,16 @@ onCreate_orig__10ProjectileFv = 0x8001DAD0;
 _ZN7dAcPy_c14onExecute_origEv = 0x80046BB0;
 onExecute_orig__7dAcPy_cFv = 0x80046BB0;
 
+_ZN9dCamera_c14onExecute_origEv = 0x80913E30;
+onExecute_orig__9dCamera_cFv = 0x80913E30;
+_ZN9dCamera_c11onDraw_origEv = 0x80913E80;
+onDraw_orig__9dCamera_cFv = 0x80913E80;
+
+PointerToStageF70 = 0x80429D70;
+StageF70__fancilyAddScoreFromPosition = 0x800E22C0;/*mi*/
+StageF70__fancilyAddScoreFromActor = 0x800E2340;/*mi*/
+dEn_c__addScoreWhenHitTwo = 0x80096700;/*mi*/
+
 pow = 0x802E53B4;
 
 TEST_REGION = 0x80768D50;

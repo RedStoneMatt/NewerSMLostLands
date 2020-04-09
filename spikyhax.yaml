@@ -53,3 +53,13 @@ hooks:
     branch_type: bl
     src_addr_pal: 0x80159AE8
     target_func: 'dGameDisplay_c::doHexCoin()'
+
+  - name: Camera_Replace
+    type: add_func_pointer
+    src_addr_pal: 0x8098A920
+    target_func: 'dCamera_c::newOnExecute()'
+
+  - name: Camera_ReplaceTwo
+    type: add_func_pointer
+    src_addr_pal: 0x8098A92C
+    target_func: 'dCamera_c::newOnDraw()'

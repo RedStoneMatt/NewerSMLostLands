@@ -411,28 +411,140 @@ extern bool enableCollisionMode;
 extern "C" void *dAcPy_c__ChangePowerupWithAnimation(void * Player, int powerup); 	// Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
 extern "C" int CheckExistingPowerup(void * Player);
 int minuscounter;
+bool stopCamera;
+int doOneTimeCam;
+VEC3 initialcamPos;
+bool disableOrNot;
+bool isLuigiActive;
+bool isKinoBActive;
+bool isKinoYActive;
+int pActivityDoOneTime;
 
 int dGameDisplay_c::doWaitCheck() {
 	int orig_val = this->onExecute_orig();
 	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
 	if(enableDebugMode) {
 		dAcPy_c *player = dAcPy_c::findByID(0);
-		if ((GetActiveRemocon()->heldButtons == 0x402) && (nowPressed & 0x402)) { // B + UP
+		if ((GetActiveRemocon()->heldButtons == 0x402) && (nowPressed & 0x402)) { // B + UP // Changes the player's powerup
 			int playerPowerup = ((CheckExistingPowerup(player) == 7) ? 0 : (CheckExistingPowerup(player) + 1));
 			dAcPy_c__ChangePowerupWithAnimation(player, playerPowerup);
 		}
-		if ((GetActiveRemocon()->heldButtons == 0x401) && (nowPressed & 0x401)) { // B + DOWN
+		if ((GetActiveRemocon()->heldButtons == 0x401) && (nowPressed & 0x401)) { // B + DOWN // Beats the current level
 			ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);
 		}
-		if ((GetActiveRemocon()->heldButtons == 0x408) && (nowPressed & 0x408)) { // B + LEFT
+		if ((GetActiveRemocon()->heldButtons == 0x408) && (nowPressed & 0x408)) { // B + LEFT // Turn On/Off the collision viewer
 			enableCollisionMode = !enableCollisionMode;
 		}
-		if ((GetActiveRemocon()->heldButtons == 0x404) && (nowPressed & 0x404)) { // B + RIGHT
+		if ((GetActiveRemocon()->heldButtons == 0x404) && (nowPressed & 0x404)) { // B + RIGHT // Spawns a Star
 			int enitemsettings = 0 | (1 << 0) | (2 << 18) | (4 << 9) | (2 << 10) | (8 << 16); //Setting the settings
 			dStageActor_c *Star = dStageActor_c::create(EN_ITEM, enitemsettings, &player->pos, 0, 0); //Creating the Star
 		}
+		if ((GetActiveRemocon()->heldButtons == 0x500) && (nowPressed & 0x500)) { // B + TWO // Points ID - 1 = 200; 2 = 400; 3 = 800; 4 = 1000; 5 = 2000; 6 = 4000; 7 = 8000; 8 = 1UP
+			//extern "C" void *StageF70__fancilyAddScoreFromActor(int PointerToStageF70, dAcPy_c *player, int pointID); //800E24B0
+			// dActor_c *bleh = (dActor_c *)player;
+			// StageF70__fancilyAddScoreFromActor(PointerToStageF70, bleh, CheckExistingPowerup(player)); 
+			stopCamera = !stopCamera;
+			// VEC2 position = {player->pos.x, player->pos.y};
+			// StageF70__fancilyAddScoreFromPosition(position, 1, CheckExistingPowerup(player)); 
+			// dEn_c__addScoreWhenHitTwo(player, 1);
+		}	
+		if ((GetActiveRemocon()->heldButtons == 0x600) && (nowPressed & 0x600)) { // B + ONE // Makes tge gameScene disappear/appear
+			disableOrNot = !disableOrNot;
+			nw4r::lyt::Picture *_poisonusbar = dGameDisplay_c::instance->layout.findPictureByName("P_PoisonBar_00");
+			nw4r::lyt::Picture *_poisonusjauge = dGameDisplay_c::instance->layout.findPictureByName("P_PoisonJauge_00");
+			nw4r::lyt::Picture *_1 = dGameDisplay_c::instance->layout.findPictureByName("P_baseS_01");
+			nw4r::lyt::Picture *_2 = dGameDisplay_c::instance->layout.findPictureByName("P_base_01");
+			nw4r::lyt::Picture *_3 = dGameDisplay_c::instance->layout.findPictureByName("P_otasukeIcon_00");
+			nw4r::lyt::Picture *_4 = dGameDisplay_c::instance->layout.findPictureByName("P_marioIcon_00");
+			nw4r::lyt::Picture *_5 = dGameDisplay_c::instance->layout.findPictureByName("P_luijiIcon_00");
+			nw4r::lyt::Picture *_6 = dGameDisplay_c::instance->layout.findPictureByName("P_kinoB_00");
+			nw4r::lyt::Picture *_7 = dGameDisplay_c::instance->layout.findPictureByName("P_kinoY_00");
+			nw4r::lyt::Picture *_31 = dGameDisplay_c::instance->layout.findPictureByName("P_baseS_00");
+			nw4r::lyt::Picture *_8 = dGameDisplay_c::instance->layout.findPictureByName("P_base_00");
+			nw4r::lyt::Picture *_9 = dGameDisplay_c::instance->layout.findPictureByName("P_coin_00");
+			nw4r::lyt::Picture *_10 = dGameDisplay_c::instance->layout.findPictureByName("P_collectOff_00");
+			nw4r::lyt::Picture *_11 = dGameDisplay_c::instance->layout.findPictureByName("P_collectOff_01");
+			nw4r::lyt::Picture *_12 = dGameDisplay_c::instance->layout.findPictureByName("P_collectOff_02");
+			nw4r::lyt::Picture *_13 = dGameDisplay_c::instance->layout.findPictureByName("P_collection_00");
+			nw4r::lyt::Picture *_14 = dGameDisplay_c::instance->layout.findPictureByName("P_collection_01");
+			nw4r::lyt::Picture *_15 = dGameDisplay_c::instance->layout.findPictureByName("P_collection_02");
+			nw4r::lyt::Picture *_16 = dGameDisplay_c::instance->layout.findPictureByName("P_timer_00");
+			nw4r::lyt::TextBox *_17 = dGameDisplay_c::instance->layout.findTextBoxByName("T_debug_00");
+			nw4r::lyt::TextBox *_18 = dGameDisplay_c::instance->layout.findTextBoxByName("T_otaChuS_00");
+			nw4r::lyt::TextBox *_19 = dGameDisplay_c::instance->layout.findTextBoxByName("T_otaChu_00");
+			nw4r::lyt::TextBox *_20 = dGameDisplay_c::instance->layout.findTextBoxByName("T_x_01");
+			nw4r::lyt::TextBox *_21 = dGameDisplay_c::instance->layout.findTextBoxByName("T_x_02");
+			nw4r::lyt::TextBox *_22 = dGameDisplay_c::instance->layout.findTextBoxByName("T_x_03");
+			nw4r::lyt::TextBox *_23 = dGameDisplay_c::instance->layout.findTextBoxByName("T_x_04");
+			nw4r::lyt::TextBox *_24 = dGameDisplay_c::instance->layout.findTextBoxByName("T_left_00");
+			nw4r::lyt::TextBox *_25 = dGameDisplay_c::instance->layout.findTextBoxByName("T_left_01");
+			nw4r::lyt::TextBox *_26 = dGameDisplay_c::instance->layout.findTextBoxByName("T_left_02");
+			nw4r::lyt::TextBox *_27 = dGameDisplay_c::instance->layout.findTextBoxByName("T_left_03");
+			nw4r::lyt::TextBox *_28 = dGameDisplay_c::instance->layout.findTextBoxByName("T_coin_00");
+			nw4r::lyt::TextBox *_29 = dGameDisplay_c::instance->layout.findTextBoxByName("T_score_00");
+			nw4r::lyt::TextBox *_30 = dGameDisplay_c::instance->layout.findTextBoxByName("T_time_00");
+			// nw4r::lyt::Picture *_debugText = dGameDisplay_c::instance->layout.findTextBoxByName("T_debug_00");
+			// nw4r::lyt::Picture *_debugText = dGameDisplay_c::instance->layout.findTextBoxByName("T_debug_00");
+			int visibility = !disableOrNot;
+
+			if(pActivityDoOneTime == 0) {
+				if(_5->flag == 1) {
+					isLuigiActive = true;
+				}
+				if(_6->flag == 1) {
+					isKinoBActive = true;
+				}
+				if(_7->flag == 1) {
+					isKinoYActive = true;
+				}
+				pActivityDoOneTime = 1;
+			}
+
+			_poisonusbar->SetVisible(visibility);
+			_poisonusjauge->SetVisible(visibility);
+			_1->SetVisible(visibility);
+			_2->SetVisible(visibility);
+			_3->SetVisible(visibility);
+			_4->SetVisible(visibility);
+
+			if(isLuigiActive) {
+				_5->SetVisible(visibility);
+				_21->SetVisible(visibility);
+				_25->SetVisible(visibility);
+			}
+			
+			if(isKinoBActive) {
+				_6->SetVisible(visibility);
+				_22->SetVisible(visibility);
+				_26->SetVisible(visibility);
+			}
+			
+			if(isKinoYActive) {
+				_7->SetVisible(visibility);
+				_23->SetVisible(visibility);
+				_27->SetVisible(visibility);
+			}
+
+			_8->SetVisible(visibility);
+			_9->SetVisible(visibility);
+			_10->SetVisible(visibility);
+			_11->SetVisible(visibility);
+			_12->SetVisible(visibility);
+			_13->SetVisible(visibility);
+			_14->SetVisible(visibility);
+			_15->SetVisible(visibility);
+			_16->SetVisible(visibility);
+			_17->SetVisible(visibility);
+			_18->SetVisible(visibility);
+			_19->SetVisible(visibility);
+			_20->SetVisible(visibility);
+			_24->SetVisible(visibility);
+			_28->SetVisible(visibility);
+			_29->SetVisible(visibility);
+			_30->SetVisible(visibility);
+			_31->SetVisible(visibility);
+		}		
 	}
-	OSReport("bleh %d\n", minuscounter);
 	if(nowPressed & WPAD_MINUS) {
 		minuscounter++;
 		if(minuscounter >= 16) {
@@ -458,6 +570,22 @@ void dGameDisplay_c::doHexCoin() {
 	nyeh[1] = str[1];
 	nyeh[2] = str[2];
 	stupidcoin->SetString(nyeh, 0, 3);
+}
+
+int dCamera_c::newOnExecute() {
+	if(stopCamera) {
+		return false;
+	}
+	int orig_val = this->onExecute_orig();
+	return orig_val;
+}
+
+int dCamera_c::newOnDraw() {
+	if(stopCamera) {
+		return false;
+	}
+	int orig_val = this->onDraw_orig();
+	return orig_val;
 }
 
 

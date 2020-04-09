@@ -17,4 +17,10 @@ hooks:
 - {branch_type: bl, name: CoinHex, src_addr_jpn: 2148898744, src_addr_jpn2: 2148898744,
   src_addr_ntsc: 2148899240, src_addr_ntsc2: 2148899240, src_addr_pal: 2148899560,
   src_addr_pal2: 2148899560, target_func: 'dGameDisplay_c::doHexCoin()', type: branch_insn}
+- {name: Camera_Replace, src_addr_jpn: 2157486632, src_addr_jpn2: 2157486648, src_addr_ntsc: 2157488448,
+  src_addr_ntsc2: 2157488464, src_addr_pal: 2157488416, src_addr_pal2: 2157488432,
+  target_func: 'dCamera_c::newOnExecute()', type: add_func_pointer}
+- {name: Camera_ReplaceTwo, src_addr_jpn: 2157486644, src_addr_jpn2: 2157486660, src_addr_ntsc: 2157488460,
+  src_addr_ntsc2: 2157488476, src_addr_pal: 2157488428, src_addr_pal2: 2157488444,
+  target_func: 'dCamera_c::newOnDraw()', type: add_func_pointer}
 source_files: [../src/spikyhax.cpp]

@@ -1203,7 +1203,6 @@ namespace EGG {
 	};
 }
 
-
 class TileRenderer {
 public:
 	TileRenderer();
@@ -2008,6 +2007,26 @@ public:
 	~dBase_c();
 
 	virtual const char *GetExplanationString();
+};
+
+class dCamera_c : public dBase_c {
+	public:
+		EGG::Screen screen;
+		EGG::LookAtCamera camera0;
+		EGG::ProjectOrtho project1;
+		EGG::LookAtCamera camera1;
+		EGG::ProjectOrtho project2;
+		EGG::LookAtCamera camera2;
+		u32 cameraID;
+		VEC3 camPos;
+		VEC3 target;
+		VEC3 camUp;
+		VEC3 field_378;
+
+		int onExecute_orig();
+		int newOnExecute();
+		int onDraw_orig();
+		int newOnDraw();
 };
 
 class dScene_c : public dBase_c {
@@ -4494,6 +4513,12 @@ class dAcPy_c : public daPlBase_c {
 		int onExecute_orig(); // 80046BB0
 		int newOnExecute();
 };
+
+extern "C" void dEn_c__addScoreWhenHitTwo(void *other, int unk);
+extern "C" int PointerToStageF70[4];
+extern "C" void *StageF70__fancilyAddScoreFromPosition(VEC2 Position, int unk2, int pointID); //800E2430
+extern "C" void *StageF70__fancilyAddScoreFromActor(int PointerToStageF70[4], dActor_c *player, int pointID); //800E24B0
+
 
 dScript::Res_c *GetBMG(); // 800CDD50
 void WriteBMGToTextBox(nw4r::lyt::TextBox *textBox, dScript::Res_c *res, int category, int message, int argCount, ...); // 0x800C9B50

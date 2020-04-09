@@ -210,5 +210,6 @@ int dAcPy_c::newOnExecute() {
 			poisonusbar->size = shit;
 		}
 	}
+	// OSReport("player speed.x = %d\n", this->speed.x);
 	return orig_val;
 }

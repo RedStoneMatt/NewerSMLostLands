@@ -34,6 +34,14 @@ SECTIONS {
 
 	onExecute_orig__7dAcPy_cFv = 0x80046BB0;
 
+	onExecute_orig__9dCamera_cFv = 0x809140F0;
+	onDraw_orig__9dCamera_cFv = 0x80914140;
+
+	PointerToStageF70 = 0x8042A330;
+	StageF70__fancilyAddScoreFromPosition = 0x800E2430;/*mi*/
+	StageF70__fancilyAddScoreFromActor = 0x800E24B0;/*mi*/
+	dEn_c__addScoreWhenHitTwo = 0x80096700;/*mi*/
+
 	pow = 0x802E5894;
 	
 	TEST_REGION = 0x80768D50;
