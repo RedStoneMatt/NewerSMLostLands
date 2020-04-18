@@ -99,7 +99,9 @@ extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void dDateFile_c::fileNum() {
 	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
-		T_fileNumber_01->SetString(L"UT ");
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"  ファイル 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"  ファイル 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"  ファイル 3"); }
 	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"   File 1"); }
@@ -107,7 +109,9 @@ void dDateFile_c::fileNum() {
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"   File 3"); }
 	}
 	if(GetGameLanguage(4) == 2) { // German (by ?)
-		T_fileNumber_01->SetString(L"UT ");
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L" Datei 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L" Datei 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L" Datei 3"); }
 	}
 	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Fichier 1"); }
@@ -120,10 +124,14 @@ void dDateFile_c::fileNum() {
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Archivo 3"); }
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)
-		T_fileNumber_01->SetString(L"UT ");
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Salvataggio 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Salvataggio 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Salvataggio 3"); }
 	}
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
-		T_fileNumber_01->SetString(L"UT ");
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Bestand 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Bestand 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Bestand 3"); }
 	}
 }
 

@@ -198,11 +198,11 @@ void dWMStarCoin_c::loadInfo() {
 	
 	// Language-related things
 	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
-		UnspentTitle->SetString(L"");
-		CollectedTitle->SetString(L"");
-		BtnWorldSelText->SetString(L"");
-		BtnBackText->SetString(L"");
-		TotalCoinsTitle->SetString(L"");
+		UnspentTitle->SetString(L"ざんだか");
+		CollectedTitle->SetString(L"かくとくしたスターコイン");
+		BtnWorldSelText->SetString(L"ワールドセレクト     ");
+		BtnBackText->SetString(L"もどる †");
+		TotalCoinsTitle->SetString(L"スターコイン:");
 	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
 		UnspentTitle->SetString(L"unspent");
@@ -212,11 +212,11 @@ void dWMStarCoin_c::loadInfo() {
 		TotalCoinsTitle->SetString(L"Star Coins:");
 	}
 	if(GetGameLanguage(4) == 2) { // German (by ?)
-		UnspentTitle->SetString(L"");
-		CollectedTitle->SetString(L"");
-		BtnWorldSelText->SetString(L"");
-		BtnBackText->SetString(L"");
-		TotalCoinsTitle->SetString(L"");
+		UnspentTitle->SetString(L"noch nicht eingesetzt");
+		CollectedTitle->SetString(L"gesammelt");
+		BtnWorldSelText->SetString(L"Wähle die Welt aus");
+		BtnBackText->SetString(L"Zurück †");
+		TotalCoinsTitle->SetString(L"Sternenmünzen:");
 	}
 	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
 		UnspentTitle->SetString(L"restantes");
@@ -233,18 +233,18 @@ void dWMStarCoin_c::loadInfo() {
 		TotalCoinsTitle->SetString(L"Monedas Estrella:");
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)
-		UnspentTitle->SetString(L"");
-		CollectedTitle->SetString(L"");
-		BtnWorldSelText->SetString(L"");
-		BtnBackText->SetString(L"");
-		TotalCoinsTitle->SetString(L"");
+		UnspentTitle->SetString(L"rimanenti");
+		CollectedTitle->SetString(L"ottenute");
+		BtnWorldSelText->SetString(L"Seleziona Mondo");
+		BtnBackText->SetString(L"Indietro †");
+		TotalCoinsTitle->SetString(L"Monete Stella:");
 	}
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
-		UnspentTitle->SetString(L"");
-		CollectedTitle->SetString(L"");
-		BtnWorldSelText->SetString(L"");
-		BtnBackText->SetString(L"");
-		TotalCoinsTitle->SetString(L"");
+		UnspentTitle->SetString(L"nog niet gebruikt");
+		CollectedTitle->SetString(L"verzameld");
+		BtnWorldSelText->SetString(L"Kies de wereld uit");
+		BtnBackText->SetString(L"Terug †");
+		TotalCoinsTitle->SetString(L"Stermunten:");
 	}
 
 	int unspentCoins = getUnspentStarCoinCount();
