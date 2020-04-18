@@ -1,4 +1,7 @@
-class TimeKeeper {
+#ifndef __KAMEK_TIMEKEEPER_H
+#define __KAMEK_TIMEKEEPER_H
+
+class TimeKeeper {                       //The TimeKeeper class, handles things relited to the level's timer
 	public:
 		u32 *vtable;
 		u32 timePlusFFFTimes40000;
@@ -11,7 +14,7 @@ class TimeKeeper {
 		void setTime(int time);
 };
 
-class dGameDisplay_c : dBase_c { //The dGameDisplay_c class, very important.
+class dGameDisplay_c : dBase_c {         //The dGameDisplay_c class, handles things related to the gameScene layout
     public:
         m2d::EmbedLayout_c layout;
         mEf::es2 effect;
@@ -150,7 +153,7 @@ class dGameDisplay_c : dBase_c { //The dGameDisplay_c class, very important.
         void doHexCoin();
 };
 
-class Zone {
+class Zone {                             //The Zone class, handles things related to a zone (duh)
     public:
         u16 x;
         u16 y;
@@ -174,7 +177,7 @@ class Zone {
 
 class dCourseFull_c; // forward declaration
 
-class dCourse_c {
+class dCourse_c {                        //The dCourse_c class, handles things related to an area
     public:
         u32 vtable;
         u32 areanum;
@@ -228,14 +231,14 @@ class dCourse_c {
         int getMusicForZone(int zoneID); //8008E5C0
 };
 
-class dCourseFull_c {
+class dCourseFull_c {                    //The dCourseFull_c class, handles the 4 areas of a level
     public:
         dCourse_c *areas[4];
 
         static dCourseFull_c* instance; //8042A178
 };
 
-class Stage32C {
+class Stage32C {                         //The Stage32C class, handles much random stuff
     public:
         u32 bulletData1[32];
         u32 bulletData2[32];
@@ -274,6 +277,11 @@ class Stage32C {
         u8 _173;
         u32 pokeyTimer;
 };
+
+/*************************************************************************************************************************/
+/*The MicroGoombaManager, dEffectExplosionMgr_c, dTimerMgr_c, dBlockMgr_c, StageF70, StageF74Sub and the StageF74 classes*/
+/*************************************are here only to make the dScStage_c class work*************************************/
+/*************************************************************************************************************************/
 
 class MicroGoombaManager {
     public:
@@ -323,7 +331,7 @@ class StageF74 {
         StageF74Sub field_0[16];
 };
 
-class dScStage_c : public dScene_c {
+class dScStage_c : public dScene_c {     //The dScStage_c class, handles things related to a stage
     public:
         u32 runningFrameCount_probably;
         FunctionChain chain;
@@ -400,3 +408,11 @@ class dScStage_c : public dScene_c {
         int onExecute_orig(); //80925A60
         int newOnExecute();
 };
+
+
+
+
+
+
+
+#endif
