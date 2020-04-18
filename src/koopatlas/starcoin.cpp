@@ -230,7 +230,7 @@ void dWMStarCoin_c::loadInfo() {
 		CollectedTitle->SetString(L"obtenidas");
 		BtnWorldSelText->SetString(L"Seleccionar Mundo");
 		BtnBackText->SetString(L"Atrás †");
-		TotalCoinsTitle->SetString(L"");
+		TotalCoinsTitle->SetString(L"Monedas Estrella:");
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)
 		UnspentTitle->SetString(L"");

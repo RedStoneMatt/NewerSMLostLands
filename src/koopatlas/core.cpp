@@ -1099,7 +1099,7 @@ static const wchar_t *completionMsgsJP[] = {
 static const wchar_t *completionMsgsEN[] = {
 	L"The most erudite of Buttocks",
 	L"You've collected all of\nthe \x0B\x014F\xBEEF Star Coins in\n",
-	L"You have gotten every \x0B\x013B\xBEEF exit\nin",
+	L"You have gotten every \x0B\x013B\xBEEF exit in \n",
 	L"You have gotten everything\nin",
 	L"You have collected all the\nnecessary \x0B\x014F\xBEEF coins to enter\nthe Special World!",
 	L"You have collected all the \x0B\x014F\xBEEF Star\nCoins in the game!",
@@ -1121,7 +1121,7 @@ static const wchar_t *completionMsgsGE[] = {
 static const wchar_t *completionMsgsFR[] = {
 	L"Treeki faut penser a arrêter les messages cachés",
 	L"Vous avez collecté toutes les\n\x0B\x014F\xBEEF Pièces Étoiles dans\n",
-	L"Vous avez trouvé toutes les \x0B\x013B\xBEEF sorties\ndans",
+	L"Vous avez trouvé toutes les\n\x0B\x013B\xBEEF sorties dans \n",
 	L"Vous avez tout obtenu\ndans",
 	L"Vous avez collecté toutes les\n\x0B\x014F\xBEEF Pièces Étoiles nécéssaires\npour entrer dans le Monde Spécial!",
 	L"Vous avez obtenu toutes les\n\x0B\x014F\xBEEF Pièces Étoiles du jeu!",
@@ -1131,13 +1131,13 @@ static const wchar_t *completionMsgsFR[] = {
 
 static const wchar_t *completionMsgsSP[] = {
 	L"The most erudite of Buttocks",
-	L"Untranslated",
-	L"Untranslated",
-	L"Untranslated",
-	L"Untranslated",
-	L"Untranslated",
-	L"Untranslated",
-	L"Untranslated"
+	L"Has conseguido todas las\n\x0B\x014F\xBEEF Monedas Estrella\nen",
+	L"Has encontrado todas las\n\x0B\x013B\xBEEF salidas de",
+	L"Has conseguido absolutamente\ntodo en",
+	L"¡Has conseguido todas las\n\x0B\x014F\xBEEF Monedas Estrella necesarias\npara acceder al Mundo Especial!",
+	L"¡Has conseguido todas las\n\x0B\x014F\xBEEF Monedas Estrella del juego!",
+	L"¡Has encontrado todas las\n\x0B\x013B\xBEEF salidas del juego!",
+	L"¡Has completado\nNEWER SUPER MARIO LOST LANDS!\n\nTe proponemos un nuevo reto:\nPrueba a pulsar \x0B\x0122\xBEEF, \x0B\x0123\xBEEF y \x0B\x0125\xBEEF\nen el menú de las Mondeas Estrella."
 };
 
 static const wchar_t *completionMsgsIT[] = {
