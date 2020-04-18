@@ -1,0 +1,5 @@
+hooks:
+- {name: NumpadBuild, src_addr_jpn: 2159032288, src_addr_jpn2: 2159032320, src_addr_ntsc: 2159034112,
+  src_addr_ntsc2: 2159034144, src_addr_pal: 2159034080, src_addr_pal2: 2159034112,
+  target_func: 'dNumpadSpawner_c::build()', type: add_func_pointer}
+source_files: [../src/numpad.cpp]

@@ -63,3 +63,8 @@ hooks:
     type: add_func_pointer
     src_addr_pal: 0x8098A92C
     target_func: 'dCamera_c::newOnDraw()'
+
+  - name: dScStage_Replace
+    type: add_func_pointer
+    src_addr_pal: 0x8098DC48
+    target_func: 'dScStage_c::newOnExecute()'

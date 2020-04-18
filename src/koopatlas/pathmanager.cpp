@@ -998,7 +998,7 @@ void dWMPathManager_c::execute() {
 	} else {
 		if (pressedDir >= 0) {
 			// Use an exit if possible
-			if (canUseExit(currentNode->exits[pressedDir])) {
+			if (canUseExit(currentNode->exits[pressedDir]) || enableDebugMode) {
 				startMovementTo(currentNode->exits[pressedDir]);
 			} else {
 				// TODO: maybe remove this? got to see how it looks
@@ -1475,7 +1475,7 @@ void dWMPathManager_c::moveThroughPath(int pressedDir) {
 			int pressedDir = getPressedDir(held);
 			if (pressedDir >= 0) {
 				// Use an exit if possible
-				if (canUseExit(currentNode->exits[pressedDir])) {
+				if (canUseExit(currentNode->exits[pressedDir]) || enableDebugMode) {
 					startMovementTo(currentNode->exits[pressedDir]);
 					movingAgain = true;
 				} else {

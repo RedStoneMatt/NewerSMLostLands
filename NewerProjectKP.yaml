@@ -31,6 +31,9 @@ modules:
 #  - processed/enitemtests.yaml
   - processed/spikyhax.yaml
   - processed/custompakkun.yaml
+  - processed/quickrestart.yaml
+  - processed/icefix.yaml
+  - processed/numpad.yaml
   - processed/poisoncloud.yaml
   - processed/poweruphax.yaml
   - processed/heapbar.yaml

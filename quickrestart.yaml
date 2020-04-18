@@ -1,0 +1,14 @@
+---
+
+
+source_files: [../src/quickrestart.cpp]
+hooks:
+  - name: restartLevel
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x8013D8EC
+    target_func: 'restartLevel()'
+
+  - name: nopthat
+    type: nop_insn
+    area_pal: 0x8015A8E4

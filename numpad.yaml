@@ -1,0 +1,10 @@
+---
+#Replaces Actor 490 EN_RAIL_POLY_CHILD (Sprite 160)
+
+
+source_files: [../src/numpad.cpp]
+hooks:
+  - name: NumpadBuild
+    type: add_func_pointer
+    src_addr_pal: 0x80B03EE0
+    target_func: 'dNumpadSpawner_c::build()'

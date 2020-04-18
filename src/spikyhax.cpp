@@ -4,6 +4,7 @@
 #include <g3dhax.h>
 #include <sfx.h>
 #include <timekeeper.h>
+#include "boss.h"
 
 /*const char* SHarcNameList [] = {
 	"hammerM",
@@ -410,6 +411,7 @@ extern bool enableDebugMode;
 extern bool enableCollisionMode;
 extern "C" void *dAcPy_c__ChangePowerupWithAnimation(void * Player, int powerup); 	// Powerups - 0 = small; 1 = big; 2 = fire; 3 = mini; 4 = prop; 5 = peng; 6 = ice; 7 = hammer
 extern "C" int CheckExistingPowerup(void * Player);
+// extern "C" Zone dCourse_c__getZoneByID(dCourseFull_c *instance, u8 dScStage_ccurZone, int unk);
 int minuscounter;
 bool stopCamera;
 int doOneTimeCam;
@@ -430,7 +432,7 @@ int dGameDisplay_c::doWaitCheck() {
 			dAcPy_c__ChangePowerupWithAnimation(player, playerPowerup);
 		}
 		if ((GetActiveRemocon()->heldButtons == 0x401) && (nowPressed & 0x401)) { // B + DOWN // Beats the current level
-			ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);
+			ExitStage(WORLD_MAP, 0, EXIT_LEVEL, MARIO_WIPE);
 		}
 		if ((GetActiveRemocon()->heldButtons == 0x408) && (nowPressed & 0x408)) { // B + LEFT // Turn On/Off the collision viewer
 			enableCollisionMode = !enableCollisionMode;
@@ -439,16 +441,11 @@ int dGameDisplay_c::doWaitCheck() {
 			int enitemsettings = 0 | (1 << 0) | (2 << 18) | (4 << 9) | (2 << 10) | (8 << 16); //Setting the settings
 			dStageActor_c *Star = dStageActor_c::create(EN_ITEM, enitemsettings, &player->pos, 0, 0); //Creating the Star
 		}
-		if ((GetActiveRemocon()->heldButtons == 0x500) && (nowPressed & 0x500)) { // B + TWO // Points ID - 1 = 200; 2 = 400; 3 = 800; 4 = 1000; 5 = 2000; 6 = 4000; 7 = 8000; 8 = 1UP
-			//extern "C" void *StageF70__fancilyAddScoreFromActor(int PointerToStageF70, dAcPy_c *player, int pointID); //800E24B0
-			// dActor_c *bleh = (dActor_c *)player;
-			// StageF70__fancilyAddScoreFromActor(PointerToStageF70, bleh, CheckExistingPowerup(player)); 
-			stopCamera = !stopCamera;
-			// VEC2 position = {player->pos.x, player->pos.y};
-			// StageF70__fancilyAddScoreFromPosition(position, 1, CheckExistingPowerup(player)); 
-			// dEn_c__addScoreWhenHitTwo(player, 1);
+		if ((GetActiveRemocon()->heldButtons == 0x500) && (nowPressed & 0x500)) { // B + TWO // Numpad to spawn an actor by ID // Points ID - 1 = 200; 2 = 400; 3 = 800; 4 = 1000; 5 = 2000; 6 = 4000; 7 = 8000; 8 = 1UP
+			dAcPy_c *player = dAcPy_c::findByID(0);
+			CreateActor(490, 0, player->pos, 0, 0);
 		}	
-		if ((GetActiveRemocon()->heldButtons == 0x600) && (nowPressed & 0x600)) { // B + ONE // Makes tge gameScene disappear/appear
+		if ((GetActiveRemocon()->heldButtons == 0x600) && (nowPressed & 0x600)) { // B + ONE // Makes the gameScene disappear/appear
 			disableOrNot = !disableOrNot;
 			nw4r::lyt::Picture *_poisonusbar = dGameDisplay_c::instance->layout.findPictureByName("P_PoisonBar_00");
 			nw4r::lyt::Picture *_poisonusjauge = dGameDisplay_c::instance->layout.findPictureByName("P_PoisonJauge_00");
@@ -588,6 +585,42 @@ int dCamera_c::newOnDraw() {
 	return orig_val;
 }
 
+static nw4r::snd::StrmSoundHandle s_handle;
+extern "C" void PlaySoundWithFunctionB4(void *spc, nw4r::snd::SoundHandle *handle, int id, int unk);
+u8 hijackMusicWithSongName(const char *songName, int themeID, bool hasFast, int channelCount, int trackCount, int *wantRealStreamID);
+bool isElevatorMusic;
+
+int dScStage_c::newOnExecute() {
+	int orig_val = this->onExecute_orig();
+	if(enableDebugMode) {
+		int nowPressed = Remocon_GetPressed(GetActiveRemocon());
+		if ((GetActiveRemocon()->heldButtons == 0xC00) && (nowPressed & 0xC00)) { // B + A // Do shit
+			OSReport("isElevatorMusic = %d\n", isElevatorMusic);
+			if(isElevatorMusic == false) {
+				StopBGMMusic();
+				OSReport("switching music\n");
+				if (s_handle.Exists()) {
+					s_handle.SetTrackVolume(1<<1, 30, 0.0f);
+				}
+
+				int realStreamID;
+				// int musicid = 0;
+				char brstmName[8];
+				sprintf(brstmName, "ELEVATOR");
+				hijackMusicWithSongName(brstmName, -1, false, 2, 1, &realStreamID);
+
+				PlaySoundWithFunctionB4(SoundRelatedClass, &s_handle, realStreamID, 1);
+				isElevatorMusic = true;
+			}
+			else {
+				s_handle.Stop(1);
+				StartBGMMusic();
+				isElevatorMusic = false;
+			}
+		}
+	}
+	return orig_val;
+}
 
 /*
 class Projectile : dEn_c {

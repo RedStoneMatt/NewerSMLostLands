@@ -1,0 +1,7 @@
+hooks:
+- {branch_type: bl, name: restartLevel, src_addr_jpn: 2148783548, src_addr_jpn2: 2148783548,
+  src_addr_ntsc: 2148784044, src_addr_ntsc2: 2148784044, src_addr_pal: 2148784364,
+  src_addr_pal2: 2148784364, target_func: restartLevel(), type: branch_insn}
+- {area_jpn: 2148902324, area_jpn2: 2148902324, area_ntsc: 2148902820, area_ntsc2: 2148902820,
+  area_pal: 2148903140, area_pal2: 2148903140, name: nopthat, type: nop_insn}
+source_files: [../src/quickrestart.cpp]

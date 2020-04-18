@@ -19,6 +19,8 @@ Exception_Printf___Q24nw4r2dbFPCce = 0x80234BC0;
 
 ContinueFromFuckLineLiftActivation = 0x80839B14;
 
+loc_8091288C = 0x8091289C;
+
 GabonRock_DropOutState = 0x80998D10;
 GabonRock_CrushState = 0x80998CD0;
 forceHCGROPushBack = 0x8001DED0;
@@ -37,6 +39,14 @@ _ZN10TimeKeeper8instanceE = 0x8042A350;
 instance__10TimeKeeper = 0x8042A350;
 _ZN10TimeKeeper7setTimeEi = 0x800E3A00;
 setTime__10TimeKeeperFi = 0x800E3A00;
+
+_ZN13dCourseFull_c8instanceE = 0x8042A178;
+instance__13dCourseFull_c = 0x8042A178;
+_ZN9dCourse_c15getMusicForZoneEi = 0x8008E5C0;
+getMusicForZone__9dCourse_cFi = 0x8008E5C0;
+_ZN10dScStage_c14onExecute_origEv = 0x80925A70;
+onExecute_orig__10dScStage_cFv = 0x80925A70;
+_ZN9dCourse_c11getZoneByIDEihi = 0x8008E410;/*addAnyway*/
 
 _ZN10daEnItem_c13onCreate_origEv = 0x80A26C50;
 onCreate_orig__10daEnItem_cFv = 0x80A26C50;

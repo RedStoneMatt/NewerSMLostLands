@@ -12,6 +12,8 @@ SECTIONS {
 	Exception_Printf___Q24nw4r2dbFPCce = 0x80234BC0;
 
 	ContinueFromFuckLineLiftActivation = 0x80839B04;
+	
+	loc_8091288C = 0x8091288C;
 
 	GabonRock_DropOutState = 0x80998CF0;
 	GabonRock_CrushState = 0x80998CB0;
@@ -25,6 +27,11 @@ SECTIONS {
 	
 	instance__10TimeKeeper = 0x8042A350;
 	setTime__10TimeKeeperFi = 0x800E3A00;
+
+	instance__13dCourseFull_c = 0x8042A178;
+	getMusicForZone__9dCourse_cFi = 0x8008E5C0;
+	onExecute_orig__10dScStage_cFv = 0x80925A60;
+	_ZN9dCourse_c11getZoneByIDEihi = 0x8008E410;/*addAnyway*/
 	
 	onCreate_orig__10daEnItem_cFv = 0x80A26C30;
 	
