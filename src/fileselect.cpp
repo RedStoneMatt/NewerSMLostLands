@@ -54,8 +54,8 @@ class dDateFile_c : dBase_c {
 		nw4r::lyt::Pane *N_dateFile_01;
 		nw4r::lyt::Pane *N_NewFile_00;
 		nw4r::lyt::Pane *N_save;
-		u32 W_select_00;
-		u32 W_shadow_00;
+		nw4r::lyt::Pane *W_select_00;
+		nw4r::lyt::Pane *W_shadow_00;
 		nw4r::lyt::TextBox *T_worldNumber_00;
 		nw4r::lyt::TextBox *T_worldNumber_01;
 		nw4r::lyt::TextBox *T_x_00;
@@ -98,40 +98,131 @@ class dDateFile_c : dBase_c {
 extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void dDateFile_c::fileNum() {
+	nw4r::lyt::Picture *bgMid1Active = layout.findPictureByName("bgMid1Active");
+	nw4r::lyt::Picture *bgLeftActive = layout.findPictureByName("bgLeftActive");
+	nw4r::lyt::Picture *bgLeft = layout.findPictureByName("bgLeft");
+	nw4r::lyt::Picture *bgMiddle = layout.findPictureByName("bgMiddle");
+	nw4r::lyt::Picture *P_Shine_00 = layout.findPictureByName("P_Shine_00");
+	nw4r::lyt::Picture *P_mario_00 = layout.findPictureByName("P_mario_00");
 	if(GetGameLanguage(4) == 0) { // Japanese (by ?)
-		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"  ファイル 1"); }
-		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"  ファイル 2"); }
-		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"  ファイル 3"); }
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"ファイル 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"ファイル 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"ファイル 3"); }
 	}
 	if(GetGameLanguage(4) == 1) { // English (by everyone actually)
-		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"   File 1"); }
-		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"   File 2"); }
-		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"   File 3"); }
+		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"File 1"); }
+		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"File 2"); }
+		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"File 3"); }
 	}
 	if(GetGameLanguage(4) == 2) { // German (by ?)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L" Datei 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L" Datei 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L" Datei 3"); }
+		T_fileNumber_01->size.x = 140.11f;
+		T_fileNumber_01->trans.x = -234.0f;
+		N_dateFile_00->trans.x = 13.0f;
+		bgLeftActive->trans.x = -314.0f;
+		bgMid1Active->size.x = 122.0f;
+		bgMid1Active->trans.x = -249.0f;
+		W_select_00->size.x = 602.0f;
+		W_select_00->trans.x = -16.0f;
+		W_shadow_00->size.x = 600.0f;
+		W_shadow_00->trans.x = -16.0f;
+		bgLeft->trans.x = -314.0f;
+		bgMiddle->size.x = 576.0f;
+		bgMiddle->trans.x = -18.0f;
+		P_Shine_00->size.x = 598.0f;
+		P_Shine_00->trans.x = -15.0f;
+		P_mario_00->trans.x = -286.0f;
+		N_NewFile_00->trans.x = -30.0f;
 	}
 	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Fichier 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Fichier 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Fichier 3"); }
+		T_fileNumber_01->size.x = 140.11f;
+		T_fileNumber_01->trans.x = -238.0f;
+		N_dateFile_00->trans.x = 13.0f;
+		bgLeftActive->trans.x = -314.0f;
+		bgMid1Active->size.x = 122.0f;
+		bgMid1Active->trans.x = -249.0f;
+		W_select_00->size.x = 602.0f;
+		W_select_00->trans.x = -16.0f;
+		W_shadow_00->size.x = 600.0f;
+		W_shadow_00->trans.x = -16.0f;
+		bgLeft->trans.x = -314.0f;
+		bgMiddle->size.x = 576.0f;
+		bgMiddle->trans.x = -18.0f;
+		P_Shine_00->size.x = 598.0f;
+		P_Shine_00->trans.x = -15.0f;
+		P_mario_00->trans.x = -290.0f;
+		N_NewFile_00->trans.x = -30.0f;
 	}
 	if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Archivo 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Archivo 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Archivo 3"); }
+		T_fileNumber_01->size.x = 144.11f;
+		T_fileNumber_01->trans.x = -242.0f;
+		N_dateFile_00->trans.x = 16.0f;
+		bgLeftActive->trans.x = -320.0f;
+		bgMid1Active->size.x = 128.0f;
+		bgMid1Active->trans.x = -252.0f;
+		W_select_00->size.x = 608.0f;
+		W_select_00->trans.x = -19.0f;
+		W_shadow_00->size.x = 606.0f;
+		W_shadow_00->trans.x = -19.0f;
+		bgLeft->trans.x = -320.0f;
+		bgMiddle->size.x = 582.0f;
+		bgMiddle->trans.x = -21.0f;
+		P_Shine_00->size.x = 598.0f;
+		P_Shine_00->trans.x = -15.0f;
+		P_mario_00->trans.x = -294.0f;
+		N_NewFile_00->trans.x = -30.0f;
 	}
 	if(GetGameLanguage(4) == 5) { // Italian (by ?)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Salvataggio 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Salvataggio 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Salvataggio 3"); }
+		T_fileNumber_01->size.x = 196.11f;
+		T_fileNumber_01->trans.x = -271.0f;
+		N_dateFile_00->trans.x = 41.0f;
+		bgLeftActive->trans.x = -370.0f;
+		bgMid1Active->size.x = 178.0f;
+		bgMid1Active->trans.x = -277.0f;
+		W_select_00->size.x = 658.0f;
+		W_select_00->trans.x = -44.0f;
+		W_shadow_00->size.x = 656.0f;
+		W_shadow_00->trans.x = -44.0f;
+		bgLeft->trans.x = -364.0f;
+		bgMiddle->size.x = 626.0f;
+		bgMiddle->trans.x = -43.0f;
+		P_Shine_00->size.x = 648.0f;
+		P_Shine_00->trans.x = -40.0f;
+		P_mario_00->trans.x = -348.0f;
+		N_NewFile_00->trans.x = -30.0f;
 	}
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
 		if(this->fileNum_maybe == 0) { T_fileNumber_01->SetString(L"Bestand 1"); }
 		if(this->fileNum_maybe == 1) { T_fileNumber_01->SetString(L"Bestand 2"); }
 		if(this->fileNum_maybe == 2) { T_fileNumber_01->SetString(L"Bestand 3"); }
+		T_fileNumber_01->size.x = 144.11f;
+		T_fileNumber_01->trans.x = -244.0f;
+		N_dateFile_00->trans.x = 16.0f;
+		bgLeftActive->trans.x = -320.0f;
+		bgMid1Active->size.x = 128.0f;
+		bgMid1Active->trans.x = -252.0f;
+		W_select_00->size.x = 608.0f;
+		W_select_00->trans.x = -19.0f;
+		W_shadow_00->size.x = 606.0f;
+		W_shadow_00->trans.x = -19.0f;
+		bgLeft->trans.x = -320.0f;
+		bgMiddle->size.x = 582.0f;
+		bgMiddle->trans.x = -21.0f;
+		P_Shine_00->size.x = 598.0f;
+		P_Shine_00->trans.x = -15.0f;
+		P_mario_00->trans.x = -296.0f;
+		N_NewFile_00->trans.x = -30.0f;
 	}
 }
 

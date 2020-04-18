@@ -24,6 +24,8 @@ CREATE_STATE(dWMStarCoin_c, Wait);
 CREATE_STATE(dWMStarCoin_c, HideSectionWait);
 CREATE_STATE(dWMStarCoin_c, HideWait);
 
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
+
 int dWMStarCoin_c::onCreate() {
 
 	if (!layoutLoaded) {
@@ -31,7 +33,15 @@ int dWMStarCoin_c::onCreate() {
 		if (!gotFile)
 			return false;
 
-		bool output = layout.build("StarCoins.brlyt");
+		const char *brlytname;
+		if(GetGameLanguage(4) == 0 || GetGameLanguage(4) == 1 || GetGameLanguage(4) == 3 || GetGameLanguage(4) == 4 || GetGameLanguage(4) == 5) { // Japanese, English, French, Spanish, Italian
+			brlytname = "StarCoins.brlyt";
+		}
+		if(GetGameLanguage(4) == 2 || GetGameLanguage(4) == 6) { // German, Dutch
+			brlytname = "StarCoinsGE.brlyt";
+		}
+
+		bool output = layout.build(brlytname);
 
 		layout.layout.rootPane->trans.x = -112.0f;
 		if (IsWideScreen()) {
@@ -192,7 +202,6 @@ bool dWMStarCoin_c::canScrollRight() const {
 	return (currentSectionIndex < (availableSectionCount - 1));
 }
 
-extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
 
 void dWMStarCoin_c::loadInfo() {
 	
@@ -214,21 +223,21 @@ void dWMStarCoin_c::loadInfo() {
 	if(GetGameLanguage(4) == 2) { // German (by ?)
 		UnspentTitle->SetString(L"noch nicht eingesetzt");
 		CollectedTitle->SetString(L"gesammelt");
-		BtnWorldSelText->SetString(L"Wähle die Welt aus");
+		BtnWorldSelText->SetString(L"Wähle die Welt aus     ");
 		BtnBackText->SetString(L"Zurück †");
 		TotalCoinsTitle->SetString(L"Sternenmünzen:");
 	}
 	if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
 		UnspentTitle->SetString(L"restantes");
 		CollectedTitle->SetString(L"collectées");
-		BtnWorldSelText->SetString(L"Choisir Monde    ");
+		BtnWorldSelText->SetString(L"Choisir Monde     ");
 		BtnBackText->SetString(L"Retour †");
 		TotalCoinsTitle->SetString(L"Pièces Étoiles:");
 	}
 	if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
 		UnspentTitle->SetString(L"restantes");
 		CollectedTitle->SetString(L"obtenidas");
-		BtnWorldSelText->SetString(L"Seleccionar Mundo");
+		BtnWorldSelText->SetString(L"Seleccionar Mundo     ");
 		BtnBackText->SetString(L"Atrás †");
 		TotalCoinsTitle->SetString(L"Monedas Estrella:");
 	}
@@ -242,7 +251,7 @@ void dWMStarCoin_c::loadInfo() {
 	if(GetGameLanguage(4) == 6) { // Dutch (by ?)
 		UnspentTitle->SetString(L"nog niet gebruikt");
 		CollectedTitle->SetString(L"verzameld");
-		BtnWorldSelText->SetString(L"Kies de wereld uit");
+		BtnWorldSelText->SetString(L"Kies de wereld uit     ");
 		BtnBackText->SetString(L"Terug †");
 		TotalCoinsTitle->SetString(L"Stermunten:");
 	}

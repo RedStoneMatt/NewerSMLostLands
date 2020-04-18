@@ -31,6 +31,7 @@ modules:
 #  - processed/enitemtests.yaml
   - processed/spikyhax.yaml
   - processed/custompakkun.yaml
+  # - processed/datefile.yaml
   - processed/quickrestart.yaml
   - processed/icefix.yaml
   - processed/numpad.yaml

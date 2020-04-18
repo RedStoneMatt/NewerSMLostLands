@@ -28,6 +28,8 @@ SECTIONS {
 	instance__10TimeKeeper = 0x8042A350;
 	setTime__10TimeKeeperFi = 0x800E3A00;
 
+	dDateFile_c_build = 0x80941D18;
+
 	CanExitThisLevel = 0x800B4E30;
 
 	instance__13dCourseFull_c = 0x8042A178;

@@ -40,6 +40,8 @@ instance__10TimeKeeper = 0x8042A350;
 _ZN10TimeKeeper7setTimeEi = 0x800E3A00;
 setTime__10TimeKeeperFi = 0x800E3A00;
 
+dDateFile_c_build = 0x80941D28;
+
 CanExitThisLevel = 0x800B4E30;
 
 _ZN13dCourseFull_c8instanceE = 0x8042A178;

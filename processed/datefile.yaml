@@ -1,0 +1,5 @@
+hooks:
+- {branch_type: bl, name: datefile, src_addr_jpn: 2157189936, src_addr_jpn2: 2157189952,
+  src_addr_ntsc: 2157191192, src_addr_ntsc2: 2157191208, src_addr_pal: 2157191192,
+  src_addr_pal2: 2157191208, target_func: changestring, type: branch_insn}
+source_files: [../src/datefile.S]
