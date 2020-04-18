@@ -449,7 +449,7 @@ int dGameDisplay_c::doWaitCheck() {
 			dAcPy_c__ChangePowerupWithAnimation(player, playerPowerup);                                                  //change it
 		}
 		if ((GetActiveRemocon()->heldButtons == 0x401) && (nowPressed & 0x401)) { // B + DOWN // Beats the current level
-			ExitStage(WORLD_MAP, 0, EXIT_LEVEL, MARIO_WIPE);                                                             //exit the current stage and beat it
+			ExitStage(WORLD_MAP, 0, BEAT_LEVEL, MARIO_WIPE);                                                             //exit the current stage and beat it
 		}
 		if ((GetActiveRemocon()->heldButtons == 0x408) && (nowPressed & 0x408)) { // B + LEFT // Turn On/Off the collision viewer
 			enableCollisionMode = !enableCollisionMode;                                                                  //enable or disable to collision debugger

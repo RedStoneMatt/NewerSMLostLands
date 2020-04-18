@@ -2,6 +2,16 @@ hooks:
 - {branch_type: bl, name: restartLevel, src_addr_jpn: 2148783548, src_addr_jpn2: 2148783548,
   src_addr_ntsc: 2148784044, src_addr_ntsc2: 2148784044, src_addr_pal: 2148784364,
   src_addr_pal2: 2148784364, target_func: restartLevel(), type: branch_insn}
-- {area_jpn: 2148902324, area_jpn2: 2148902324, area_ntsc: 2148902820, area_ntsc2: 2148902820,
-  area_pal: 2148903140, area_pal2: 2148903140, name: nopthat, type: nop_insn}
+- {branch_type: bl, name: exitLevel, src_addr_jpn: 2148339964, src_addr_jpn2: 2148339964,
+  src_addr_ntsc: 2148340092, src_addr_ntsc2: 2148340092, src_addr_pal: 2148340332,
+  src_addr_pal2: 2148340332, target_func: exitLevel(), type: branch_insn}
+- {addr_jpn: 2148902248, addr_jpn2: 2148902248, addr_ntsc: 2148902744, addr_ntsc2: 2148902744,
+  addr_pal: 2148903064, addr_pal2: 2148903064, data: '38600001', name: CanAlwaysExitLevel1,
+  type: patch}
+- {addr_jpn: 2148338632, addr_jpn2: 2148338632, addr_ntsc: 2148338760, addr_ntsc2: 2148338760,
+  addr_pal: 2148339000, addr_pal2: 2148339000, data: '38600001', name: CanAlwaysExitLevel2,
+  type: patch}
+- {addr_jpn: 2148338960, addr_jpn2: 2148338960, addr_ntsc: 2148339088, addr_ntsc2: 2148339088,
+  addr_pal: 2148339328, addr_pal2: 2148339328, data: '38600001', name: CanAlwaysExitLevel3,
+  type: patch}
 source_files: [../src/quickrestart.cpp]

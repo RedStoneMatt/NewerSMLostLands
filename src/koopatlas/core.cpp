@@ -1085,7 +1085,18 @@ void dScKoopatlas_c::showSaveWindow() {
 	yesNoWindow->visible = true;
 }
 
-static const wchar_t *completionMsgs[] = {
+static const wchar_t *completionMsgsJP[] = {
+	L"The most erudite of Buttocks",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated"
+};
+
+static const wchar_t *completionMsgsEN[] = {
 	L"The most erudite of Buttocks",
 	L"You've collected all of\nthe \x0B\x014F\xBEEF Star Coins in\n",
 	L"You have gotten every \x0B\x013B\xBEEF exit\nin",
@@ -1093,7 +1104,62 @@ static const wchar_t *completionMsgs[] = {
 	L"You have collected all the\nnecessary \x0B\x014F\xBEEF coins to enter\nthe Special World!",
 	L"You have collected all the \x0B\x014F\xBEEF Star\nCoins in the game!",
 	L"You've found every \x0B\x013B\xBEEF exit in the\ngame!",
-	L"You've completed everything in\nNEWER SUPER MARIO BROS. Wii!\n\nWe present you a new quest.\nTry pressing \x0B\x0122\xBEEF, \x0B\x0123\xBEEF and \x0B\x0125\xBEEF\n on the Star Coin menu."
+	L"You've completed everything in\nNEWER SUPER MARIO LOST LANDS!\n\nWe present you a new quest.\nTry pressing \x0B\x0122\xBEEF, \x0B\x0123\xBEEF and \x0B\x0125\xBEEF\n on the Star Coin menu."
+};
+
+static const wchar_t *completionMsgsGE[] = {
+	L"The most erudite of Buttocks",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated"
+};
+
+static const wchar_t *completionMsgsFR[] = {
+	L"Treeki faut penser a arrêter les messages cachés",
+	L"Vous avez collecté toutes les\n\x0B\x014F\xBEEF Pièces Étoiles dans\n",
+	L"Vous avez trouvé toutes les \x0B\x013B\xBEEF sorties\ndans",
+	L"Vous avez tout obtenu\ndans",
+	L"Vous avez collecté toutes les\n\x0B\x014F\xBEEF Pièces Étoiles nécéssaires\npour entrer dans le Monde Spécial!",
+	L"Vous avez obtenu toutes les\n\x0B\x014F\xBEEF Pièces Étoiles du jeu!",
+	L"Vous avez trouvé toutes les\n\x0B\x013B\xBEEF sorties du jeu !",
+	L"Vous avez tout complété dans\nNEWER SUPER MARIO LOST LANDS!\n\nNous avons donc une nouvelle quête:\nAppuyez sur \x0B\x0122\xBEEF, \x0B\x0123\xBEEF et \x0B\x0125\xBEEF\n dans le menu des Pièces Étoiles."
+};
+
+static const wchar_t *completionMsgsSP[] = {
+	L"The most erudite of Buttocks",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated"
+};
+
+static const wchar_t *completionMsgsIT[] = {
+	L"The most erudite of Buttocks",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated"
+};
+
+static const wchar_t *completionMsgsDU[] = {
+	L"The most erudite of Buttocks",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated",
+	L"Untranslated"
 };
 
 void dScKoopatlas_c::beginState_CompletionMsg() {
@@ -1123,6 +1189,8 @@ void dScKoopatlas_c::endState_CompletionMsg() {
 	//pathManager.completionMessageType ++;
 }
 
+extern "C" int GetGameLanguage(int nyeh); //nyeh is always 4 for some reasons
+
 void dScKoopatlas_c::executeState_CompletionMsg() {
 	// hacky shit
 	if (mustFixYesNoText > 0) {
@@ -1130,7 +1198,31 @@ void dScKoopatlas_c::executeState_CompletionMsg() {
 
 		int type = pathManager.completionMessageType;
 
-		const wchar_t *baseText = completionMsgs[type];
+		const wchar_t *baseText;
+
+		if(GetGameLanguage(4) == 0) { // Japanese (by ?)
+			baseText = completionMsgsJP[type];
+		}
+		if(GetGameLanguage(4) == 1) { // English (by everyone actually)
+			baseText = completionMsgsEN[type];
+		}
+		if(GetGameLanguage(4) == 2) { // German (by ?)
+			baseText = completionMsgsGE[type];
+		}
+		if(GetGameLanguage(4) == 3) { // French (by RedStoneMatt)
+			baseText = completionMsgsFR[type];
+		}
+		if(GetGameLanguage(4) == 4) { // Spanish (by Sandre)
+			baseText = completionMsgsSP[type];
+		}
+		if(GetGameLanguage(4) == 5) { // Italian (by ?)
+			baseText = completionMsgsIT[type];
+		}
+		if(GetGameLanguage(4) == 6) { // Dutch (by ?)
+			baseText = completionMsgsDU[type];
+		}
+
+		
 
 		// Used when we assemble a dynamic message
 		wchar_t text[512];
@@ -1152,7 +1244,7 @@ void dScKoopatlas_c::executeState_CompletionMsg() {
 			while (*title) {
 				char chr = *(title++);
 				if (chr != '-')
-					text[pos++] = chr;
+					text[pos++] = (unsigned char)chr;
 			}
 
 			text[pos++] = '!';

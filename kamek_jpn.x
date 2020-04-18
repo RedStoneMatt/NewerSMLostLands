@@ -40,6 +40,8 @@ instance__10TimeKeeper = 0x80429D90;
 _ZN10TimeKeeper7setTimeEi = 0x800E3890;
 setTime__10TimeKeeperFi = 0x800E3890;
 
+CanExitThisLevel = 0x800B4D60;
+
 _ZN13dCourseFull_c8instanceE = 0x80429BB8;
 instance__13dCourseFull_c = 0x80429BB8;
 _ZN9dCourse_c15getMusicForZoneEi = 0x8008E5C0;

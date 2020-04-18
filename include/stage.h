@@ -82,9 +82,9 @@ enum SceneParameters {
 };
 
 enum PowerupStoreTypes {
-	BEAT_LEVEL = 0, // Keeps powerups
+	BEAT_LEVEL = 0, // Keeps powerups, beat the level
 	LOSE_LEVEL = 1, // Loses everything
-	EXIT_LEVEL = 2  // Loses powerups, resets to previous state
+	EXIT_LEVEL = 2  // Go back to the worldmap as if the level wasn't entered
 };
 
 

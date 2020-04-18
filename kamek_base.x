@@ -28,6 +28,8 @@ SECTIONS {
 	instance__10TimeKeeper = 0x8042A350;
 	setTime__10TimeKeeperFi = 0x800E3A00;
 
+	CanExitThisLevel = 0x800B4E30;
+
 	instance__13dCourseFull_c = 0x8042A178;
 	getMusicForZone__9dCourse_cFi = 0x8008E5C0;
 	onExecute_orig__10dScStage_cFv = 0x80925A60;

@@ -2,6 +2,7 @@
 #include <stage.h>
 
 extern u8 LastLevelPlayed[2];
+extern "C" int CanExitThisLevel();
 
 void restartLevel() {
 
@@ -24,4 +25,24 @@ void restartLevel() {
 	ActivateWipe(WIPE_BOWSER);
 
 	DoStartLevel(GetGameMgr(), &sl);
+}
+
+void exitLevel() {
+	int canI = CanExitThisLevel();
+	if(canI) {
+		ExitStage(WORLD_MAP, 0, EXIT_LEVEL, 5);
+	}
+	else {
+		Player_Lives[0]--;
+		if(Player_Active[1]) {
+			Player_Lives[1]--;
+		}
+		if(Player_Active[2]) {
+			Player_Lives[2]--;
+		}
+		if(Player_Active[3]) {
+			Player_Lives[3]--;
+		}
+		ExitStage(WORLD_MAP, 0, LOSE_LEVEL, 5);
+	}
 }

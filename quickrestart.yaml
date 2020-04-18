@@ -9,6 +9,23 @@ hooks:
     src_addr_pal: 0x8013D8EC
     target_func: 'restartLevel()'
 
-  - name: nopthat
-    type: nop_insn
-    area_pal: 0x8015A8E4
+  - name: exitLevel
+    type: branch_insn
+    branch_type: bl
+    src_addr_pal: 0x800D126C
+    target_func: 'exitLevel()'
+
+  - name: CanAlwaysExitLevel1
+    type: patch
+    addr_pal: 0x8015A898
+    data: '38600001' #li r3, 1
+
+  - name: CanAlwaysExitLevel2
+    type: patch
+    addr_pal: 0x800D0D38
+    data: '38600001' #li r3, 1
+
+  - name: CanAlwaysExitLevel3
+    type: patch
+    addr_pal: 0x800D0E80
+    data: '38600001' #li r3, 1
